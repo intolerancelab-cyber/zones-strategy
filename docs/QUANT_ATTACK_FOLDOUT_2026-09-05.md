@@ -1,50 +1,57 @@
 # QUANT_ATTACK_FOLDOUT — 5 Sep 2026 (London)
 
-Paper + UI copy pass for Quant Logic Attacker CRITICAL findings.
-Paths: `/workspace/prompt-dash/` + `/workspace/prompt-dash-web/`.
-**Did not invent David locks.** GitHub push left to parent.
+Paper + UI copy pass. Paths: `/workspace/prompt-dash/` + `/workspace/prompt-dash-web/`.
+**David grill locks baked** — see `DAVID_GRILL_LOCKS_2026-09-05.md`.
+**Q4 geometry LOCKED. Q5 walk-forward LOCKED. Q6 alone-vs-together FOR NOW** (borrow best single; OPEN to revise). GitHub push left to parent.
 
 ---
 
-## CHANGED (closed this pass)
+## CHANGED (closed this pass — David grill locks)
 
-### Coherent PF ladder (David voice)
-- **<0.75** → SKIP — no *normal* sweep.
-- **~0.75** → REVIVAL class — one tailored revival sweep allowed; if still under keep line → stay SKIP.
-- **Keep/boost lean:** PF **> 1.2** (grill at launch). **1.0 = sensitivity / fork-hook only** (not equal pick).
-- After failed revival under keep → **FAILED_REVIVAL** or **BELOW_KEEP** (not table / not keep).
-- Removed dual-label **SWEEP_CANDIDATE + DEAD_ZONE** on the same band.
-- “No sweep under 0.75” → “no *normal* sweep under 0.75; revival is the exception at ~0.75.”
+### 1) Boost/keep LABEL — PF > 1.2 only (LOCKED)
+- BOOST/KEEP label **only if** PF **> 1.2**.
+- Under 1.2 after sweep → **SKIP** label for confluence/table.
+- **No 1.0 keep line** (1.0 = unused fork-hook note only, or omit).
+- Reason in notes: **compounding / fewer loser streaks**.
 
-Touched: Stage 6/7/8/9 prompts, HANDOFF, DAVID_BRIEF, CHECK_ASSAULT_OUTLINE, GATE_PLAN, STAGE_MAP, WORK template, Freeze provisional note, UI notes.
+### 2) Sweep gate (LOCKED)
+- **PF < 0.75** = do **not** sweep at all.
+- **PF ≥ 0.75** = sweep (revival/fix try; should not come out worse than pre-sweep).
+- Aligned: HANDOFF, GATE_PLAN, prompts 06–13, CURRENT_STAGE_MAP, Freeze PF note, UI.
 
-### Dual-label confluence
-- Headers/UI: **Band-find cross-cell (3-of-4 same POI×band)** vs **Stage-12 boost-count confluence (2/3/4 B×S)**.
-- Ban lone header word “Confluence” (Stage 12/13 titles + `stages.ts` titles updated).
-- Band-find output labels: **CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT** — not naked “BOOST candidate”.
+### 3) Take table (LOCKED process; draw-a-line FOR NOW stays)
+- Recalculated **every run**.
+- Find B×S cut where **full-session PF > 1.2**.
+- Soft/bottom end of table = **small sweep** to draw the line.
+- Easy fat shapes (high B, 0S e.g. **5B0S/6B0S**) = take **without heavy sweep**; use best highest-profit boost recipe.
 
-### Stage 10 soften
-- Marks *per-boost* evidence + *candidate* B×S occupancy only (`multi_B_proven=false`).
-- Multi-B joints = Stage 12.
-- Do **not** seal `boost_search_closed` or “table ready for take” until Stage 12 / Stage 13 CHECK.
-- Soft dual-lamp through Stages 10–12; Stage 13 seals `boost_search_closed=true`.
+### 4) Q4 take-table geometry LOCKED
+- **S ≥ B** → no sweep, don’t take.
+- **B−S == 1** (e.g. 2B1S, 3B2S) → don’t take (hard); don’t hunt.
+- **B−S ≥ 2** (e.g. 3B1S, 4B2S) → sweep each run; take line at full-session PF > 1.2.
+- Easy fat (high B, 0S) still light-take via best high-profit recipe.
 
-### Holdout copy
-- Until a real holdout take-read stamp exists: **“holdout reserved — take not sealed by this stage”** (replaced “take sealed” / take-seal phrasing).
+### 5) Q5 walk-forward LOCKED
+- Prefer label **walk-forward** (David’s past name); holdout = same idea (note once).
+- Hold back unseen data while picking recipe.
+- Score recipe on that never-seen chunk **before** take seals / before move-forward.
+- **Weak score blocks** seal / move-forward — real bearing, not cosmetic.
+- Require **walk-forward score stamp** before take seal; remove soft “holdout reserved — take not sealed” hedging where it contradicted.
 
-### Stage 6 CROSS_CELL_3OF4
-- Wired into WORK steps (step 9), required stamps (`CROSS_CELL_3OF4/{cell}` + BOOK), NOT-to-do — not appendix-only.
-- Stage 7 cheap kills + CHECK_ASSAULT_OUTLINE updated.
+### 6) Q6 alone-vs-together FOR NOW (temporary)
+- Sweep recipes on **single boosts only** (Stage alone path).
+- When 2/3/4 boosts fire together: reuse **best-performing single’s recipe**; score together profitability (full-session PF > 1.2).
+- Do **NOT** require full joint/combo TP-SL sweep of every multi-B combination for now.
+- Dual-lamp: confluence still checks together profitability with borrowed single recipe.
+- **OPEN to revise** if David’s later combo-sweep test wins.
 
-### Stage 13 never-1B
-- **WARN not FAIL** until David locks (`never_1B_policy=WARN_UNTIL_DAVID_LOCK`).
-
-### Cheap-combo 5B3S
-- Tagged **PROBE_ONLY** (never-S≥3 geometry notes stand).
-
-### UI
-- `src/lib/stages.ts` titles/notes; `PromptDash.tsx` lean/ladder/dual-label copy; `ATTACK_BRIEF.md`.
-- `public/prompts/*` + `docs/*` synced from paper tree.
+### Prior QUANT pass (still held)
+- Dual-label confluence headers (Band-find cross-cell vs Stage-12 boost-count).
+- Stage 10 soften (candidate occupancy; seal at 13).
+- Walk-forward virgin while picking recipe; take seal requires WF score stamp (Q5).
+- Stage 6 CROSS_CELL_3OF4 wired into WORK.
+- Stage 13 never-1B = WARN until further lock.
+- Cheap-combo 5B3S = PROBE_ONLY.
 
 ---
 
@@ -52,14 +59,14 @@ Touched: Stage 6/7/8/9 prompts, HANDOFF, DAVID_BRIEF, CHECK_ASSAULT_OUTLINE, GAT
 
 | Item | Status |
 |------|--------|
-| Confirm 0.75 = band PF (David grill) | OPEN |
-| Keep lean PF > 1.2 final lock at launch | OPEN (lean stated; grill) |
-| never-1B / never-S≥3 / B−S geometry as **locks** | OPEN (WARN/notes only) |
-| Continuation entry-method set | PLACEHOLDER — ask David before lock |
-| Deadwood POI keep/cut cleaned set | Pending other session / NEW BANDING admit |
-| Amalgamation vs best-recipe-by-B | OPEN later |
-| On/off filter list | Parked — ask David later |
-| Real holdout take-read stamp | Not invented — copy says take not sealed |
+| **Q5 walk-forward** | **LOCKED** (see DAVID_GRILL_LOCKS) |
+| **Q6 alone-vs-together** | **FOR NOW** (borrow single; OPEN to revise) |
+| Q4 take-table geometry | **LOCKED** (see DAVID_GRILL_LOCKS) |
+| never-1B / never-S≥3 / B−S as locks | OPEN (WARN/notes) |
+| Continuation entry-method set | PLACEHOLDER |
+| Deadwood POI keep/cut | Pending other session |
+| Full joint multi-B TP-SL amalgamation | OPEN later (Q6 FOR NOW borrows single) |
+| On/off filter list | Parked |
 | Exact POI list / new strategy text | Incoming David |
 
 ---
@@ -67,4 +74,4 @@ Touched: Stage 6/7/8/9 prompts, HANDOFF, DAVID_BRIEF, CHECK_ASSAULT_OUTLINE, GAT
 ## Not done here
 - No GitHub push.
 - No factory/engine POI code.
-- No invented numeric locks beyond David-voice ladder copy.
+- Q6 FOR NOW baked; permanent combo-sweep outcome left OPEN to revise. No other invented locks.

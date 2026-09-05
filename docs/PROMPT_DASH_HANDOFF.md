@@ -7,6 +7,7 @@ Scope: webpage + clickable prompts + sequence. NOT live engine. NOT POI chunk co
 - WORK overseer handbook template + Band-sweep filled example (sharding depth): [`WORK_HANDBOOK_TEMPLATE.md`](WORK_HANDBOOK_TEMPLATE.md)
 
 ## CHANGELOG — 2026-09-05
+- **David grill locks baked:** PF < 0.75 = no sweep; ≥0.75 = sweep (must not worsen); BOOST/KEEP label only if PF > 1.2; no 1.0 keep line; take-table recalc every run cut at full-session PF > 1.2; easy fat 5B0S/6B0S light-take; **Q4 geometry LOCKED** (S≥B / B−S==1 / B−S≥2); **Q5 walk-forward LOCKED** (hold back unseen while picking recipe; score never-seen before take seal / move-forward; weak score blocks); **Q6 alone-vs-together FOR NOW** (single-boost recipe sweeps; multi-B borrows best single recipe; score together PF>1.2; no full joint TP-SL sweep for now; OPEN to revise). See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 - **NEW BANDING (David confirmed):** branch `codex/rty-replay-parity-20260702` — fewer/tighter bands near the level (not old wide map) → sweeps → REMOVE DEADWOOD POIs (heavy lifters only). Align DEC-063 / RESCORE-20. Prompt-dash admits cleaned POI set later; do not invent keep/cut list.
 - **Stages 10–13 prompts written:** boost-alone → cost-shock/trade-count CHECK → confluence take-table line (best recipe by B; cheap combo shapes; amalgamation OPEN) → holy-grail/dependence CHECK. Dual-lamp locked.
 - **UI lock (David happy):** vertical scroll; STRATEGY INPUT top; each WORK stage = green WORK bar + stacked blue RESULTS strips (one strip per fleet cell: asset×TF); each strip = 10 chunks (10%…100%) with time under chunks; heartbeat/stuck under stack; orange CHECK unlocks only when every strip is 100% green; failed check loops to that section only; stamp each phase; linear (no skip); talk-before-check only for real choices; fork = page hooks only.
@@ -108,10 +109,10 @@ Stay linear. Stamp each phase.
 ## How edge is built (product locks)
 1. **Baseline alone** (often ~0.9 / breakeven) — best you can.
 2. **POI map** from list; **value areas = POIs** (daily/weekly/monthly) per asset×TF.
-3. **Band find:** where baseline helped vs hurt. Coherent ladder: <0.75 → **SKIP** (no *normal* sweep); ~0.75 → **REVIVAL**; keep lean PF > 1.2; FAILED_REVIVAL/BELOW_KEEP after failed revival. **Band-find cross-cell (3-of-4)** → CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT. **OPEN with David:** confirm 0.75 = band PF.
+3. **Band find:** where baseline helped vs hurt. **LOCKED (David grill 5 Sep):** PF < 0.75 → do **not** sweep at all (SKIP); PF ≥ 0.75 → sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label **only if** PF > 1.2; under 1.2 after sweep → SKIP for confluence/table. No 1.0 keep line. Reason: compounding / fewer loser streaks. **Band-find cross-cell (3-of-4)** → CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 4. **Band sweep:** tailored entry/TP recipes per location; keep recipes; wide→narrow KEEP.
 5. **Boost path (dual-lamp):** boost-alone → mark *candidate* B×S occupancy → CHECK unlock → **Stage-12 boost-count confluence (2/3/4 B×S)** on allowlisted squares only; does not re-open boost-family search; `boost_search_closed` at Stage 13; **holy grail** = final table.
-6. **Take path FOR NOW:** draw-a-line take-table across B×S (best recipe by B). Old B−S notes remain OPEN (B−S ≥ 2, B in 2..7; never B<2; never S≥3; lean 2B or 3B+1S; never 1B alone) — Stage 13 treats never-1B as WARN until David locks.
+6. **Take path FOR NOW:** draw-a-line take-table; **recalculated every run**; find B×S cut where **full-session PF > 1.2**; soft/bottom end = small sweep to draw the line; easy fat shapes (5B0S/6B0S) take without heavy sweep using best highest-profit boost recipe. **Q4 geometry LOCKED:** S≥B → no sweep/don’t take; B−S==1 (2B1S, 3B2S) → don’t take hard / don’t hunt; B−S≥2 (3B1S, 4B2S) → sweep each run, take line at PF > 1.2. Stage 13 never-1B = WARN where Q4 doesn’t hard-block. **Q5 walk-forward LOCKED:** hold back unseen while picking recipe; score on never-seen chunk before take seal / move-forward; weak score blocks seal / move-forward (real bearing). Prefer label **walk-forward** (holdout = same idea). **Q6 alone-vs-together FOR NOW:** sweep recipes on single boosts only; when 2/3/4 fire together reuse best-performing single’s recipe and score together profitability (full-session PF > 1.2); do **not** require full joint/combo TP-SL sweep for now; OPEN to revise if David’s later combo-sweep test wins.
 7. **On/off filters** late (trend/range, calendar, half-days…).
 8. **Assemble + hold/flat.**
 9. **Stress + luck** — same late area, two questions: Stress = walk-forward / capacity / ugly regimes; Luck = Monte Carlo.
@@ -120,22 +121,30 @@ Stay linear. Stamp each phase.
 ## Pro quant KEEP loops
 - One-cell smoke before fleet.
 - Count/PF floors early.
-- Holdout last ~20% reserved — take not sealed by this stage.
+- **Walk-forward** (holdout = same idea): hold back unseen chunk while picking recipe; require **walk-forward score stamp** before take seal / move-forward; **weak score blocks** (not cosmetic).
 - Ablate one POI/skip family.
 - Cost model before PF talk.
 - RTH vs overnight; ES+NQ overlap; null tests; multiplicity control.
 - Cache bars/POIs; never re-walk for a prompt tweak.
 
 ## Talk boxes / champion checkpoint (5 Sep)
-- Chat only on real forks: different baseline champions; post band-sweep dual recipes; 1.0 vs 1.2 boost line.
+- Chat only on real forks: different baseline champions; post band-sweep dual recipes. Boost keep line is **LOCKED PF > 1.2** (1.0 unused fork-hook note only — not a real pick).
 - Hooks: checkpoint + bank unused champion → resume later with the other. Full build later if cheap; else hooks only.
 - Detail: `DAVID_NOTES_2026-09-05_TALKBOX_TAKE.md`
 
-## Take-table line (FOR NOW — David)
-- After boost-alone + confluence table: draw take/don’t-take line across B×S squares; use best boost recipe for that square’s boost count.
-- Cheap combo pass over shapes (2B0S, 3B0S/1S, 4B…, 5B0S/1S/2S…) without new heavy sweeps; **5B3S = PROBE_ONLY**; tighten if weak.
-- Amalgamated multi-boost TP vs best recipe = OPEN test later.
-- Detail: `DAVID_NOTES_2026-09-05_TALKBOX_TAKE.md`
+## Take-table line (FOR NOW — David grill locks 5 Sep)
+- **Recalculated every run.** Find B×S cut where **full-session PF > 1.2**.
+- Soft/bottom end of table = **small sweep** to draw the line (not new heavy family search).
+- Easy fat shapes (high B, 0S — e.g. **5B0S / 6B0S**) = take **without heavy sweep**; use **best highest-profit boost recipe**.
+- **Q4 take-table geometry LOCKED:**
+  - **S ≥ B** → no sweep, don’t take.
+  - **B−S == 1** (e.g. 2B1S, 3B2S) → don’t take (**hard**); don’t hunt that cell as a take.
+  - **B−S ≥ 2** (e.g. 3B1S, 4B2S) → sweep each run; draw take line where full-session PF > 1.2.
+- Cheap combo pass over shapes without new heavy sweeps; **5B3S = PROBE_ONLY**; tighten if weak.
+- **Q6 FOR NOW:** multi-B together uses borrowed best single recipe (score together PF > 1.2); full joint/combo TP-SL amalgamation = OPEN later / revise if combo-sweep wins.
+- **Q5 walk-forward LOCKED:** hold back unseen while picking recipe; score never-seen before take seal / move-forward; weak score blocks. Prefer **walk-forward** label (holdout = same idea once).
+- **Q6 alone-vs-together FOR NOW:** single-boost recipe sweeps; multi-B borrows best single recipe; score together PF > 1.2; no full joint TP-SL sweep required for now; OPEN to revise if later combo-sweep wins.
+- Detail: `DAVID_GRILL_LOCKS_2026-09-05.md`, `DAVID_NOTES_2026-09-05_TALKBOX_TAKE.md`
 
 ## Fork (LOCKED 5 Sep — David answered)
 - Decide fork style later. Page leaves hooks only (bank champions; optional later A/B). No fork UX locked yet.
@@ -160,19 +169,21 @@ When a POI×band (e.g. BEFORE) looks strong on one cell but **n is thin** (examp
 - Prompt-dash: admit expects a **cleaned POI set** when ready; do not invent keep/cut list here.
 - Aligns with Sep-3 poi lessons + RESCORE-20 zone-first (effects mostly within ~0.5 ATR of touch).
 
-## Band / PF figures — PROVISIONAL (from laptop files, NOT locked)
-Source (Halls_Laptop, read 5 Sep): `C:\Users\David\THE STRATEGY\_orderflow_poi_campaign\rescore20\PREREGISTRATION.json` (RESCORE-20, updated 5 Sep) + checkpoint in `_poi_lab_from_gaming_pc_20260822\CHECKPOINT_20260828.md`.
+## Band / PF figures — LOCKED (David grill 5 Sep)
+Source trail (Halls_Laptop, read 5 Sep): RESCORE-20 PREREGISTRATION + CHECKPOINT_20260828 — thresholds grilled and **locked** into prompt-dash. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 
-Working draft from Stage-2 thresholds (do **not** set in stone until that campaign finishes; grill David before launch):
-- **instant_skip_below = 0.75** PF (profit factor) — below this after/without revival → skip zone.
-- **~0.75 SKIP bands get a revival sweep** (new TP/entry arms); if still under the chosen boost line → stay skip.
-- **Keep/boost lean: **PF > 1.2** (grill at launch). Report 1.0 as sensitivity / fork-hook only (not an equal pick). Owner fork hook in LEDGERS before check read if a real choice exists (`owner_open_items`).
-- Between 0.75 and keep lean (PF > 1.2) after failed revival = FAILED_REVIVAL or BELOW_KEEP (not table / not keep). Do **not** dual-label SWEEP_CANDIDATE + DEAD_ZONE.
-- Example story matches: baseline ~0.8, at a POI drops to 0.74 → skip; at 0.75 → try revive; end must clear chosen line (lean 1.2).
+**LOCKED ladder:**
+- **PF < 0.75** → do **not** sweep at all → SKIP.
+- **PF ≥ 0.75** → sweep (revival/fix try); post-sweep **must not come out worse than pre-sweep**.
+- **BOOST/KEEP label only if PF > 1.2.** Under 1.2 after sweep → **SKIP** label for confluence/table.
+- **No 1.0 keep line.** 1.0 may remain as unused fork-hook note only (historical `owner_open_items`) — not an equal pick.
+- **Reason:** compounding / fewer loser streaks.
+- Do **not** dual-label SWEEP_CANDIDATE + DEAD_ZONE.
+- Example: baseline ~0.8, at a POI drops to 0.74 → no sweep / SKIP; at ≥0.75 → sweep; end must clear PF > 1.2 to keep/boost label.
 
-Also noted for prompt-dash champions: aim is **compounding / high % of bank risk** — champion pick (baseline + band sweep) should be whatever fits that staking system, not generic PF alone. Money sim in prereg currently stakes 0.5%/1%/2% with mini caps — confirm later.
+Champion lens: **compounding / high % of bank risk** — not vanity PF. Money sim stakes 0.5%/1%/2% with mini caps — confirm later.
 
-Related: DEC-063 zone-first banding (28 bins); confluence_primary in same file currently `boost_votes >= 2 AND skip_votes == 0` (may differ from 3B1S lean — grill later).
+Related: DEC-063 zone-first banding (28 bins); confluence_primary notes elsewhere may differ from take-table examples — take-table cut is full-session PF > 1.2 (draw-a-line FOR NOW). **Q4 + Q5 LOCKED; Q6 FOR NOW (OPEN to revise).**
 
 ## On/off filters (parked — ask David later)
 - Binary / no physical line: e.g. trending vs ranging day, positive/negative gamma, similar state flags.
@@ -191,8 +202,10 @@ Related: DEC-063 zone-first banding (28 bins); confluence_primary in same file c
 ## Open for David (do not invent answers)
 - Exact POI list (incoming).
 - New strategy text (incoming).
-- **Band skip 0.75:** still provisional from RESCORE-20 until campaign done.
-- **Boost keep lean:** David lean **PF > 1.2** (still grill at launch). Report 1.0 as sensitivity / fork-hook only — not an equal pick.
+- **Band PF / keep / sweep gate:** LOCKED 5 Sep grill — see `DAVID_GRILL_LOCKS_2026-09-05.md` (do not re-provisionalize).
+- **Q4 take-table geometry:** LOCKED — see `DAVID_GRILL_LOCKS_2026-09-05.md`.
+- **Q5 walk-forward:** LOCKED — see `DAVID_GRILL_LOCKS_2026-09-05.md`.
+- **Q6 alone-vs-together:** FOR NOW (borrow best single recipe for multi-B; score together PF > 1.2; no joint TP-SL sweep) — OPEN to revise if David’s later combo-sweep wins. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 - **Continuation entry-method set:** dig found LTF-4 KEEP list (see above); checkbox still **PLACEHOLDER (not operable OPEN)** — **ask David before locking** (Done seal must ask).
-- Take path = draw-a-line FOR NOW; B−S notes OPEN; never-1B WARN at Stage 13 until David locks.
+- Take path = draw-a-line FOR NOW (recalc every run; cut full-session PF > 1.2); B−S notes OPEN; never-1B WARN at Stage 13 until further lock.
 - Highest-boost recipe + vote grading (tested elsewhere — notes only).

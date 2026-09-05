@@ -6,7 +6,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Band PF LOCKED (David grill 5 Sep):** PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line (unused fork-hook note only). Reason: compounding / fewer loser streaks. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **On/off filters:** binary no-line states; parked — ask David later.
 **NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level (not old wide map) → sweeps → **REMOVE DEADWOOD POIs** (only heavy lifters keep). Align DEC-063 / RESCORE-20. Prompt-dash admits cleaned POI set later — **do not invent keep/cut list**. Pending other session for cleaned set.
 **Band-find cross-cell (3-of-4 same POI×band)** ≠ **Stage-12 boost-count confluence (2/3/4 B×S)** — do not conflate.
@@ -33,7 +33,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 ### 0. Header
 - **Stage # / name:** 8 — Band sweep
 - **Kind:** WORK
-- **Goal:** Wide→narrow KEEP sweep of tailored entry/TP recipes on sweep-candidate bands only (≥~0.75 provisional); stamp keepers per fleet cell; unlock Stage 9 CHECK.
+- **Goal:** Wide→narrow KEEP sweep of tailored entry/TP recipes on sweep-gate bands only (PF ≥ 0.75 LOCKED); stamp keepers per fleet cell; unlock Stage 9 CHECK.
 - **Unlocks next:** Stage 9 CHECK
 - **Fleet cells:** ES 5m, ES 15m, NQ 5m, NQ 15m
 - **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED (`close_back_inside`, `n_close_back_inside`, `wick_rejection_completed_bar`, `touch`, `close_confirm`, `pullback_to_level`) OR Continuation PLACEHOLDER (catalog minus `orb_*` — not operable OPEN; do not claim locked).
@@ -42,7 +42,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 
 ### 1. Goal
 - For each fleet cell: take Band-find KEEP/sweep-candidate bands; run wide→narrow entry×TP recipes; stamp KEEP recipes + drop dead arms; paint strips to 100%.
-- Does **not** decide final champion take, confluence, or lock 0.75/1.2 — those stay provisional / later CHECK / David OPEN.
+- Does **not** decide final champion take or confluence fill — Band PF / keep / Q4 geometry are LOCKED; Q5 LOCKED; Q6 FOR NOW.
 - **Compounding champion lens:** when multiple KEEP recipe families appear, flag types for Stage 9 talk only if a real choice exists — prefer staking / high-% bank risk fit over vanity PF.
 
 ---
@@ -54,7 +54,7 @@ If missing → STOP, do not invent.
 - Stage 3 CHECK green
 - Stage 4 POI map hashes (value areas as POIs) + SILENT_ZERO_GATE
 - Stage 5 CHECK green
-- Stage 6 Band find: SKIP (<0.75 no normal sweep), REVIVAL (~0.75), keep lean >1.2, FAILED_REVIVAL/BELOW_KEEP; SKIP_MAP + REVIVAL_MAP + CROSS_CELL_3OF4
+- Stage 6 Band find: SKIP (<0.75 no sweep), sweep-gate (≥0.75), KEEP label only if PF>1.2; SKIP_MAP + SWEEP_GATE_MAP + CROSS_CELL_3OF4
 - Stage 7 CHECK green
 - Cache pins: bars + POI map hashes must match; if mismatch → rebuild map section, do not silent continue
 - Entry-method set = current STRATEGY INPUT checkbox value (must match Freeze ENTRY_SET)
@@ -67,7 +67,7 @@ If missing → STOP, do not invent.
 - Wide first (Halton / deep-wide style per AGENTS notes) → narrow KEEP on survivors
 - **Smoke:** one cell (prefer NQ 5m or ES 5m — pick one) full path before fleet fan-out
 - Expected jobs: large (hundreds–thousands); shard by band_id then recipe batch
-- **Never enqueue <0.75 skip bands** (revival arms only where Band-find marked revival)
+- **Never enqueue PF < 0.75 bands** (sweep only where SWEEP_GATE / PF ≥ 0.75)
 
 #### 3b. Cores
 - Default `n_workers=1`; for fleet heavy pass opt-in high-n on EPYC (up to 64) + Gaming if room rules allow
@@ -94,13 +94,13 @@ If missing → STOP, do not invent.
 3. Load SKIP_MAP — assert zero skip band ids enter the sweep queue; revival arms only where Band-find marked revival.
 4. One-cell smoke: wide→narrow on one candidate band; verify n, PF (cost-applied), workers_used honesty, hash pin.
 5. Identity check: smoke n_workers=1 hash == n_workers=k hash on same tiny set.
-6. Fan out fleet cells; per cell load bar+POI cache by hash; enqueue only ≥~0.75 candidates (provisional); **never enqueue <0.75 skip bands**.
+6. Fan out fleet cells; per cell load bar+POI cache by hash; enqueue only PF ≥ 0.75 sweep-gate bands (LOCKED); **never enqueue PF < 0.75**.
 7. Wide pass → triage → narrow KEEP; TP arms = original + fractions + ATR 1.2–5.0 (**DEC-061 structural TP = research-only**, do not swap in as production/deployable TP).
 8. Apply early n+PF floors; cost model already from Freeze — no PF talk without cost.
 9. Multiplicity control on recipe explosion; flag overfit smell for CHECK.
 10. Holdout last ~20% untouched (take decisions later — not here).
 11. Paint each cell strip 10%…100% with real chunk times; heartbeat under stack.
-12. Write KEEP recipe stamps per cell; mark dead arms; write book-level sweep manifest; stamp provisional PF note still not locked.
+12. Write KEEP recipe stamps per cell; mark dead arms; write book-level sweep manifest; stamp BAND_PF_LOCKS disclosure (David grill 5 Sep LOCKED).
 13. Barrier: wait all four cells 100% green → unlock Stage 9 CHECK (do not auto-pass CHECK).
 
 ---
@@ -119,7 +119,7 @@ If missing → STOP, do not invent.
 - `band_sweep/MANIFEST.json` — entry_set_id, entry_set_lock_state (LOCKED|OPEN), tp_grid_id, workers_used, hashes, skip bands omitted, no_ORB / no_doubles attestation
 - `band_sweep/SMOKE_IDENTITY.json` — one-core vs multi-core hash
 - `band_sweep/SKIP_OMISSION_PROOF.json` — list of omitted skip band ids from Stage 6 SKIP_MAP
-- `band_sweep/PROVISIONAL_NOTE.json` — band PF lines 0.75 | 1.0 | 1.2 **not locked**
+- `band_sweep/BAND_PF_LOCKS.json` — LOCKED: <0.75 no sweep; ≥0.75 sweep; KEEP if PF > 1.2; no 1.0 keep line
 - `band_sweep/TP_POLICY.json` — ATR 1.2–5.0 + fractions = deployable grid; DEC-061 structural TP = research-only
 - Strip paint 100% × 4 cells
 - What CHECK will read: KEEP manifests, smoke identity, entry_set vs checkbox proof, cost-applied proof, omitted skip bands, no ORB/no doubles, wide→narrow evidence, holdout virgin, Continuation not claimed LOCKED
@@ -130,14 +130,14 @@ If missing → STOP, do not invent.
 - Do not sweep doubles/pairs (DEFUNCT)
 - Do not invent deadwood POI keep/cut list (NEW BANDING cleaned set pending other session)
 - Do not include orb_* methods (ORB DEAD)
-- Do not lock 0.75/1.2 in stone
+- Do not re-provisionalize Band PF locks; Q5 LOCKED; Q6 FOR NOW
 - Do not claim Continuation set locked
 - Do not shard the CHECK or final take decision itself
 - Do not edit factory code from this room
 - Do not start confluence / boost-alone early
 - Do not re-walk bars because a prompt word changed
 - Do not unlock CHECK until all strips green
-- Do not enqueue <0.75 skip bands
+- Do not enqueue PF < 0.75 bands
 - Do not swap structural TP (DEC-061) in as production TP
 - Do not contaminate holdout
 - Do not narrow KEEP without wide evidence
@@ -168,7 +168,7 @@ If missing → STOP, do not invent.
 
 ### 10. Handoff to CHECK
 - Feed Stage 9 bullets in CHECK_ASSAULT_OUTLINE.md / `09_BAND_SWEEP_CHECK.md`
-- Give agents: KEEP manifests, DEAD_ARMS, SMOKE_IDENTITY, SKIP_OMISSION_PROOF, TP_POLICY, entry_set vs checkbox proof, cost-applied proof, list of omitted skip bands, explicit “no ORB/no doubles” attestation, provisional note, Stage 7 GREEN
+- Give agents: KEEP manifests, DEAD_ARMS, SMOKE_IDENTITY, SKIP_OMISSION_PROOF, TP_POLICY, entry_set vs checkbox proof, cost-applied proof, list of omitted skip bands, explicit “no ORB/no doubles” attestation, BAND_PF_LOCKS, Stage 7 GREEN
 
 ---
 

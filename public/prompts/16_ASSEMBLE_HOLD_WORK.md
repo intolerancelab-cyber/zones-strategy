@@ -6,7 +6,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only (checkpoint + bank unused champion if dual talk).
-**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Band PF LOCKED (David grill 5 Sep):** PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line (unused fork-hook note only). Reason: compounding / fewer loser streaks. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **Dual-lamp:** boost-alone sealed before confluence; do not reopen boost search.
 **On/off filters:** binary no-line; may be PARKED — consume Stage 15 posture; do not invent filter list.
 **NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level → sweeps → REMOVE DEADWOOD POIs. Do not invent keep/cut list.
@@ -109,7 +109,7 @@ If missing → STOP, do not invent.
 8. Run **micro hold-vs-flat** evidence (KEEP cheap loop) per cell / session slice; stamp evidence tables.
 9. Stamp hold vs flat path from evidence (MUST-NOT: do not shard the choice; talk-box only if real dual path under compounding lens); **checkpoint hook** banks unused champion if fork.
 10. Write Monday-runbook-shaped research artifact (costs, size note, entry set, skips, filters) — paper only, no live deploy language.
-11. Holdout last ~20% still virgin — holdout reserved; take not sealed by this stage (do not burn as assemble fuel).
+11. Walk-forward chunk remains held for scoring discipline (Q5); do not burn as assemble fuel; take seal already required WF stamp at Stage 12/13.
 12. Paint strips 10%…100%; heartbeat under stack.
 13. Barrier: all four cells 100% green → unlock Stage 17 CHECK (do not auto-pass).
 
@@ -134,7 +134,7 @@ If missing → STOP, do not invent.
 - `assemble/SMOKE_IDENTITY.json` — one-core vs multi-core hash
 - `assemble/CHECKPOINT_HOOKS.json` — if dual hold/flat or champion fork: bank unused path (hooks only)
 - Strip paint 100% × 4 cells
-- What CHECK will read: stamped-recipes-only proof, skip omission, hold/flat micro evidence, runbook research (not live), dual-lamp, no ORB/no doubles, holdout virgin
+- What CHECK will read: stamped-recipes-only proof, skip omission, hold/flat micro evidence, runbook research (not live), dual-lamp, no ORB/no doubles, walk-forward discipline (Q5)
 
 ---
 
@@ -149,7 +149,7 @@ If missing → STOP, do not invent.
 - Do not use live/deploy language; paper research book only
 - Do not sweep doubles/pairs (DEFUNCT) or include orb_* (ORB DEAD)
 - Do not claim Continuation LOCKED
-- Do not contaminate holdout
+- Do not contaminate walk-forward chunk (Q5)
 - Do not edit factory code from this room
 - Do not unlock CHECK until all strips green
 - Do not conflate Band-find 3-of-4 with boost-count confluence
@@ -171,7 +171,7 @@ If missing → STOP, do not invent.
 - Stamped-recipes-only enqueue proof
 - Cache never re-walk
 - Compounding lens on hold/flat / champion fork + checkpoint bank unused
-- Holdout virgin
+- Walk-forward discipline (Q5)
 - ES+NQ overlap / RTH vs overnight on assemble sample
 - Dual-lamp intact; boost job count zero
 - Filter list not invented; deadwood POI list not invented

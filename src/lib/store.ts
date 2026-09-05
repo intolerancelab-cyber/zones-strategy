@@ -66,14 +66,32 @@ export type TalkNote = {
   stampedAt: string | null;
 };
 
+/** Q5 walk-forward demo stamp — lamp + seal affordance (not live scores) */
+export type WalkForwardStamp = {
+  /** Hold back unseen while picking recipe (demo lamp) */
+  heldBack: boolean;
+  /** Demo stamp that never-seen chunk was scored */
+  stamped: boolean;
+  stampedAt: string | null;
+  /** Demo: weak walk-forward score blocks take seal / move-forward */
+  weakBlocks: boolean;
+  note: string;
+};
+
 /** Fork stages with talk-box hooks */
 export const TALK_BOX_STAGE_IDS = [3, 9, 12] as const;
 
 export const TALK_BOX_LABELS: Record<number, string> = {
   3: "Baseline CHECK fork — champion choice (hook only)",
   9: "Post band-sweep fork — recipe choice (hook only)",
-  12: "Boost keep 1.0 vs 1.2 (hook only — before confluence check)",
+  12: "Take-table / Q4+Q5 grill (keep PF>1.2; WF stamp; Q6 FOR NOW borrow-single)",
 };
+
+/**
+ * Take-related stages showing walk-forward lamp/stamp (Q5).
+ * 11 = hold-back reminder; 12/13 = stamp before take seal.
+ */
+export const WF_STAGE_IDS = [11, 12, 13] as const;
 
 export type DashState = {
   entered: boolean;
@@ -83,12 +101,13 @@ export type DashState = {
   checkAssault: Record<number, CheckAssault>;
   bankedChampions: BankedChampion[];
   talkNotes: Record<number, TalkNote>;
+  walkForward: Record<number, WalkForwardStamp>;
   overseer: OverseerStatus;
   activeWorkId: number;
   toast: string | null;
 };
 
-export const STORAGE_KEY = "prompt-dash-web-v2";
+export const STORAGE_KEY = "prompt-dash-web-v3";
 
 export const FLEET = ["NQ 5m", "ES 5m", "NQ 15m", "ES 15m"] as const;
 
@@ -120,6 +139,16 @@ export function emptyTalkNote(): TalkNote {
   return { text: "", stampedAt: null };
 }
 
+export function emptyWalkForward(): WalkForwardStamp {
+  return {
+    heldBack: false,
+    stamped: false,
+    stampedAt: null,
+    weakBlocks: false,
+    note: "",
+  };
+}
+
 export function defaultState(): DashState {
   const work: Record<number, WorkProgress> = {};
   for (const id of WORK_IDS) {
@@ -133,6 +162,10 @@ export function defaultState(): DashState {
   for (const id of TALK_BOX_STAGE_IDS) {
     talkNotes[id] = emptyTalkNote();
   }
+  const walkForward: Record<number, WalkForwardStamp> = {};
+  for (const id of WF_STAGE_IDS) {
+    walkForward[id] = emptyWalkForward();
+  }
   return {
     entered: false,
     strategyText: "",
@@ -141,6 +174,7 @@ export function defaultState(): DashState {
     checkAssault,
     bankedChampions: [],
     talkNotes,
+    walkForward,
     overseer: "moving",
     activeWorkId: 1,
     toast: null,
@@ -150,7 +184,10 @@ export function defaultState(): DashState {
 export function loadState(): DashState {
   if (typeof window === "undefined") return defaultState();
   try {
-    const raw = localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem("prompt-dash-web-v1");
+    const raw =
+      localStorage.getItem(STORAGE_KEY) ??
+      localStorage.getItem("prompt-dash-web-v2") ??
+      localStorage.getItem("prompt-dash-web-v1");
     if (!raw) return defaultState();
     const parsed = JSON.parse(raw) as Partial<DashState>;
     const base = defaultState();
@@ -161,6 +198,7 @@ export function loadState(): DashState {
       checkAssault: { ...base.checkAssault, ...(parsed.checkAssault || {}) },
       bankedChampions: parsed.bankedChampions || [],
       talkNotes: { ...base.talkNotes, ...(parsed.talkNotes || {}) },
+      walkForward: { ...base.walkForward, ...(parsed.walkForward || {}) },
     };
   } catch {
     return defaultState();
@@ -213,4 +251,10 @@ export function overseerLabel(status: OverseerStatus): string {
   if (status === "moving") return "MOVING";
   if (status === "need_power") return "NEED POWER";
   return "STUCK"; // stall | stuck
+}
+
+/** Demo helper: take seal blocked when weak WF lamp is on after stamp attempt. */
+export function walkForwardBlocksSeal(wf: WalkForwardStamp | undefined): boolean {
+  if (!wf) return false;
+  return wf.weakBlocks === true;
 }

@@ -6,8 +6,15 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Band PF LOCKED (David grill 5 Sep):** PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line (unused fork-hook note only). Reason: compounding / fewer loser streaks. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **Dual-lamp:** boost-alone completes → Stage 11 CHECK → only then **Stage-12 boost-count confluence (2/3/4 B×S)** on allowlisted squares. Stage 12 must **not** re-open boost-family search. Soft seal only: do **not** stamp `boost_search_closed` or “table ready for take” until after Stage 12 / Stage 13 CHECK.
+**Q4 take-table geometry LOCKED (David grill 5 Sep — plain):**
+- If **skips ≥ boosts** → no sweep, don’t take.
+- If **boosts − skips == 1** (only one more boost, e.g. 2B1S, 3B2S) → don’t take (**hard**); don’t hunt that cell as a take.
+- If **boosts − skips ≥ 2** (e.g. 3B1S, 4B2S) → sweep each run; draw take line where full-session PF > 1.2.
+- Easy fat shapes (high B, 0S) still take without heavy sweep via best high-profit boost recipe.
+**Q5 walk-forward LOCKED:** hold back unseen while picking recipe; do not use walk-forward chunk as research fuel here; score stamp required before take seal (Stage 12/13). Prefer **walk-forward** (holdout=same idea).
+**Q6 alone-vs-together FOR NOW:** sweep recipes on **single boosts only** here; stamp BEST_RECIPE_BY_B for later borrow. Do **not** run joint/combo TP-SL sweeps of multi-B. OPEN to revise if David’s later combo-sweep wins. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **On/off filters:** binary no-line states; parked — ask David later.
 **NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level (not old wide map) → sweeps → **REMOVE DEADWOOD POIs** (only heavy lifters keep). Align DEC-063 / RESCORE-20. Prompt-dash admits cleaned POI set later — **do not invent keep/cut list**.
 **Band-find cross-cell (3-of-4 same POI×band)** — NOT Stage-12 boost-count confluence: If a POI×band (e.g. BEFORE) is strongly positive but thin n (~50) on one cell, look at the **SAME POI×SAME band** on the other fleet cells (ES/NQ × 5m/15m). If **≥3 of 4** show same-direction positive effect → **CROSS_CELL_BOOST_CANDIDATE**. If fewer than 3 agree → stamp **INSUFFICIENT** — **do not boost from that thin cell alone**. Same idea for SKIP. This is **Band-find cross-cell (3-of-4 same POI×band)** — **SEPARATE** from **Stage-12 boost-count confluence (2/3/4 B×S)**. Aligns RESCORE-20 3-of-4 val cells same sign.
@@ -25,7 +32,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 | | All-cell barrier wait (100% fleet) |
 | | Speedy lamp / emit-covered report steps |
 | | Champion talk-box choice |
-| | Locking take rule (B−S≥2, etc.) or 0.75/1.2 |
+| | Inventing permanent Q6 combo-sweep locks / joint TP-SL as required for now |
 | | Re-opening boost search after B×S mark |
 
 **Hard rule:** Boost-alone **is** MUST-SHARD. Wait 100% across all fleet cells before Stage 11 CHECK unlock. Do not shard the barrier wait itself or the CHECK. Mark B×S table from compute; do **not** run confluence here; do **not** finalize take rule.
@@ -46,17 +53,17 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 - **Done means:**
   - Each boost family evaluated **alone** (no multi-B Stage-12 boost-count confluence fill in this stage).
   - *Candidate* B×S occupancy marked from **per-boost alone-path evidence only** — do **not** imply B≥2 proven from alone-path; multi-B joints are Stage 12.
-  - Squares labeled keep-candidate / thin / skip-heavy / dead as provisional report under keep lean **PF > 1.2** (1.0 = sensitivity / fork-hook only — still not locked).
-  - Best boost recipe per boost-count family stamped for later take-table use (Stage 12 uses best recipe for that square’s boost count — not amalgamation here).
+  - Squares labeled keep-candidate / thin / skip-heavy / dead under LOCKED keep line **PF > 1.2** (1.0 = unused fork-hook note only — not a keep line). Apply Q4 geometry filters when marking take-hunt candidates.
+  - Best boost recipe per boost-count family stamped for later take-table use (**Q6 FOR NOW:** Stage 12 borrows best-performing single’s recipe when 2/3/4 fire together — no joint TP-SL sweep required for now).
   - Strips 100% green; book-level boost-alone manifest + smoke identity + dual-lamp **soft** note written (`boost_search_closed=false` until Stage 13).
 - **Does NOT decide:**
   - Confluence 2/3/4 fill (Stage 12 — only after Stage 11 green).
   - Final take rule / holy-grail (OPEN with David — grill on table later).
-  - Lock of boost keep line 1.0 vs 1.2 (report both; owner_open_items).
-  - Amalgamated multi-boost TP vs best single boost recipe (OPEN — park).
+  - Re-provisionalizing Q5 walk-forward or inventing permanent Q6 combo-sweep. Boost keep line is LOCKED at PF > 1.2.
+  - Full joint multi-B TP-SL amalgamation as required path (OPEN later / Q6 FOR NOW = borrow single).
   - On/off filters, assemble, stress/luck.
   - Continuation set final shortlist.
-  - Holdout take decisions (last ~20% untouched).
+  - Burning walk-forward / never-seen chunk as alone-path fuel (hold back while picking recipe).
   - Re-litigating Band-find cross-cell labeling confluence (3-of-4) — that was Stage 6/7; this stage consumes stamped band/boost posture and must not confuse it with boost-count confluence.
 
 ---
@@ -114,11 +121,11 @@ If missing → STOP, do not invent.
 5. One-cell smoke: run each boost family **alone** on one cell; apply cost model before PF; mark sample B×S rows; verify n, PF, workers_used honesty, hash pin.
 6. Identity check: smoke n_workers=1 hash == n_workers=k hash on same tiny set.
 7. Fan out fleet cells; per cell load bar+POI+KEEP caches by hash; enqueue boost-alone shards only (boost_family × cell).
-8. Score each boost alone with **cost applied**; report under both provisional boost keep lines **1.0 and 1.2** (do not lock; stamp both).
-9. Mark *candidate* B×S occupancy: for each (B, S) square, record **per-boost alone-path evidence only**, n, PF (cost-applied), thin-n flags, skip-heavy flags. Do **not** claim multi-B joints proven. Do **not** stamp “table ready for take”. Notes only (not locks; Stage 12 draws take-table line FOR NOW): B−S ≥ 2 lean, B in 2..7; never B<2; never S≥3; lean 2B alone or 3B+1S; never 1B alone — **grill later; Stage 13 = WARN not FAIL on never-1B until David locks**.
-10. Stamp **best boost recipe** per boost-count family for later Stage 12 take-table line (best recipe for that boost count — not amalgamation).
+8. Score each boost alone with **cost applied**; KEEP/BOOST label **only if** PF **> 1.2** (LOCKED). Do not use 1.0 as a keep line (unused fork-hook note only).
+9. Mark *candidate* B×S occupancy: for each (B, S) square, record **per-boost alone-path evidence only**, n, PF (cost-applied), thin-n flags, skip-heavy flags. Do **not** claim multi-B joints need their own heavy TP-SL sweep (**Q6 FOR NOW** = borrow best single later). Do **not** stamp “table ready for take”. **Apply Q4 geometry when flagging take-hunt candidates:** S≥B → no-take; B−S==1 → hard no-take / don’t hunt; B−S≥2 → eligible for Stage 12 take-line at full-session PF > 1.2; easy fat high-B 0S → light-take path. never-1B remains WARN at Stage 13 where Q4 doesn’t already hard-block. **Q5 walk-forward LOCKED; Q6 FOR NOW.**
+10. Stamp **best boost recipe** per boost-count family for later Stage 12 take-table line (**Q6 FOR NOW:** Stage 12 borrows best-performing single’s recipe for multi-B together; score together PF > 1.2 — no joint TP-SL sweep for now).
 11. Apply early n floors / thin-n flags for Stage 11 trade-count floor; do not silently promote thin squares to allowlist.
-12. Holdout last ~20% untouched (take decisions later — not here).
+12. Hold back walk-forward / never-seen chunk while picking recipe (Q5); do not burn as alone-path fuel.
 13. Paint each cell strip 10%…100% with real chunk times; heartbeat under stack.
 14. Write boost-alone stamps + *candidate* B×S occupancy + allowlist **candidates** (provisional — Stage 11 gates cost shock + trade-count floor before Stage-12 unlock) + book-level manifest + dual-lamp **soft** note (`boost_search_closed=false` until after Stage 12 / Stage 13 CHECK; Stage-12 UI still locked until Stage 11 GREEN).
 15. Barrier: wait all four cells 100% green → unlock Stage 11 CHECK (do not auto-pass CHECK; do not unlock Stage 12 yet).
@@ -135,17 +142,17 @@ If missing → STOP, do not invent.
 ---
 
 ### 6. Success stamps
-- `boost_alone/CELL/{cell}.json` — per boost family alone scores: n, PF (cost-applied), recipe ids, boost keep line reports at 1.0 and 1.2, bar_hash, poi_map_hash, keep_recipe_hash, workers_used
+- `boost_alone/CELL/{cell}.json` — per boost family alone scores: n, PF (cost-applied), recipe ids, keep_label_gt_1_2 bool, bar_hash, poi_map_hash, keep_recipe_hash, workers_used
 - `boost_alone/BXS_TABLE/{cell}.json` — *candidate* B×S occupancy from alone-path evidence; labels, n, PF, thin flags, skip-heavy flags; `multi_B_proven=false`
 - `boost_alone/BXS_TABLE/BOOK.json` — book-level candidate occupancy + notes (`table_ready_for_take=false`)
-- `boost_alone/BEST_RECIPE_BY_B/{cell}.json` — best boost recipe per boost-count (for Stage 12 take-table line)
+- `boost_alone/BEST_RECIPE_BY_B/{cell}.json` — best boost recipe per boost-count (Q6 FOR NOW: Stage 12 borrows for multi-B together)
 - `boost_alone/ALLOWLIST_CANDIDATES.json` — provisional squares for confluence after Stage 11 gates (not yet unlocked)
 - `boost_alone/MANIFEST.json` — entry_set_id, entry_set_lock_state (LOCKED|PLACEHOLDER), workers_used, hashes, no_ORB / no_doubles attestation, dual_lamp=`boost_marked_stage12_locked`, `boost_search_closed=false` (soft — seal only after Stage 13), `table_ready_for_take=false`
 - `boost_alone/SMOKE_IDENTITY.json` — one-core vs multi-core hash
-- `boost_alone/PROVISIONAL_BOOST_LINES.json` — 1.0|1.2 both reported; owner picks before check read; **not locked**
+- `boost_alone/BAND_PF_LOCKS.json` — KEEP label only if PF > 1.2 LOCKED; no 1.0 keep line; Q4 geometry note stamped
 - `boost_alone/TAKE_NOTES_OPEN.json` — B−S≥2 / B in 2..7 / never B<2 / never S≥3 / lean 2B or 3B+1S / never 1B alone — **notes only, OPEN with David**
 - Strip paint 100% × 4 cells
-- What CHECK will read: candidate B×S occupancy, cost-applied alone scores, thin-n / trade-count floor readiness, keep lean >1.2 (1.0 sensitivity), no Stage-12 fill started, boost_search_closed still false, table_ready_for_take=false, no ORB/no doubles, holdout reserved — take not sealed by this stage
+- What CHECK will read: candidate B×S occupancy, cost-applied alone scores, thin-n / trade-count floor readiness, KEEP label only if PF > 1.2 (LOCKED), Q4 geometry flags, Q6 single-recipe stamps, walk-forward chunk held back (Q5), no Stage-12 fill started, boost_search_closed still false, table_ready_for_take=false, no ORB/no doubles
 
 ---
 
@@ -154,7 +161,7 @@ If missing → STOP, do not invent.
 - Do not re-open boost-family search casually; also do **not** stamp boost_search_closed or table-ready-for-take yet (seal after Stage 12 / 13)
 - Do not sweep doubles/pairs (DEFUNCT)
 - Do not include orb_* methods (ORB DEAD)
-- Do not lock take rule or 1.0/1.2 in stone
+- Do not re-provisionalize Band PF / Q4 / Q5; do not invent permanent Q6 combo-sweep as required for now
 - Do not claim Continuation set locked
 - Do not shard the CHECK or final take decision itself
 - Do not edit factory code from this room
@@ -162,9 +169,9 @@ If missing → STOP, do not invent.
 - Do not unlock Stage 11 CHECK until all strips green
 - Do not unlock Stage 12 from this WORK (Stage 11 must green first)
 - Do not enqueue skip-zone leakage
-- Do not contaminate holdout
+- Do not contaminate walk-forward / never-seen chunk (Q5)
 - Do not promote thin-n squares to allowlist without Stage 11 floor
-- Do not invent amalgamated multi-boost TP as the production path
+- Do not invent full joint multi-B TP-SL as required for now (Q6 FOR NOW = borrow single; OPEN to revise)
 - Do not invent deadwood POI keep/cut list (cleaned set admitted later; NEW BANDING path only)
 - Do not conflate Band-find cross-cell labeling confluence (3-of-4 same POI×band) with Stage 12 boost-count 2/3/4 confluence
 - Do not promote a thin-n single-cell band boost that failed 3-of-4 cross-cell agreement upstream
@@ -188,7 +195,7 @@ If missing → STOP, do not invent.
 - Ablate one boost family if smell appears (flag for CHECK — do not silently drop)
 - Skip-omission proof vs Stage 6 SKIP_MAP
 - Compounding lens note if multiple boost-family champions (not vanity PF)
-- Holdout virgin
+- Walk-forward chunk held back while picking recipe (Q5)
 - ES+NQ overlap awareness
 - Dual-lamp integrity: confluence jobs count must be zero this stage
 - Respect upstream Band-find 3-of-4 cross-cell labeling (thin-n alone ≠ boost); do not re-boost from one thin cell
@@ -197,7 +204,7 @@ If missing → STOP, do not invent.
 
 ### 10. Handoff to CHECK
 - Feed Stage 11 bullets in CHECK_ASSAULT_OUTLINE.md / `11_BOOST_ALONE_CHECK.md`
-- Give agents: BXS_TABLE (candidate occupancy), CELL alone scores, BEST_RECIPE_BY_B, ALLOWLIST_CANDIDATES, SMOKE_IDENTITY, PROVISIONAL_BOOST_LINES, TAKE_NOTES_OPEN, MANIFEST (dual-lamp soft; boost_search_closed=false; table_ready_for_take=false), cost-applied proof, no ORB/no doubles attestation, Stage 9 GREEN, explicit “Stage-12 boost-count confluence not started; multi-B not proven from alone-path” attestation
+- Give agents: BXS_TABLE (candidate occupancy), CELL alone scores, BEST_RECIPE_BY_B, ALLOWLIST_CANDIDATES, SMOKE_IDENTITY, PROVISIONAL_BOOST_LINES, TAKE_NOTES_OPEN, MANIFEST (dual-lamp soft; boost_search_closed=false; table_ready_for_take=false), cost-applied proof, no ORB/no doubles attestation, Stage 9 GREEN, explicit “Stage-12 boost-count confluence not started; Q6 FOR NOW = alone recipes only; multi-B together scored later with borrowed single” attestation
 
 ---
 
@@ -209,5 +216,5 @@ If missing → STOP, do not invent.
 - [x] Hash-first reuse stated
 - [x] Dual-lamp: boost marks table; confluence locked until Stage 11
 - [x] B×S mark + no confluence fill stated
-- [x] OPEN David items named, not invented (take rule, 1.0|1.2)
+- [x] Q4 + Q5 LOCKED; Q6 FOR NOW (single-boost recipes; OPEN to revise); no other invented locks
 - [x] Handoff points at Stage 11 CHECK assault

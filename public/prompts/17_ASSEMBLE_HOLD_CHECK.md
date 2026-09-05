@@ -8,7 +8,7 @@ Source locks: CHECK_ASSAULT_OUTLINE.md, CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOF
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m).
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Band PF LOCKED (David grill 5 Sep):** PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line (unused fork-hook note only). Reason: compounding / fewer loser streaks. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **Dual-lamp:** boost search must stay sealed.
 **Continuation:** PLACEHOLDER (catalog minus orb_* — not operable OPEN; wait David before lock).
 **Multi-agent:** every check (this one included).
@@ -54,8 +54,8 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip <0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock).
-- Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
+- Band PF LOCKED (David grill 5 Sep): PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line.
+- Cost model present before any PF talk. Walk-forward (Q5): chunk held while picking; take seal requires WF score stamp (already at Stage 12/13).
 - **Stage 17 add:** assemble CELL squares ⊆ take-line; recipe refs resolve to BEST_RECIPE_BY_B / KEEP stamps; skip omission vs Stage 6 SKIP_MAP; HOLD_FLAT_MICRO present before HOLD_FLAT_PATH; cost-applied PF; smoke identity; workers_used honesty; onoff posture hash matches Stage 15 FILTER_POSTURE.
 - Output: PASS / FAIL with tables: claimed vs recomputed, per cell; take-line set-diff; hold/flat evidence present.
 
@@ -123,7 +123,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 - `checks/stage_17_assemble_hold/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths, hold/flat review, talk-box / checkpoint if any
 - `checks/stage_17_assemble_hold/GREEN.stamp` — unlocks Stage 18 Stress + luck WORK
 - `checks/stage_17_assemble_hold/BOOK_SEAL_REVIEWED.json` — assembled book accepted; skip_omission=true; hold_flat_micro_present=true; live_deploy=false
-- Attestations: no ORB, no doubles, fleet 4 cells, dual-lamp intact, filter_list_invented=false, deadwood_poi_list not invented, holdout virgin, Continuation still PLACEHOLDER, compounding lens applied
+- Attestations: no ORB, no doubles, fleet 4 cells, dual-lamp intact, filter_list_invented=false, deadwood_poi_list not invented, walk-forward discipline, Continuation still PLACEHOLDER, compounding lens applied
 
 ---
 

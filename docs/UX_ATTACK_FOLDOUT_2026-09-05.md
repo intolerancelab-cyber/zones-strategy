@@ -56,7 +56,7 @@
 - Under each WORK strip stack: stuck/wait banner when `stuck` | `stall` | `need_power`.
 
 ### H1 — Talk-box hooks at forks (FIXED)
-**Forks:** Baseline CHECK (~3), post band-sweep (~9), boost keep 1.0 vs 1.2 (~12).
+**Forks:** Baseline CHECK (~3), post band-sweep (~9), take-table / Q4 grill (~12; keep line LOCKED PF > 1.2).
 
 **Fix:** Talk-box UI (textarea + stamp note) at stages 3, 9, 12. Persist `talkNotes` in store. Hooks only — no invented answers.
 

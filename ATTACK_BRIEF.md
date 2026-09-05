@@ -24,11 +24,14 @@
 - Fail to same WORK section only; linear; no skip.
 - ORB = DEAD, doubles/pairs = DEFUNCT.
 - Reversal LOCKED 6; Continuation OPEN (wait David).
-- Keep lean: PF > 1.2 (1.0 sensitivity / fork-hook only — not equal pick).
-- PF ladder: <0.75 SKIP (no normal sweep); ~0.75 REVIVAL; FAILED_REVIVAL/BELOW_KEEP after failed revival.
+- KEEP label only if PF > 1.2 (LOCKED; no 1.0 keep line). Reason: compounding / fewer loser streaks.
+- Sweep gate LOCKED: PF < 0.75 = no sweep; ≥ 0.75 = sweep (must not worsen vs pre-sweep).
+- **Q4 take-table geometry LOCKED:** S≥B → no sweep/don’t take; B−S==1 → don’t take hard / don’t hunt; B−S≥2 → sweep each run, take line at full-session PF > 1.2; easy fat high-B 0S light-take.
 - Band-find cross-cell (3-of-4) ≠ Stage-12 boost-count confluence (2/3/4 B×S).
 - Continuation = PLACEHOLDER (not operable OPEN).
-- Take path = draw-a-line take-table FOR NOW; never-1B WARN until David locks.
+- Take path = draw-a-line FOR NOW (recalc every run; cut PF > 1.2); never-1B WARN where Q4 doesn’t hard-block.
+- **Q5 walk-forward LOCKED** (hold back unseen; score never-seen before take seal; weak blocks).
+- **Q6 alone-vs-together FOR NOW** (single-boost recipes; multi-B borrows best single; score together PF>1.2; no joint TP-SL sweep; OPEN to revise).
 - Do not invent POI keep/cut lists, banding bin counts, or final table numbers.
 - STRATEGY INPUT placeholders pending; core chord stays.
 - Champion fork = hooks only.

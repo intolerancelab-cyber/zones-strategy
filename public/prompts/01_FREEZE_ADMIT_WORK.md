@@ -8,7 +8,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Band PF LOCKED (David grill 5 Sep):** PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line (unused fork-hook note only). Reason: compounding / fewer loser streaks. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **On/off filters:** binary no-line states; parked — ask David later.
 
 ---
@@ -36,7 +36,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 - ORB DEAD + doubles DEFUNCT attestation
 - STRATEGY INPUT checkbox binding (Reversal LOCKED 6 vs Continuation PLACEHOLDER minus orb_* (not operable OPEN))
 - Fork = hooks only
-- Band PF provisional lines disclosed as provisional (not invented locks)
+- Band PF LOCKED lines disclosed (David grill 5 Sep — not re-provisionalized)
 - Paper-room scope (no live / fold / VPS from this room)
 
 ---
@@ -59,7 +59,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 - **This stage intentionally does NOT decide:**
   - Baseline PF / champion (Stage 2–3)
   - POI list (OPEN with David)
-  - Band PF ladder locks (provisional only — disclose, do not lock; keep lean >1.2)
+  - Band PF ladder LOCKED (David grill 5 Sep): <0.75 no sweep; ≥0.75 sweep; KEEP if PF > 1.2; no 1.0 keep line
   - Continuation set final shortlist (OPEN)
   - Take rule / on/off filter list / champion bank choice
   - Any KEEP / take / hold / grade decision
@@ -131,10 +131,10 @@ List prior-stage stamp paths / hashes. If missing → STOP, do not invent.
 - `freeze_admit/COST_MODEL.json` — fields required before any PF talk downstream
 - `freeze_admit/SESSION_LOCKS.json` — RTH/overnight/calendar locks in force
 - `freeze_admit/ENTRY_SET.json` — Reversal 6 names OR Continuation OPEN catalog minus orb_* (explicit exclusions listed)
-- `freeze_admit/PROVISIONAL_BAND_PF_NOTE.json` — SKIP <0.75 (no normal sweep); REVIVAL ~0.75; keep lean PF > 1.2 (1.0 sensitivity / fork-hook only) **not locked** (disclose only)
+- `freeze_admit/BAND_PF_LOCKS.json` (alias PROVISIONAL_BAND_PF_NOTE) — LOCKED: PF < 0.75 no sweep; ≥ 0.75 sweep; KEEP/BOOST label only if PF > 1.2; no 1.0 keep line; reason compounding / fewer loser streaks
 - `freeze_admit/CELL_ADMIT/{cell}.json` — per-cell roster/TF admit + workers_used honesty
 - `freeze_admit/MANIFEST.json` — hashes, workers_used, n cells=4, timestamp
-- What CHECK will read later (Stage 3+): cost/session locks present; no ORB in intake; entry set matches checkbox; provisional PF note not forged as final.
+- What CHECK will read later (Stage 3+): cost/session locks present; no ORB in intake; entry set matches checkbox; BAND_PF_LOCKS stamped LOCKED (do not forge alternate lines).
 
 ---
 
@@ -142,7 +142,7 @@ List prior-stage stamp paths / hashes. If missing → STOP, do not invent.
 - No ORB / no doubles (do not put in UI copy or stamps except DEAD/DEFUNCT markers)
 - No factory code edits from this room (do not delete ORB code elsewhere)
 - **No sharding the freeze / admit seals / identity decisions**
-- No inventing OPEN David locks (0.75/1.2 final, continuation shortlist, take rule, on/off list, POI list)
+- No inventing OPEN David items (permanent Q6 combo-sweep, continuation shortlist, on/off list, POI list). Band PF + Q4 + Q5 LOCKED; Q6 FOR NOW.
 - No advancing without fleet 100% admit strips green
 - No contaminating holdout (last ~20% reserved — take not sealed by this stage)
 - No baseline / POI / band / boost work in this stage
@@ -172,7 +172,7 @@ List prior-stage stamp paths / hashes. If missing → STOP, do not invent.
 - Unlock Stage 2 Baseline alone WORK (`02_BASELINE_WORK.md`)
 - Stage 3 CHECK (`03_BASELINE_CHECK.md`) comes **after** Baseline — point agents at CHECK_ASSAULT_OUTLINE.md Stage 3 bullets
 - Artifacts Baseline must receive: BOOK_SEAL, COST_MODEL, SESSION_LOCKS, ENTRY_SET, PROVISIONAL_BAND_PF_NOTE, CELL_ADMIT ×4, MANIFEST
-- Explicit attestation: no ORB / no doubles / fleet 4 cells / fork hooks only / band PF provisional
+- Explicit attestation: no ORB / no doubles / fleet 4 cells / fork hooks only / band PF LOCKED
 
 ---
 

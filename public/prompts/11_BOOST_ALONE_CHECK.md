@@ -8,10 +8,16 @@ Source locks: CHECK_ASSAULT_OUTLINE.md, CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOF
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m).
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Band PF LOCKED (David grill 5 Sep):** PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line (unused fork-hook note only). Reason: compounding / fewer loser streaks. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **Dual-lamp:** this CHECK gates Stage-12 boost-count confluence unlock; Stage 12 must not re-open boost-family search. Still do **not** seal `boost_search_closed` or “table ready for take” — that waits for Stage 12 / Stage 13 CHECK.
 **Continuation:** PLACEHOLDER (catalog minus orb_* — not operable OPEN; wait David before lock).
 **Multi-agent:** every check (this one included).
+**Q4 take-table geometry LOCKED (David grill 5 Sep — plain):**
+- If **skips ≥ boosts** → no sweep, don’t take.
+- If **boosts − skips == 1** (only one more boost, e.g. 2B1S, 3B2S) → don’t take (**hard**); don’t hunt that cell as a take.
+- If **boosts − skips ≥ 2** (e.g. 3B1S, 4B2S) → sweep each run; draw take line where full-session PF > 1.2.
+- Easy fat shapes (high B, 0S) still take without heavy sweep via best high-profit boost recipe.
+**Q5 walk-forward LOCKED** + **Q6 alone-vs-together FOR NOW** (single-boost recipes; multi-B borrow later; OPEN to revise). See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **Compounding champion:** high-% bank risk fit, not vanity PF.
 **NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level (not old wide map) → sweeps → **REMOVE DEADWOOD POIs** (only heavy lifters keep). Align DEC-063 / RESCORE-20. Prompt-dash admits cleaned POI set later — **do not invent keep/cut list**.
 **Band-find cross-cell (3-of-4 same POI×band)** — NOT Stage-12 boost-count confluence: If a POI×band (e.g. BEFORE) is strongly positive but thin n (~50) on one cell, look at the **SAME POI×SAME band** on the other fleet cells (ES/NQ × 5m/15m). If **≥3 of 4** show same-direction positive effect → **CROSS_CELL_BOOST_CANDIDATE**. If fewer than 3 agree → stamp **INSUFFICIENT** — **do not boost from that thin cell alone**. Same idea for SKIP. This is **Band-find cross-cell (3-of-4 same POI×band)** — **SEPARATE** from **Stage-12 boost-count confluence (2/3/4 B×S)**. Aligns RESCORE-20 3-of-4 val cells same sign.
@@ -27,7 +33,7 @@ Stage 10 boost-alone → **mark B×S table**. Each boost family run alone; best 
 - Research-grade boost recipe notes exist elsewhere; do not live-deploy language.
 - Dual-lamp: boost-alone then confluence; confluence must not re-open boost search.
 - Band-find cross-cell labeling confluence (3-of-4 same POI×band / same sign; thin-n gate) is SEPARATE from Stage 12 boost-count confluence — do not conflate; thin single-cell boosts that failed 3-of-4 should not appear as keep.
-- Owner picks boost keep line 1.0 vs 1.2 before check read (RESCORE-20 owner_open_items) — still provisional / not locked.
+- Boost keep line LOCKED at PF > 1.2 (1.0 unused fork-hook only). Verify Q4 geometry flags on candidate table. Q5 walk-forward LOCKED (chunk held back). Q6 FOR NOW = single-boost recipe stamps only.
 
 ---
 
@@ -55,11 +61,11 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip <0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock).
-- Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
+- Band PF LOCKED (David grill 5 Sep): PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line.
+- Cost model present before any PF talk. Walk-forward chunk held back while picking recipe (Q5); take seal later requires WF score stamp.
 - **Stage 11 add — cost shock:** recompute PF under Freeze COST_MODEL with an adverse cost bump (shock); any square that only clears keep lines under fantasy/zero cost → FAIL or demote from allowlist. Tables: claimed PF vs cost-shocked PF per cell × boost family.
 - **Stage 11 add — trade-count floor:** enforce floor on n before allowlist; thin-n squares must not enter confluence allowlist. Tables: n vs floor per square; workers_used honesty; smoke identity match.
-- **Take-table sanity (pro quant KEEP from handoff — if stamps in hand):** one-cell smoke done; count/PF floors early; cost before PF; RTH vs overnight sample; ES+NQ overlap note; multiplicity control; cache reuse; holdout virgin. Do not invent floors David did not stamp — report missing as FAIL/OPEN.
+- **Take-table sanity (pro quant KEEP from handoff — if stamps in hand):** one-cell smoke done; count/PF floors early; cost before PF; RTH vs overnight sample; ES+NQ overlap note; multiplicity control; cache reuse; walk-forward chunk virgin while alone-path. Do not invent floors David did not stamp — report missing as FAIL/OPEN.
 - Output: PASS / FAIL with tables: claimed vs recomputed, per cell; allowlist before/after shock+floor.
 
 ### Role 3 — Real-life trader lens
@@ -81,8 +87,8 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 
 ### Shared verdict protocol
 1. Any FAIL from roles 1–2 → CHECK fail → loop same WORK section (Stage 10; Stage 8 if KEEP identity broken); do not advance; do **not** unlock confluence.
-2. WARN from role 3 → talk box only if a real choice exists (e.g. boost keep line 1.0 vs 1.2; dual boost-family champion types under compounding lens); else stamp WARN and proceed only if David/overseer accepts.
-3. Role 4 REFUTED items that are fixable → same-section loop; if OPEN with David (take rule, 1.0|1.2 final) → park, do not invent.
+2. WARN from role 3 → talk box only if a real choice exists (e.g. dual boost-family champion types under compounding lens — NOT 1.0 vs 1.2); else stamp WARN and proceed only if David/overseer accepts.
+3. Role 4 REFUTED items that are fixable → same-section loop; if OPEN with David (permanent Q6 combo-sweep revise, deadwood POI list) → park, do not invent. Band PF + Q4 + Q5 LOCKED; Q6 FOR NOW.
 4. All four PASS (or WARN accepted) → stamp CHECK green; **seal allowlist** (post shock+floor); unlock Stage 12 Stage-12 boost-count confluence WORK; attest allowlist-only path; `boost_search_closed` remains false until Stage 13; Stage 12 may start on allowlisted squares only.
 
 ---
@@ -120,7 +126,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 Apply if stamps present; otherwise flag OPEN — do not invent numbers:
 - Cost model before PF talk (Freeze COST_MODEL + shock)
 - Count / trade-count floors early
-- Holdout last ~20% virgin for take only
+- Walk-forward chunk held back while picking recipe (Q5)
 - One-cell smoke before fleet (Stage 10 SMOKE_IDENTITY)
 - Multiplicity control on boost-family / recipe explosion
 - RTH vs overnight; ES+NQ overlap; null/ablate smell flags
@@ -130,9 +136,9 @@ Apply if stamps present; otherwise flag OPEN — do not invent numbers:
 ---
 
 ## Talk-before-check (only if real choice)
-- **Boost keep line 1.0 vs 1.2** before check read — real fork; stamp owner pick; still provisional until David grill; do not forge “locked.”
+- Boost keep line is **LOCKED PF > 1.2** — do not present 1.0 vs 1.2 as equal pick. Verify Q4 geometry (S≥B / B−S==1 hard no-take / B−S≥2 eligible).
 - If multiple boost-family champion **types** appear → talk box: compounding / high-% bank risk lens (not max PF vanity). Fork = hooks only: checkpoint + bank unused champion for later resume.
-- Do **not** invent take locks (B−S≥2 etc.), POI list, Continuation shortlist, or amalgamated multi-boost TP as locked path.
+- Do **not** invent take locks beyond Q4, POI list, Continuation shortlist, or require full joint multi-B TP-SL as locked path (Q6 FOR NOW = borrow single).
 
 ---
 
@@ -141,7 +147,7 @@ Apply if stamps present; otherwise flag OPEN — do not invent numbers:
 - `checks/stage_11_boost_alone/GREEN.stamp` — unlocks Stage 12 Stage-12 boost-count confluence WORK
 - `checks/stage_11_boost_alone/ALLOWLIST_SEALED.json` — post shock+floor allowlisted B×S squares only
 - `checks/stage_11_boost_alone/DUAL_LAMP.json` — boost_search_closed=false (soft); stage12_unlock=true on allowlist only; table_ready_for_take=false
-- Attestations: no ORB, no doubles, fleet 4 cells, cost shock applied, trade-count floor enforced, confluence not started during Stage 10, provisional 1.0|1.2 disclosed, take notes still OPEN, holdout virgin, Continuation still PLACEHOLDER
+- Attestations: no ORB, no doubles, fleet 4 cells, cost shock applied, trade-count floor enforced, confluence not started during Stage 10, KEEP>1.2 LOCKED disclosed, Q4 geometry checked, Q5 WF chunk held back, Q6 FOR NOW single-recipe only, Continuation still PLACEHOLDER
 
 ---
 

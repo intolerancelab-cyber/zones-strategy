@@ -6,7 +6,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange next (Done) only when assault green.
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked) — disclose, do not forge locked.
+**Band PF LOCKED (David grill 5 Sep):** PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (must not worsen); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line. Q4 geometry LOCKED. Q5 walk-forward LOCKED. Q6 alone-vs-together FOR NOW (OPEN to revise). See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **Dual-lamp:** boost-alone sealed before confluence; holy grail = final table only.
 **On/off filters:** PARKED or APPLIED — do not invent list.
 **NEW BANDING:** do not invent deadwood POI keep/cut list.
@@ -46,7 +46,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 - **Done means:**
   - Four roles spawned in parallel on the **whole finished book** with full stamp chain.
   - Extra brief answered explicitly:
-    - **Legit?** hashes, stamps, holdout reserved — take not sealed, no ORB/doubles, provisional PF lines disclosed, dual-lamp integrity, both stress+luck tracks, no invented lists.
+    - **Legit?** hashes, stamps, WALK_FORWARD_SCORE present (Q5), no ORB/doubles, BAND_PF + Q4 + Q5 locks disclosed; Q6 FOR NOW borrow-single disclosed, dual-lamp integrity, both stress+luck tracks, no invented permanent combo-sweep.
     - **Can it trade?** research-book sense: coherent runbook, costs, size note, skip zones omitted, entry set clear — **not** live permission.
     - **Real life?** Monday failure modes across the chain; compounding / high-% bank risk fit of banked champion.
   - Assault VERDICT stamped PASS (or FAIL with section pointer).
@@ -101,7 +101,7 @@ If missing → STOP / FAIL assault; do not invent.
 2. Load whole-book artifact pack (list in §2 / handoff).
 3. Spawn **four agents in parallel** with shared pack + final-assault extra brief + cheap kills.
 4. Role 1 — Mistake hunter: whole-book hunt (Silent Zero, fake ticks, ORB/doubles, 1m fleet, wrong entry set, forged percents, missing stamps, boost reopened after confluence, skip <0.75 still trading, Continuation silently locked, fork UX invented, factory edits from this room, invented filter/deadwood lists, cross-cell conflated with boost-count confluence).
-5. Role 2 — Number auditor: reconcile key stamps end-to-end; cost before PF; provisional lines disclosed not locked; holdout virgin; workers_used honesty; stress+luck both present; seeds pinned.
+5. Role 2 — Number auditor: reconcile key stamps end-to-end; cost before PF; BAND_PF + Q4 locks disclosed; holdout virgin; workers_used honesty; stress+luck both present; seeds pinned.
 6. Role 3 — Real-life trader: Monday runbook coherence; slippage/capacity/ES+NQ overlap; compounding fit; on/off live-proxy WARN if parked/undefined; “can it trade?” in research-book sense only.
 7. Role 4 — Claim refuter: attack “holy grail locked,” “live ready,” “filters David-locked” (if invented), “stress skipped,” “done already,” etc.; demand disconfirming evidence.
 8. Apply shared verdict protocol: FAIL → point to **specific section** to loop; PASS → stamp Stage 20 assault green.
@@ -120,10 +120,10 @@ If missing → STOP / FAIL assault; do not invent.
 
 ### 6. Success stamps
 - `final_assault/VERDICT.json` — roles 1–4 PASS/WARN/FAIL; evidence paths; section pointers on FAIL
-- `final_assault/LEGIT.json` — hashes/stamps/holdout/ORB-doubles/provisional PF disclosure/dual-lamp/both-tracks/no-invented-lists
+- `final_assault/LEGIT.json` — hashes/stamps/holdout/ORB-doubles/BAND_PF + Q4 disclosure/dual-lamp/both-tracks/no-invented-lists
 - `final_assault/CAN_IT_TRADE.json` — research-book coherence: runbook, costs, size note, skips, entry set; live_deploy=false
 - `final_assault/REAL_LIFE.json` — Monday failure list; compounding fit; WARN park items
-- `final_assault/MANIFEST.json` — whole-book stamp index, no_ORB / no_doubles, fleet 4 cells, fork=hooks_only, NEW_BANDING note, filter_list_invented=false, deadwood_poi_list=`NOT_INVENTED`, cross_cell_band_confluence_separated=true, take_table_line_present=true, band_PF_provisional=true
+- `final_assault/MANIFEST.json` — whole-book stamp index, no_ORB / no_doubles, fleet 4 cells, fork=hooks_only, NEW_BANDING note, filter_list_invented=false, deadwood_poi_list=`NOT_INVENTED`, cross_cell_band_confluence_separated=true, take_table_line_present=true, band_PF_locked=true, q4_geometry_locked=true, q5_q6_open=true
 - `final_assault/GREEN.stamp` — present only on PASS; unlocks Stage 21 Done
 - What Stage 21 will read: GREEN.stamp + VERDICT + LEGIT + CAN_IT_TRADE + REAL_LIFE + prior CHECK greens intact
 
@@ -176,7 +176,7 @@ If missing → STOP / FAIL assault; do not invent.
 
 ## Extra brief for all four roles (paste)
 - Can it trade? (research-book sense: coherent runbook, costs, size, skip zones omitted, entry set clear)
-- Is the final result legit? (hashes, stamps, holdout reserved — take not sealed, no ORB/doubles, provisional PF lines disclosed)
+- Is the final result legit? (hashes, stamps, WALK_FORWARD_SCORE present, no ORB/doubles, BAND_PF + Q4 + Q5 locks disclosed; Q6 FOR NOW disclosed)
 - Compounding / high-% bank risk fit of the banked champion
 - Dual-lamp integrity: boost-alone sealed before confluence; holy grail = final table only
 

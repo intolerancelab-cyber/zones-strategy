@@ -8,7 +8,7 @@ Source locks: CHECK_ASSAULT_OUTLINE.md, CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOF
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m).
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Band PF LOCKED (David grill 5 Sep):** PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line (unused fork-hook note only). Reason: compounding / fewer loser streaks. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **Continuation:** PLACEHOLDER (catalog minus orb_* — not operable OPEN; wait David before lock).
 **Multi-agent:** every check (this one included).
 
@@ -47,7 +47,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip <0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock). *Baseline itself is pre-band; confirm provisional note not forged as final.*
+- Band PF LOCKED (David grill 5 Sep): PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line. *Baseline itself is pre-band; confirm BAND_PF_LOCKS disclosed as LOCKED (not forged alternate).*
 - Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
 - **Stage 3 add:** mediocre PF (~0.9 / breakeven) is expected — do not FAIL solely for “low” baseline PF if cost-applied and counts reconcile; FAIL if PF talked without cost or workers_used inflated.
 - Output: PASS / FAIL with tables: claimed vs recomputed, per cell.
@@ -115,7 +115,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 - `checks/stage_03_baseline/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths, talk-box / checkpoint outcome if any
 - `checks/stage_03_baseline/GREEN.stamp` — unlocks Stage 4 POI map WORK
 - `checks/stage_03_baseline/CHECKPOINT_HOOKS.json` — if multi champion types: fork stamp + banked unused champion (hooks only)
-- Attestations: no ORB, no doubles, fleet 4 cells, cost-before-PF, mediocre-PF-expected acknowledged, holdout reserved — take not sealed by this stage, Continuation still PLACEHOLDER
+- Attestations: no ORB, no doubles, fleet 4 cells, cost-before-PF, mediocre-PF-expected acknowledged, walk-forward chunk held back while picking (Q5), Continuation still PLACEHOLDER
 
 ---
 

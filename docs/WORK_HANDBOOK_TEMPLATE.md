@@ -6,7 +6,7 @@ Every WORK clickable prompt must be a **detailed overseer handbook**, not a one-
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only.
-**Band PF provisional:** skip &lt;0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Band PF LOCKED (David grill 5 Sep):** PF &lt; 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line (unused fork-hook note only). Reason: compounding / fewer loser streaks. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **On/off filters:** binary no-line states; parked — ask David later.
 
 ---
@@ -86,16 +86,16 @@ Numbered. No skips. Include smoke → fleet → stamp.
 ### 6. Success stamps
 - Exact stamp names / fields
 - Per-cell vs book-level stamps
-- workers_used, hash, n, PF (and provisional band lines if relevant)
+- workers_used, hash, n, PF (and LOCKED band PF / Q4 notes if relevant)
 - What CHECK will read
 
 ### 7. What NOT to do
 - No ORB / no doubles
 - No factory code edits from this room
 - No sharding identity decisions
-- No inventing OPEN David locks (0.75/1.2, continuation set, take rule, on/off list, POI list)
+- No inventing OPEN David items (permanent Q6 combo-sweep, continuation set, on/off list, POI list). Band PF + Q4 + Q5 LOCKED; Q6 FOR NOW.
 - No advancing without fleet 100%
-- No contaminating holdout (last ~20% reserved — take not sealed by this stage)
+- No contaminating walk-forward chunk; take seal requires WF score stamp; weak score blocks (Q5)
 
 ### 8. Heartbeat / stuck
 - Heartbeat cadence
@@ -118,14 +118,14 @@ Depth David wants: sharding handbook style. Use as the bar for other heavy WORKs
 ### 0. Header
 - **Stage # / name:** 8 — Band sweep
 - **Kind:** WORK
-- **Goal:** Wide→narrow KEEP sweep of tailored entry/TP recipes on sweep-candidate bands only (≥~0.75 provisional); stamp keepers per fleet cell; unlock Stage 9 CHECK.
+- **Goal:** Wide→narrow KEEP sweep of tailored entry/TP recipes on sweep-gate bands only (PF ≥ 0.75 LOCKED); stamp keepers per fleet cell; unlock Stage 9 CHECK.
 - **Unlocks next:** Stage 9 CHECK
 - **Fleet cells:** ES 5m, ES 15m, NQ 5m, NQ 15m
 - **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED (`close_back_inside`, `n_close_back_inside`, `wick_rejection_completed_bar`, `touch`, `close_confirm`, `pullback_to_level`) OR Continuation PLACEHOLDER (catalog minus `orb_*` — not operable OPEN; do not claim locked).
 
 ### 1. Goal
 - For each fleet cell: take Band-find KEEP/sweep-candidate bands; run wide→narrow entry×TP recipes; stamp KEEP recipes + drop dead arms; paint strips to 100%.
-- Does **not** decide final champion take, confluence, or lock 0.75/1.2 — those stay provisional / later CHECK / David OPEN.
+- Does **not** decide final champion take or confluence fill unless this is Stage 12/13 — Band PF / keep / Q4 / Q5 are LOCKED; Q6 FOR NOW.
 
 ### 2. Stamped inputs
 - Stage 1 Freeze/admit (cost/session; no ORB)
@@ -133,7 +133,7 @@ Depth David wants: sharding handbook style. Use as the bar for other heavy WORKs
 - Stage 3 CHECK green
 - Stage 4 POI map hashes (value areas as POIs)
 - Stage 5 CHECK green
-- Stage 6 Band find: SKIP (<0.75), REVIVAL (~0.75), keep lean >1.2, FAILED_REVIVAL/BELOW_KEEP; CROSS_CELL_3OF4
+- Stage 6 Band find: SKIP (<0.75 no sweep), sweep-gate (≥0.75), KEEP if PF>1.2; CROSS_CELL_3OF4
 - Stage 7 CHECK green
 - Cache pins: bars + POI map hashes must match; if mismatch → rebuild map section, do not silent continue
 - Entry-method set = current STRATEGY INPUT checkbox value
@@ -166,10 +166,10 @@ Depth David wants: sharding handbook style. Use as the bar for other heavy WORKs
 2. Read STRATEGY INPUT checkbox → bind entry-method list; **strip any orb_*; refuse doubles/pairs arms**.
 3. One-cell smoke: wide→narrow on one candidate band; verify n, PF, workers_used honesty, hash pin.
 4. Identity check: smoke n_workers=1 hash == n_workers=k hash on same tiny set.
-5. Fan out fleet cells; per cell load bar+POI cache by hash; enqueue only ≥~0.75 candidates (provisional); **never enqueue &lt;0.75 skip bands** (revival arms only where Band-find marked revival).
+5. Fan out fleet cells; per cell load bar+POI cache by hash; enqueue only PF ≥ 0.75 sweep-gate bands (LOCKED); **never enqueue PF &lt; 0.75**.
 6. Wide pass → triage → narrow KEEP; TP arms = original + fractions + ATR 1.2–5.0 (DEC-061 structural TP = research-only, do not swap in as production TP).
 7. Apply early n+PF floors; cost model already from Freeze — no PF talk without cost.
-8. Holdout last ~20% untouched (take decisions later — not here).
+8. Hold back walk-forward / never-seen chunk while picking recipe (Q5); take seal later needs WF score stamp.
 9. Paint each cell strip 10%…100% with real chunk times; heartbeat under stack.
 10. Write KEEP recipe stamps per cell; mark dead arms; write book-level sweep manifest.
 11. Barrier: wait all four cells 100% green → unlock Stage 9 CHECK (do not auto-pass CHECK).
@@ -183,13 +183,13 @@ Depth David wants: sharding handbook style. Use as the bar for other heavy WORKs
 - `band_sweep/KEEP_RECIPES/{cell}.json` — recipes, n, PF, cost-applied flag
 - `band_sweep/MANIFEST.json` — entry_set_id, tp_grid_id, workers_used, hashes, skip bands omitted
 - `band_sweep/SMOKE_IDENTITY.json` — one-core vs multi-core hash
-- Provisional note stamped: band PF lines 0.75 | 1.0 | 1.2 **not locked**
+- BAND_PF_LOCKS stamped: <0.75 no sweep; ≥0.75 sweep; KEEP if PF > 1.2; no 1.0 keep line
 - Strip paint 100% × 4 cells
 
 ### 7. What NOT to do
 - Do not sweep doubles/pairs (DEFUNCT)
 - Do not include orb_* methods (ORB DEAD)
-- Do not lock 0.75/1.2 in stone
+- Do not re-provisionalize Band PF / Q4 / Q5; Q6 FOR NOW (OPEN to revise)
 - Do not claim Continuation set locked
 - Do not shard the CHECK or KEEP decision itself
 - Do not edit factory code from this room
@@ -223,7 +223,7 @@ When authoring Stage 10, fill the same template with:
 - **Split:** boost family × cell jobs; mark B×S table; do **not** run confluence here
 - **Dual-lamp:** boost-alone completes → Stage 11 CHECK (cost shock + trade-count floor) → only then Stage 12 confluence on allowlisted squares
 - **MUST-NOT:** take rule finalization (OPEN), holy-grail claim, re-open after mark
-- **Provisional:** boost keep lines 1.0|1.2 both reported; owner picks before check read
+- **LOCKED:** KEEP label only if PF > 1.2; Q4 geometry; Q5 walk-forward; Q6 FOR NOW borrow-single
 - **NOT:** doubles, ORB, inventing take locks (B−S≥2, etc. = notes only until table grill)
 
 ---

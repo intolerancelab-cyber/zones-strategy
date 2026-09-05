@@ -24,14 +24,14 @@ Read-only briefing for prompt-driven dash redesign. Aligns with PROMPT_DASH_HAND
 | 3 | Check (+ champion talk if needed) | CHECK |
 | 4 | POI map (value areas = POIs: D/W/M) | WORK |
 | 5 | Check | CHECK |
-| 6 | Band find (<0.75 SKIP no normal sweep; ~0.75 REVIVAL; keep lean >1.2; Band-find cross-cell 3-of-4) | WORK |
+| 6 | Band find (LOCKED: <0.75 no sweep; ≥0.75 sweep; KEEP label only if PF>1.2; cross-cell 3-of-4) | WORK |
 | 7 | Check | CHECK |
 | 8 | Band sweep (wide→narrow KEEP; entry set from checkbox) | WORK |
 | 9 | Check | CHECK |
-| 10 | Boost-alone → mark *candidate* B×S occupancy (unlocks Stage-12 path after 11) | WORK |
+| 10 | Boost-alone → mark *candidate* B×S occupancy; Q6 FOR NOW = single-boost recipe sweeps only (unlocks Stage-12 path after 11) | WORK |
 | 11 | Check (cost shock + trade-count floor) | CHECK |
-| 12 | Stage-12 boost-count confluence (2/3/4 B×S allowlisted; draw-a-line take-table FOR NOW) | WORK |
-| 13 | Check (draw-a-line take-table FOR NOW / holy-grail + dependence; never-1B WARN) | CHECK |
+| 12 | Stage-12 boost-count confluence (2/3/4 B×S; take-table redraw every run; cut full-session PF>1.2; Q5 walk-forward score before take seal; draw-a-line FOR NOW) | WORK |
+| 13 | Check (take-table cut PF>1.2; Q4 LOCKED; Q5 WF score stamp; weak WF blocks; Q6 FOR NOW borrow-single; draw-a-line FOR NOW; never-1B WARN) | CHECK |
 | 14 | On/off filters | WORK |
 | 15 | Check | CHECK |
 | 16 | Assemble + hold/flat | WORK |
@@ -65,5 +65,5 @@ PROMPT_DASH_HANDOFF.md, DAVID_BRIEF_2026-09-05.md, GATE_PLAN_V1.md, agent memory
 - Branch `codex/rty-replay-parity-20260702`: fewer/tighter near-level bands → sweeps → remove deadwood POIs.
 - Prompt-dash admits cleaned POI set later — **do not invent keep/cut list**. Pending other session.
 - Band-find cross-cell (3-of-4 same POI×band) ≠ Stage-12 boost-count confluence (2/3/4 B×S).
-- Coherent PF ladder: <0.75 SKIP (no normal sweep); ~0.75 REVIVAL; keep lean PF > 1.2; FAILED_REVIVAL/BELOW_KEEP after failed revival.
-- Continuation = PLACEHOLDER (not operable OPEN). Take path = draw-a-line take-table FOR NOW (not old B−S notes as locked rule).
+- **Band PF LOCKED (David grill 5 Sep):** <0.75 no sweep; ≥0.75 sweep (must not worsen); KEEP/BOOST label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line.
+- Continuation = PLACEHOLDER. Take path = draw-a-line FOR NOW; recalc every run; cut at full-session PF > 1.2; easy fat 5B0S/6B0S light-take. **Q4 geometry LOCKED** (S≥B no-take; B−S==1 hard no-take; B−S≥2 sweep+PF>1.2). **Q5 walk-forward LOCKED** (hold back unseen while picking recipe; score never-seen before take seal / move-forward; weak score blocks). **Q6 FOR NOW:** single-boost recipes; multi-B borrows best single + score together PF>1.2; no joint TP-SL sweep; OPEN to revise.

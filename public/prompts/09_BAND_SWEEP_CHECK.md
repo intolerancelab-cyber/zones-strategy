@@ -10,14 +10,14 @@ Source locks: CHECK_ASSAULT_OUTLINE.md, CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOF
 **Fork:** hooks only.
 **NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level (not old wide map) → sweeps → **REMOVE DEADWOOD POIs** (only heavy lifters keep). Align DEC-063 / RESCORE-20. Prompt-dash admits cleaned POI set later — **do not invent keep/cut list**. Pending other session for cleaned set.
 **Band-find cross-cell (3-of-4 same POI×band)** ≠ **Stage-12 boost-count confluence (2/3/4 B×S)** — do not conflate.
-**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Band PF LOCKED (David grill 5 Sep):** PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line (unused fork-hook note only). Reason: compounding / fewer loser streaks. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **Continuation:** PLACEHOLDER (catalog minus orb_* — not operable OPEN; wait David before lock).
 **Multi-agent:** every check (this one included).
 
 ---
 
 ## Prior WORK context
-Stage 8 band sweep — **wide→narrow KEEP**; tailored entry/TP per location; entry set from Reversal/Continuation checkbox. TP today = original + fractions + ATR 1.2–5.0 (**structural TP DEC-061 research-only** — not production swap-in). SKIP bands (<0.75) omitted from *normal* sweep; REVIVAL (~0.75) arms only where REVIVAL_MAP marked; keep lean PF > 1.2.
+Stage 8 band sweep — **wide→narrow KEEP**; tailored entry/TP per location; entry set from Reversal/Continuation checkbox. TP today = original + fractions + ATR 1.2–5.0 (**structural TP DEC-061 research-only** — not production swap-in). PF < 0.75 omitted from all sweeps; PF ≥ 0.75 swept (must not worsen); KEEP label only if PF > 1.2.
 
 **Agents must know:**
 - Wide→narrow KEEP path; one-cell smoke before fleet.
@@ -51,7 +51,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip <0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock).
+- Band PF LOCKED (David grill 5 Sep): PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line.
 - Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
 - **Stage 9 add:** SKIP_OMISSION_PROOF vs Stage 6 SKIP_MAP — every skip id absent from KEEP_RECIPES; entry_set_id matches checkbox/Freeze; TP_POLICY tags research-only vs ATR deployable correctly; smoke identity matches; no inflated workers_used on tiny job count.
 - Output: PASS / FAIL with tables: claimed vs recomputed, per cell.
@@ -70,7 +70,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 **Question:** What have we done wrong?
 - Attack every stamp claim: “KEEP”, “champion”, “holy grail”, “boost unlock”, “skip zone”, “confluence allowlist,” “Continuation LOCKED,” “structural TP production-ready.”
 - Demand disconfirming evidence; null shuffle / multiplicity where relevant.
-- **Stage 9 add:** refute ORB/doubles revival; refute final lock of 0.75/1.2; refute boost/confluence already done; refute narrow-only KEEP with no wide trail; refute skip-zone leakage into KEEP_RECIPES.
+- **Stage 9 add:** refute ORB/doubles revival; refute re-provisionalizing Band PF locks / treating 1.0 as keep; refute boost/confluence already done; refute narrow-only KEEP with no wide trail; refute skip-zone leakage into KEEP_RECIPES.
 - Output: REFUTED claims list + what must be re-run in **Stage 8 only** (or Stage 6 if skip maps wrong).
 
 ### Shared verdict protocol
@@ -111,7 +111,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 - If multiple KEEP champion **types** appear → **talk box + champion checkpoint**: compounding / high-% bank risk lens (not max PF vanity). **Bank unused champion** via checkpoint hook for later resume. Fork = hooks only (no fork UX).
 - Stamp `checks/stage_09_band_sweep/CHECKPOINT_HOOKS.json` when dual/multi KEEP types talked (fork stamp + banked unused champion id/path).
 - If single type or none → no forced talk; proceed to verdict.
-- Do **not** invent take locks, POI list, 0.75/1.2 final, or Continuation shortlist.
+- Do **not** invent Q5/Q6 answers, POI list, or Continuation shortlist. Band PF + Q4 geometry are LOCKED.
 - Structural TP remains research-only — not a talk to “promote” it to deployable without David.
 
 ---
@@ -120,7 +120,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 - `checks/stage_09_band_sweep/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths, talk-box / checkpoint outcome if any
 - `checks/stage_09_band_sweep/CHECKPOINT_HOOKS.json` — if multi KEEP champion types: fork stamp + banked unused champion (hooks only)
 - `checks/stage_09_band_sweep/GREEN.stamp` — unlocks Stage 10 Boost-alone WORK
-- Attestations: no ORB, no doubles, fleet 4 cells, skip bands omitted, wide→narrow evidenced, cost-before-PF, provisional PF not locked, Continuation still PLACEHOLDER, structural TP research-only, holdout virgin
+- Attestations: no ORB, no doubles, fleet 4 cells, skip bands omitted, wide→narrow evidenced, cost-before-PF, BAND_PF_LOCKS stamped LOCKED, Continuation still PLACEHOLDER, structural TP research-only, holdout virgin
 
 ---
 

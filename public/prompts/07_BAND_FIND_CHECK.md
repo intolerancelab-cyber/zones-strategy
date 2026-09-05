@@ -8,17 +8,17 @@ Source locks: CHECK_ASSAULT_OUTLINE.md, CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOF
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m).
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Band PF LOCKED (David grill 5 Sep):** PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line (unused fork-hook note only). Reason: compounding / fewer loser streaks. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **Continuation:** PLACEHOLDER (catalog minus orb_* — not operable OPEN; wait David before lock).
 **Multi-agent:** every check (this one included).
 
 ---
 
 ## Prior WORK context
-Stage 6 found bands where baseline helped vs hurt. Under ~0.75 → **SKIP** (no *normal* sweep). ~0.75 → REVIVAL class (one tailored sweep). Keep lean PF > 1.2; post-failed-revival under keep = FAILED_REVIVAL / BELOW_KEEP. Band PF figures **PROVISIONAL** (not locked). DEC-063 zone-first banding notes may be referenced — bin count **not** invented-locked.
+Stage 6 found bands where baseline helped vs hurt under **LOCKED** ladder (David grill 5 Sep): PF < 0.75 → no sweep / SKIP; PF ≥ 0.75 → sweep (must not worsen); KEEP/BOOST label only if PF > 1.2; under 1.2 after sweep → SKIP for confluence/table; no 1.0 keep line. DEC-063 notes OK — bin count **not** invented-locked.
 
 **Agents must know:**
-- Coherent ladder: PF <0.75 → SKIP (no *normal* sweep); ~0.75 → REVIVAL; keep lean PF > 1.2 (1.0 sensitivity / fork-hook only); post-failed-revival under keep → FAILED_REVIVAL / BELOW_KEEP. Do **not** dual-label SWEEP_CANDIDATE + DEAD_ZONE.
+- LOCKED ladder: PF < 0.75 → no sweep / SKIP; ≥ 0.75 → sweep (must not worsen); KEEP/BOOST only if PF > 1.2; under 1.2 after sweep → SKIP for confluence/table; no 1.0 keep line. Do **not** dual-label SWEEP_CANDIDATE + DEAD_ZONE.
 - **Band-find cross-cell (3-of-4 same POI×band)** must be stamped (CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT) — SEPARATE from Stage-12 boost-count confluence.
 - NEW BANDING / deadwood POI keep/cut list not invented.
 - DEC-063 zone-first banding notes exist; do not invent bin count locks.
@@ -46,15 +46,15 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 **Question:** Was a mistake made?
 - Hunt: Silent Zero, fake ticks, percent paint without work, wrong folder/roster, smell gaps, leftover polish, roster defaults, ORB/doubles copy leaking into UI or stamps.
 - Hunt: skipped stamp, wrong entry-method set vs STRATEGY INPUT checkbox, 1m accidentally in fleet, re-walk of cached bars/POIs, identity stage that was sharded when it must not be.
-- **Stage 7 add:** *normal* sweeping or pre-enqueuing a <0.75 skip band; locking 0.75/1.2 as final without David grill; skip/KEEP labels swapped across cells; missing SKIP_MAP / REVIVAL_MAP / CROSS_CELL_3OF4; thin-n BOOST without 3-of-4; naked “BOOST candidate” label; dual-label SWEEP_CANDIDATE+DEAD_ZONE; invented deadwood POI keep/cut; Stage 8 work done early; CHECK clicked before all strips green; invented bin-count lock from DEC-063 notes.
+- **Stage 7 add:** sweeping a PF < 0.75 band; re-provisionalizing locked Band PF / keep lines; skip/KEEP labels swapped across cells; missing SKIP_MAP / REVIVAL_MAP / CROSS_CELL_3OF4; thin-n BOOST without 3-of-4; naked “BOOST candidate” label; dual-label SWEEP_CANDIDATE+DEAD_ZONE; invented deadwood POI keep/cut; Stage 8 work done early; CHECK clicked before all strips green; invented bin-count lock from DEC-063 notes.
 - Output: PASS / FAIL with concrete file/stamp/path evidence. No vibes.
 
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades/bands, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip <0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock).
+- Band PF LOCKED (David grill 5 Sep): PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line.
 - Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
-- **Stage 7 add:** every SKIP_MAP id has PF <0.75 (cost-applied); every REVIVAL_MAP id is ~0.75; FAILED_REVIVAL/BELOW_KEEP used instead of dual SWEEP_CANDIDATE+DEAD_ZONE; every CROSS_CELL_BOOST_CANDIDATE has ≥3/4 same-sign readable cells; INSUFFICIENT when <3; bar_hash/poi_map_hash match prior stamps; no inflated workers_used.
+- **Stage 7 add:** every SKIP_MAP id has PF < 0.75 (cost-applied); every SWEEP_GATE/REVIVAL_MAP id has PF ≥ 0.75; post-sweep under 1.2 uses FAILED_REVIVAL/BELOW_KEEP / SKIP-for-table — not dual SWEEP_CANDIDATE+DEAD_ZONE; every CROSS_CELL_BOOST_CANDIDATE has ≥3/4 same-sign readable cells; INSUFFICIENT when <3; bar_hash/poi_map_hash match prior stamps; no inflated workers_used.
 - Output: PASS / FAIL with tables: claimed vs recomputed, per cell.
 
 ### Role 3 — Real-life trader lens
@@ -71,12 +71,12 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 **Question:** What have we done wrong?
 - Attack every stamp claim: “KEEP”, “champion”, “holy grail”, “boost unlock”, “skip zone”, “confluence allowlist,” “0.75 locked,” “1.2 locked,” “DEC-063 bin count locked.”
 - Demand disconfirming evidence; null shuffle / multiplicity where relevant.
-- **Stage 7 add:** refute final lock of provisional lines; refute Continuation LOCKED; refute ORB/doubles; refute Stage 8 KEEP recipes already chosen; refute band vs ATR/tick smell ignored.
+- **Stage 7 add:** refute re-provisionalizing Band PF locks; refute Continuation LOCKED; refute ORB/doubles; refute Stage 8 KEEP recipes already chosen; refute band vs ATR/tick smell ignored.
 - Output: REFUTED claims list + what must be re-run in **Stage 6 only** (or earlier if identity broken).
 
 ### Shared verdict protocol
 1. Any FAIL from roles 1–2 → CHECK fail → loop same WORK section (Stage 6; earlier only if prior identity broken); do not advance.
-2. WARN from role 3 → talk box only if a real choice exists; else stamp WARN and proceed only if David/overseer accepts. Provisional 0.75/1.2 grill = OPEN — park, do not invent.
+2. WARN from role 3 → talk box only if a real choice exists; else stamp WARN and proceed only if David/overseer accepts. Band PF locks already LOCKED — do not invent alternate lines. Q5 LOCKED; Q6 FOR NOW.
 3. Role 4 REFUTED items that are fixable → same-section loop; if OPEN with David → park, do not invent.
 4. All four PASS (or WARN accepted) → stamp CHECK green; unlock Stage 8 Band sweep WORK.
 
@@ -93,8 +93,8 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ---
 
 ## Stage 7 — cheap kills specific
-- *Normal* sweeping a <0.75 skip band (revival is the only exception class at ~0.75)
-- Locking 0.75/1.2 as final without David grill; treating 1.0 as equal keep pick vs lean >1.2
+- Sweeping a PF < 0.75 band at all
+- Re-provisionalizing locks; treating 1.0 as a keep line
 - Band vs ATR/tick smell ignored
 - Skip/KEEP labels swapped across cells
 - Missing CROSS_CELL_3OF4 stamps / BOOK
@@ -113,7 +113,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ---
 
 ## Talk-before-check (only if real choice)
-- Owner open item: pick boost line 1.0 vs 1.2 **before** later check reads if a real choice is presented — still provisional until David grill; do not forge “locked.”
+- Boost keep line LOCKED at PF > 1.2 — 1.0 is unused fork-hook note only; do not present 1.0 vs 1.2 as equal pick.
 - DEC-063 bin count / banding scheme — park if disputed; do not invent lock.
 - Do **not** invent take locks, Continuation shortlist, or POI list.
 
@@ -122,7 +122,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ## Success stamp (CHECK green)
 - `checks/stage_07_band_find/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths, talk-box outcome if any
 - `checks/stage_07_band_find/GREEN.stamp` — unlocks Stage 8 Band sweep WORK
-- Attestations: no ORB, no doubles, fleet 4 cells, SKIP/REVIVAL/FAILED_REVIVAL maps intact, CROSS_CELL_3OF4 stamped, provisional PF disclosed not locked, NEW BANDING / deadwood-not-invented, DEC-063 note without invented bin lock, holdout reserved — take not sealed by this stage, Continuation still PLACEHOLDER
+- Attestations: no ORB, no doubles, fleet 4 cells, SKIP/REVIVAL/FAILED_REVIVAL maps intact, CROSS_CELL_3OF4 stamped, BAND_PF_LOCKS disclosed as LOCKED, NEW BANDING / deadwood-not-invented, DEC-063 note without invented bin lock, walk-forward chunk held back while picking (Q5), Continuation still PLACEHOLDER
 
 ---
 

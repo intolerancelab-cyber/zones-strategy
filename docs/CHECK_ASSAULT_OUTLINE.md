@@ -22,8 +22,8 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip &lt;0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock).
-- Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
+- Band PF LOCKED (David grill 5 Sep): PF &lt; 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line.
+- Cost model present before any PF talk. Walk-forward (holdout=same idea): hold back unseen while picking recipe; take seal requires WF score stamp; weak score blocks.
 - Output: PASS / FAIL with tables: claimed vs recomputed, per cell.
 
 ### Role 3 — Real-life trader lens
@@ -101,16 +101,16 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 ---
 
 ### Stage 6→7 — Check (after Band find WORK)
-**Prior WORK context:** Stage 6 found bands where baseline helped vs hurt under the coherent ladder: <0.75 → SKIP (no *normal* sweep); ~0.75 → REVIVAL; keep lean PF > 1.2; post-failed-revival → FAILED_REVIVAL / BELOW_KEEP. **Band-find cross-cell (3-of-4)** stamps CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT required. NEW BANDING / deadwood-not-invented. Band PF figures PROVISIONAL (not locked).
+**Prior WORK context:** Stage 6 under **LOCKED** ladder (David grill 5 Sep): PF < 0.75 → no sweep / SKIP; ≥ 0.75 → sweep (must not worsen); KEEP/BOOST label only if PF > 1.2; under 1.2 after sweep → SKIP for confluence/table; no 1.0 keep line. **Band-find cross-cell (3-of-4)** stamps CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT required. NEW BANDING / deadwood-not-invented.
 
 **Agents must know:**
-- instant_skip_below = 0.75 provisional; revival at ~0.75; keep lean PF > 1.2 (grill at launch); 1.0 = sensitivity / fork-hook only — owner fork hook before check read if a real choice exists.
-- Between 0.75 and keep lean (PF > 1.2) after failed revival = FAILED_REVIVAL or BELOW_KEEP (not table / not keep) — provisional story. Do **not** dual-label SWEEP_CANDIDATE + DEAD_ZONE.
+- PF < 0.75 = no sweep LOCKED; ≥ 0.75 = sweep LOCKED; KEEP label only if PF > 1.2 LOCKED; no 1.0 keep line.
+- Under 1.2 after sweep = SKIP for confluence/table. Do **not** dual-label SWEEP_CANDIDATE + DEAD_ZONE. Q4 geometry applies at take-table stages.
 - DEC-063 zone-first banding notes exist; do not invent bin count locks.
 
 **Cheap kills specific:**
-- *Normal* sweeping a <0.75 skip band (revival exception only at ~0.75)
-- Locking 0.75/1.2 as final; treating 1.0 as equal keep pick vs lean >1.2
+- Sweeping a PF < 0.75 band at all
+- Re-provisionalizing Band PF locks; treating 1.0 as a keep line
 - Missing CROSS_CELL_3OF4 / thin-n BOOST without 3-of-4 / naked “BOOST candidate”
 - Dual-label SWEEP_CANDIDATE + DEAD_ZONE
 - Band vs ATR/tick smell ignored
@@ -180,7 +180,8 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 - 1B alone on take-line → WARN (not FAIL) until David locks never-1B
 - S≥3 or B&lt;2 taken
 - Dependence ignored (same underlying signal counted as 3 “boosts”)
-- Holdout used during confluence fill
+- Walk-forward chunk burned during confluence fill; take sealed without WF score; weak WF ignored
+- Requiring full joint multi-B TP-SL before take (contradicts Q6 FOR NOW)
 
 **Real-life failure modes:**
 - Confluence collapses when one POI family fails live
@@ -274,14 +275,14 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 
 ### Extra brief for all four roles
 - Can it trade? (research-book sense: coherent runbook, costs, size, skip zones omitted, entry set clear)
-- Is the final result legit? (hashes, stamps, holdout reserved — take not sealed, no ORB/doubles, provisional PF lines disclosed)
+- Is the final result legit? (hashes, stamps, WALK_FORWARD_SCORE present, no ORB/doubles, BAND_PF + Q4 + Q5 locks disclosed; Q6 FOR NOW borrow-single disclosed; no invented permanent combo-sweep)
 - Compounding / high-% bank risk fit of the banked champion
 - Dual-lamp integrity: boost_search_closed after Stage 13; Stage-12 allowlist-only; holy grail = final table only; draw-a-line take-table FOR NOW
 
 ### Final assault cheap kills
 - Any stage stamp missing or forged percent paint
 - Boost search reopened after confluence
-- SKIP <0.75 zones still trading (no normal sweep; revival exception only at ~0.75)
+- SKIP <0.75 zones still trading (must not be swept at all)
 - Continuation set silently locked
 - Fork UX invented (hooks only)
 - Factory code edited from this room

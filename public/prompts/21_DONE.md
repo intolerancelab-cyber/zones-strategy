@@ -8,7 +8,7 @@ Source locks: CHECK_ASSAULT_OUTLINE.md (Stage 21), CURRENT_STAGE_MAP.md, PROMPT_
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m).
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked) — disclosed in sealed book.
+**Band PF LOCKED (David grill 5 Sep)** + **Q4 geometry LOCKED** + **Q5 walk-forward LOCKED** + **Q6 alone-vs-together FOR NOW** — disclosed in sealed book. Q6 OPEN to revise if later combo-sweep wins.
 **Dual-lamp:** boost-alone sealed before confluence; holy grail = final table.
 **On/off filters:** PARKED or APPLIED as stamped — list not invented here.
 **NEW BANDING:** cleaned POI set admitted when ready elsewhere — keep/cut list not invented in this seal.
@@ -33,12 +33,12 @@ Stamp Done **only** when all of the following are true:
 3. **Fleet strips complete:** every WORK stage’s ES 5m, ES 15m, NQ 5m, NQ 15m strips were 100% green before their CHECKs.
 4. **Identity chain sealed:** Freeze/admit BOOK_SEAL; ENTRY_SET matches STRATEGY INPUT; no ORB; no doubles; Continuation still PLACEHOLDER — **ask David before locking continuation** (do not forge operable OPEN or LOCKED).
 5. **Dual-lamp intact:** boost_search_closed=true only after Stage 13; Stage-12 boost-count confluence allowlist-only; holy-grail = final table reviewed; draw-a-line take-table FOR NOW.
-6. **Take-table line present:** Stage 12/13 take / don’t-take with best-recipe-by-B; amalgamation OPEN disclosed.
+6. **Take-table line present:** Stage 12/13 take / don’t-take with Q6 borrow-single recipe + together PF; WALK_FORWARD_SCORE present (Q5); Q6 OPEN-to-revise disclosed.
 7. **On/off posture sealed:** PARKED or APPLIED; `filter_list_invented=false`.
 8. **Assemble + hold/flat sealed:** skip zones omitted; micro hold-vs-flat present; research runbook `live_deploy=false`.
 9. **Stress + luck both sealed:** WF/capacity/ugly + Monte Carlo; seeds pinned; cherry_pick=false.
 10. **Provisional PF ladder disclosed not forged locked:** SKIP <0.75 (no normal sweep); REVIVAL ~0.75; keep lean PF > 1.2 (1.0 sensitivity / fork-hook only).
-11. **OPEN items parked (not invented):** exact POI keep/cut (deadwood), Continuation shortlist, take rule final, filter list (if parked), amalgamation vs best-recipe, 0.75/1.2 final grill.
+11. **OPEN items parked (not invented):** exact POI keep/cut (deadwood), Continuation shortlist, take rule final, filter list (if parked), permanent Q6 combo-sweep revise, 0.75/1.2 final grill beyond locks.
 12. **Compounding lens:** banked champion fit for high-% bank risk noted in assault REAL_LIFE / checkpoints.
 13. **Fork:** hooks only; any unused champions remain banked via checkpoint hooks for later resume.
 14. **No live language:** Done = **research book finished** — **not** permission to trade live without a separate live gate.
@@ -51,8 +51,8 @@ Write a single Done pack that points at (does not rewrite) the chain:
 - `done/SEAL.json` — timestamp (UTC + Europe/London label), overseer id, spine version 5 Sep 2026, `research_book_finished=true`, `live_permission=false`
 - `done/GREEN_INDEX.json` — paths to all CHECK GREEN.stamps (3/5/7/9/11/13/15/17/19) + `final_assault/GREEN.stamp`
 - `done/BOOK_POINTER.json` — pointers to assemble BOOK, RUNBOOK_RESEARCH, TAKE_LINE, HOLD_FLAT_PATH, onoff FILTER_POSTURE, stress_luck MANIFEST (both_tracks), confluence HOLY_GRAIL_CANDIDATE / TAKE_LINE_REVIEWED
-- `done/LOCKS.json` — ORB=DEAD, doubles=DEFUNCT, fleet=ES+NQ×5m+15m, fork=hooks_only, band_PF=provisional, continuation=PLACEHOLDER (ask David before lock; do not forge), dual_lamp=intact, cross_cell_band_confluence_separated=true, new_banding_branch=`codex/rty-replay-parity-20260702`, deadwood_poi_list=`NOT_INVENTED`, filter_list_invented=false, compounding_lens=true
-- `done/OPEN_WITH_DAVID.json` — parked items list (do not invent answers); **must include Continuation lock ask** + never-1B + keep lean 1.2 grill + deadwood POI cleaned set
+- `done/LOCKS.json` — ORB=DEAD, doubles=DEFUNCT, fleet=ES+NQ×5m+15m, fork=hooks_only, band_PF=LOCKED, q4=LOCKED, q5_walk_forward=LOCKED, q6=`FOR_NOW_BORROW_SINGLE_OPEN_TO_REVISE`, continuation=PLACEHOLDER (ask David before lock; do not forge), dual_lamp=intact, cross_cell_band_confluence_separated=true, new_banding_branch=`codex/rty-replay-parity-20260702`, deadwood_poi_list=`NOT_INVENTED`, filter_list_invented=false, compounding_lens=true
+- `done/OPEN_WITH_DAVID.json` — parked items list (do not invent answers); **must include Continuation lock ask** + never-1B + Q6 combo-sweep revise ask + deadwood POI cleaned set
 - `done/FINAL_ASSAULT_SNAPSHOT.json` — copies/pointers: LEGIT, CAN_IT_TRADE, REAL_LIFE, VERDICT
 - `done/DONE.stamp` — present only when all checks above pass
 
@@ -89,7 +89,7 @@ If a seal-gate assault is run, use the same four questions narrowly:
 ## What NOT to do
 - Do not start new research stages after Done
 - Do not treat Done as live deploy authorization
-- Do not invent filter lists, deadwood POI keep/cut, take-rule locks, Continuation locks, or 0.75/1.2 locks in the seal
+- Do not invent filter lists, deadwood POI keep/cut, permanent Q6 combo-sweep locks, Continuation locks, or re-provisionalize Band PF / Q4 / Q5 in the seal
 - Do not treat Continuation PLACEHOLDER as operable OPEN
 - **Must ask David before locking Continuation**
 - Do not revive ORB or doubles

@@ -24,10 +24,10 @@ Source: David voice notes to DASHBOARD OVERSEER. Build page + prompts only. No f
 2. Layer POIs per asset × TF.
 3. Value areas (daily / weekly / monthly) are POIs in that list — calculate them, then treat as POIs. Not a separate “value area stage” forever.
 4. Find bands: where baseline is helped vs hurt.
-5. Under PF ~0.75 in a band → SKIP (no *normal* sweep; revival is the exception at ~0.75). At end, trades in skip zones are omitted. **OPEN:** confirm 0.75 = band PF.
-6. At ~0.75 → REVIVAL class (one tailored sweep); keep lean PF > 1.2; after failed revival → FAILED_REVIVAL/BELOW_KEEP. Wide→narrow KEEP.
+5. **LOCKED (David grill 5 Sep):** PF < 0.75 in a band → do **not** sweep at all → SKIP. At end, trades in skip zones are omitted.
+6. PF ≥ 0.75 → sweep (revival/fix try; must not worsen vs pre-sweep). BOOST/KEEP label **only if** PF > 1.2; under 1.2 after sweep → SKIP for confluence/table. No 1.0 keep line. Reason: compounding / fewer loser streaks. Wide→narrow KEEP.
 7. Boost model: sweep **each boost alone** → mark table → scan confluences (2/3/4) across book. Holy grail = final table.
-8. Take path FOR NOW: draw-a-line take-table. B−S notes OPEN: B−S ≥ 2, B in 2..7; never B<2; never S≥3; lean 2B alone or 3B+1S; never 1B alone (Stage 13 WARN until David locks).
+8. Take path FOR NOW: draw-a-line take-table; **recalc every run**; cut where full-session PF > 1.2; soft/bottom = small sweep to draw line; easy fat 5B0S/6B0S take without heavy sweep (best highest-profit recipe). **Q4 geometry LOCKED:** S≥B → no sweep/don’t take; B−S==1 (2B1S, 3B2S) → don’t take hard / don’t hunt; B−S≥2 (3B1S, 4B2S) → sweep each run, take line at PF > 1.2. never-1B WARN where Q4 doesn’t hard-block. **Q5 walk-forward LOCKED:** hold back unseen while picking recipe; score never-seen before take seal / move-forward; weak score blocks. Prefer **walk-forward** (holdout=same idea). **Q6 alone-vs-together FOR NOW:** single-boost recipe sweeps; multi-B borrows best single recipe + score together PF > 1.2; no full joint TP-SL sweep for now; OPEN to revise if later combo-sweep wins.
 9. On/off filters (no bands): ranging/trending, bad calendar days, half-days, low volume, later gamma etc. Prefer sweep near the end.
 10. Assemble + hold vs flat.
 11. Stress + luck — same late area, two questions: Stress = walk-forward / capacity / ugly regimes; Luck = Monte Carlo.
@@ -65,7 +65,10 @@ Chronicle: continuation close_confirm > break_and_retest.
 
 ## Decisions 5 Sep continued
 - Fork style: DECIDE LATER — leave page hooks only.
-- Band skip ~0.75 from David voice (**OPEN** confirm if PF).
+- Band PF / keep / sweep gate: **LOCKED** 5 Sep grill — see `DAVID_GRILL_LOCKS_2026-09-05.md`.
+- Q4 take-table geometry: **LOCKED** — see `DAVID_GRILL_LOCKS_2026-09-05.md`.
+- Q5 walk-forward: **LOCKED** — see `DAVID_GRILL_LOCKS_2026-09-05.md`.
+- Q6 alone-vs-together: **FOR NOW** (borrow best single for multi-B; score together PF > 1.2; no joint TP-SL sweep) — OPEN to revise. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 - Highest-boost + vote-grading: notes only (tested elsewhere).
 - David will bring POI list + new strategy later; bake in then.
 
@@ -74,7 +77,7 @@ Chronicle: continuation close_confirm > break_and_retest.
 - **ORB: DEAD** for this product. Remove from prompt-dash plans/docs. Do not delete factory code here unless proven safe elsewhere; this room builds page+prompts only.
 - Boost model: each boost alone → table → confluence scan → holy grail table.
 - Top UI checkbox selects entry-method set (Reversal locked; Continuation open).
-- Pro quant cheap loops KEEP (smoke, holdout 20%, etc.).
+- Pro quant cheap loops KEEP (smoke, walk-forward score stamp before take seal, etc.).
 ## Check / work prompt locks (5 Sep)
 - Every CHECK = multi-agent (mistake / legit / real-life / wrong). Final = whole book.
 - Every WORK = detailed handbook incl. full sharding guide.
@@ -90,8 +93,8 @@ Chronicle: continuation close_confirm > break_and_retest.
 ## Talk boxes + take-table line (5 Sep)
 - Talk only on real forks; checkpoint + bank other champion (hooks now).
 - Strategy canonical at Freeze top; look-ahead fit per strategy; no ORB.
-- Take: draw line on B×S table; best boost recipe; cheap combo shapes for now.
-- See DAVID_NOTES_2026-09-05_TALKBOX_TAKE.md
+- Take: draw line on B×S table (recalc every run; cut full-session PF > 1.2); Q4 geometry locked; Q5 walk-forward score stamp required before take seal (weak blocks); best highest-profit boost recipe (Q6: multi-B borrows single); cheap combo / small bottom-end sweep; easy fat 5B0S/6B0S light-take.
+- See `DAVID_GRILL_LOCKS_2026-09-05.md`, `DAVID_NOTES_2026-09-05_TALKBOX_TAKE.md`
 
 ## New banding (5 Sep)
 - Tighter near-level bands; sweeps; remove deadwood POIs. Source: THE STRATEGY branch `codex/rty-replay-parity-20260702`.

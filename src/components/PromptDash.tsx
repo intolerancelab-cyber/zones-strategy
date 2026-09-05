@@ -7,12 +7,14 @@ import {
   FLEET,
   TALK_BOX_LABELS,
   TALK_BOX_STAGE_IDS,
+  WF_STAGE_IDS,
   allStripsComplete,
   assaultAllPass,
   assaultHasFail,
   defaultState,
   emptyAssault,
   emptyTalkNote,
+  emptyWalkForward,
   emptyWork,
   formatTime,
   isStuckStatus,
@@ -20,6 +22,7 @@ import {
   overseerBlocksPaint,
   overseerLabel,
   saveState,
+  walkForwardBlocksSeal,
   workIdForCheck,
   type AssaultAgentId,
   type AssaultVerdict,
@@ -28,6 +31,7 @@ import {
   type EntryMode,
   type OverseerStatus,
   type TalkNote,
+  type WalkForwardStamp,
   type WorkProgress,
 } from "../lib/store";
 
@@ -227,6 +231,11 @@ export default function PromptDash() {
       setToast("CHECK locked — all four assault agents must PASS");
       return;
     }
+    // Q5 demo: weak walk-forward blocks take-related CHECK seal
+    if (walkForwardBlocksSeal(state.walkForward[checkId])) {
+      setToast(`Walk-forward WEAK @ stage ${checkId} — blocks take seal (demo)`);
+      return;
+    }
     // After Pass CHECK, set activeWorkId to the next WORK after that CHECK (C1)
     const nextWork = STAGES.find((st) => st.id > checkId && st.kind === "WORK");
     setState((s) => ({
@@ -337,6 +346,57 @@ export default function PromptDash() {
     });
   };
 
+  const updateWalkForward = (
+    stageId: number,
+    fn: (w: WalkForwardStamp) => WalkForwardStamp,
+  ) => {
+    setState((s) => {
+      const cur = s.walkForward[stageId] || emptyWalkForward();
+      return {
+        ...s,
+        walkForward: { ...s.walkForward, [stageId]: fn(cur) },
+      };
+    });
+  };
+
+  const stampWalkForward = (stageId: number) => {
+    setState((s) => {
+      const cur = s.walkForward[stageId] || emptyWalkForward();
+      if (cur.weakBlocks) {
+        return {
+          ...s,
+          toast: `Walk-forward WEAK @ stage ${stageId} — blocks take seal / move-forward (demo)`,
+          walkForward: {
+            ...s.walkForward,
+            [stageId]: {
+              ...cur,
+              stamped: true,
+              stampedAt: new Date().toISOString(),
+            },
+          },
+        };
+      }
+      if (!cur.heldBack) {
+        return {
+          ...s,
+          toast: "Hold back unseen data first (Q5) — demo lamp",
+        };
+      }
+      return {
+        ...s,
+        walkForward: {
+          ...s.walkForward,
+          [stageId]: {
+            ...cur,
+            stamped: true,
+            stampedAt: new Date().toISOString(),
+          },
+        },
+        toast: `Walk-forward score stamped @ stage ${stageId} (demo — not live PF)`,
+      };
+    });
+  };
+
   const togglePrompt = (stageId: number) => {
     setOpenPromptId((cur) => (cur === stageId ? null : stageId));
   };
@@ -370,7 +430,7 @@ export default function PromptDash() {
           Enter (demo)
         </button>
         <p className="max-w-md text-center text-sm text-slate-400">
-          Demo UI only — paper seals ≠ live permission. Boost lean: keep if PF &gt; 1.2. No ORB / doubles in this product.
+          Demo UI only — paper seals ≠ live permission. KEEP label only if PF &gt; 1.2 (LOCKED). Q4+Q5 locked; Q6 FOR NOW. No ORB / doubles.
         </p>
       </div>
     );
@@ -384,7 +444,7 @@ export default function PromptDash() {
   const doneReady = stage19Passed && stage20Strips && stage20AssaultOk;
 
   return (
-    <div className="mx-auto max-w-5xl px-4 pb-28 pt-8">
+    <div className="mx-auto max-w-5xl px-3 pb-36 pt-6 sm:px-4 sm:pb-28 sm:pt-8">
       <div className="mb-4 flex items-center justify-center">
         <span className="inline-flex items-center rounded-full border-2 border-amber-500 bg-amber-400 px-4 py-1.5 text-sm font-extrabold uppercase tracking-wide text-slate-950 shadow">
           DEMO — NOT LIVE
@@ -428,29 +488,42 @@ export default function PromptDash() {
             </span>
           </span>
         </label>
+        <GrillLocksStrip />
+
         <p className="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">
-          Note: keep lean <strong>PF &gt; 1.2</strong> (1.0 sensitivity / fork-hook only — not equal pick). Band-find cross-cell (3-of-4) ≠ Stage-12 boost-count confluence. ORB dead · doubles
-          defunct — not in this UI.
+          STRATEGY INPUT note: <strong>KEEP only if PF &gt; 1.2</strong> · sweep gate <strong>≥0.75</strong> · <strong>Q4 take geometry LOCKED</strong> · <strong>Q5 walk-forward LOCKED</strong> · <strong>Q6 FOR NOW</strong> borrow-single (OPEN to revise). Band-find cross-cell ≠ Stage-12 dual-lamp confluence. ORB dead · doubles defunct.
         </p>
 
-        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+        <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
+          PARKED — other session drops these four together (not now). Do not invent lists.
+        </p>
+        <div className="mt-2 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <PlaceholderCard
-            title="New banding"
+            title="Full baseline recipe"
             status="PARKED"
-            body="Tighter near-level bands (THE STRATEGY branch). Status PARKED — do not invent bin counts or band maps here."
+            body="Other session will fill. PARKED until the four-pack lands. Do not invent baseline recipe text or numbers."
           />
           <PlaceholderCard
-            title="Cleaned POI list / deadwood cut"
-            status="OPEN — DANGEROUSLY SILENT"
-            body="POI slot is OPEN and DANGEROUSLY SILENT if used for live — no cleaned keep/cut list admitted yet. Do not invent a POI list."
+            title="Full POI sweep recipe"
+            status="PARKED"
+            body="Other session will fill. PARKED until the four-pack lands. Do not invent POI sweep recipes."
           />
           <PlaceholderCard
-            title="Final tables"
-            status="OPEN"
-            body="Holy-grail / take tables OPEN — land here when ready. Do not invent table numbers. Core chord stays."
+            title="Full banding structure"
+            status="PARKED"
+            body="Tighter near-level bands (THE STRATEGY branch). PARKED — other session will fill. Do not invent bin counts or band maps."
+          />
+          <PlaceholderCard
+            title="POI list"
+            status="PARKED — DANGEROUSLY SILENT"
+            body="Cleaned POI keep/cut list not admitted. Other session will fill with the four-pack. Do not invent a POI list — silent if used for live."
           />
         </div>
+        <p className="mt-3 rounded-lg border border-dashed border-slate-300 bg-white/70 px-3 py-2 text-xs text-slate-600">
+          Also parked (ask later): on/off filters · final holy-grail table numbers. Tick ideas are tested elsewhere — not on this dash.
+        </p>
       </section>
+
 
       {/* Champion checkpoint hooks */}
       <section className="mb-8 rounded-2xl border border-violet-200 bg-violet-50 p-5 shadow-sm">
@@ -503,7 +576,21 @@ export default function PromptDash() {
                 promptOpen={openPromptId === stage.id}
                 onTogglePrompt={() => togglePrompt(stage.id)}
               />
-              {/* H1: talk box on Stage 12 (boost keep 1.0 vs 1.2) */}
+              {WF_STAGE_IDS.includes(stage.id as (typeof WF_STAGE_IDS)[number]) && (
+                <WalkForwardLamp
+                  stageId={stage.id}
+                  wf={state.walkForward[stage.id] || emptyWalkForward()}
+                  onToggleHeld={() =>
+                    updateWalkForward(stage.id, (w) => ({ ...w, heldBack: !w.heldBack }))
+                  }
+                  onToggleWeak={() =>
+                    updateWalkForward(stage.id, (w) => ({ ...w, weakBlocks: !w.weakBlocks }))
+                  }
+                  onNote={(note) => updateWalkForward(stage.id, (w) => ({ ...w, note }))}
+                  onStamp={() => stampWalkForward(stage.id)}
+                />
+              )}
+              {/* H1: talk box on Stage 12 (take-table / Q4; keep line LOCKED >1.2) */}
               {TALK_BOX_STAGE_IDS.includes(stage.id as (typeof TALK_BOX_STAGE_IDS)[number]) && (
                 <TalkBox
                   stageId={stage.id}
@@ -538,14 +625,29 @@ export default function PromptDash() {
                 workId={workId}
                 wp={wp}
                 unlocked={unlocked}
-                canPass={canPass}
+                canPass={canPass && !walkForwardBlocksSeal(state.walkForward[stage.id])}
                 assault={assault}
+                wfBlocks={walkForwardBlocksSeal(state.walkForward[stage.id])}
                 promptOpen={openPromptId === stage.id}
                 onTogglePrompt={() => togglePrompt(stage.id)}
                 onSetAssault={(agent, verdict) => setAssault(stage.id, agent, verdict)}
                 onPass={() => passCheck(stage.id)}
                 onFail={() => failCheck(stage.id)}
               />
+              {WF_STAGE_IDS.includes(stage.id as (typeof WF_STAGE_IDS)[number]) && (
+                <WalkForwardLamp
+                  stageId={stage.id}
+                  wf={state.walkForward[stage.id] || emptyWalkForward()}
+                  onToggleHeld={() =>
+                    updateWalkForward(stage.id, (w) => ({ ...w, heldBack: !w.heldBack }))
+                  }
+                  onToggleWeak={() =>
+                    updateWalkForward(stage.id, (w) => ({ ...w, weakBlocks: !w.weakBlocks }))
+                  }
+                  onNote={(note) => updateWalkForward(stage.id, (w) => ({ ...w, note }))}
+                  onStamp={() => stampWalkForward(stage.id)}
+                />
+              )}
               {/* H1: talk boxes at Baseline CHECK (3) and post band-sweep (9) */}
               {TALK_BOX_STAGE_IDS.includes(stage.id as (typeof TALK_BOX_STAGE_IDS)[number]) && (
                 <TalkBox
@@ -607,8 +709,21 @@ export default function PromptDash() {
 
       <div className="mb-6 rounded-xl bg-violet-50 px-4 py-3 text-sm text-violet-900">
         Fork = page hooks only (style later). Fail → same section only. Linear — no skip. Every CHECK =
-        four-agent assault (demo toggles). Stage 20 Final Assault required before Done.
+        four-agent assault (demo toggles). Stage 20 Final Assault required before Done. Dual-lamp =
+        boost-alone (10–11) then Stage-12 confluence (12–13) — Q6 FOR NOW borrow-single.
       </div>
+
+      <section className="mb-6 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700 shadow-sm">
+        <h3 className="font-bold text-slate-900">Operator docs</h3>
+        <p className="mt-1">
+          Monday operator skeleton:{" "}
+          <code className="rounded bg-slate-100 px-1.5 py-0.5 text-xs">
+            docs/MONDAY_OPERATOR_RUNBOOK.md
+          </code>{" "}
+          (mirrored from <code className="text-xs">/workspace/prompt-dash/</code>). Paper seal ≠
+          live_permission. See also README → Docs.
+        </p>
+      </section>
 
       <OverseerPanel
         status={state.overseer}
@@ -618,46 +733,46 @@ export default function PromptDash() {
         onStall={injectStall}
       />
 
-      <div className="fixed bottom-0 left-0 right-0 z-40 border-t-2 border-amber-400 bg-white/95 px-4 py-3 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-3">
+      <div className="fixed bottom-0 left-0 right-0 z-40 border-t-2 border-amber-400 bg-white/95 px-2 py-2 backdrop-blur sm:px-4 sm:py-3">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-1.5 sm:gap-3">
           <span
-            className="inline-flex items-center rounded-full border-2 border-amber-500 bg-amber-400 px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-slate-950"
+            className="inline-flex items-center rounded-full border-2 border-amber-500 bg-amber-400 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-slate-950 sm:px-3 sm:py-1 sm:text-xs"
             title="Non-dismissible: demo only — local setInterval, not factory"
           >
             DEMO — NOT LIVE
           </span>
           <button
             onClick={startSimulate}
-            className="rounded-lg bg-emerald-600 px-4 py-2 font-semibold text-white hover:bg-emerald-500"
+            className="rounded-lg bg-emerald-600 px-2.5 py-1.5 text-xs font-semibold text-white hover:bg-emerald-500 sm:px-4 sm:py-2 sm:text-base"
           >
             Simulate (demo)
           </button>
           <button
             onClick={stopSimulate}
-            className="rounded-lg bg-slate-600 px-4 py-2 font-semibold text-white hover:bg-slate-500"
+            className="rounded-lg bg-slate-600 px-2.5 py-1.5 text-xs font-semibold text-white hover:bg-slate-500 sm:px-4 sm:py-2 sm:text-base"
           >
-            Pause sim
+            Pause
           </button>
           <button
             onClick={injectStall}
-            className="rounded-lg bg-orange-600 px-4 py-2 font-semibold text-white hover:bg-orange-500"
+            className="rounded-lg bg-orange-600 px-2.5 py-1.5 text-xs font-semibold text-white hover:bg-orange-500 sm:px-4 sm:py-2 sm:text-base"
           >
-            Inject stall
+            Stall
           </button>
           <button
             onClick={setNeedPower}
-            className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-white hover:bg-amber-400"
+            className="rounded-lg bg-amber-500 px-2.5 py-1.5 text-xs font-semibold text-white hover:bg-amber-400 sm:px-4 sm:py-2 sm:text-base"
           >
             Need power
           </button>
           <button
             onClick={resetDemo}
-            className="rounded-lg border border-slate-300 px-4 py-2 font-semibold text-slate-700 hover:bg-slate-50"
+            className="rounded-lg border border-slate-300 px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 sm:px-4 sm:py-2 sm:text-base"
           >
-            Reset demo
+            Reset
           </button>
         </div>
-        <p className="mx-auto mt-2 max-w-5xl text-center text-xs font-medium text-amber-900">
+        <p className="mx-auto mt-1 hidden max-w-5xl text-center text-xs font-medium text-amber-900 sm:mt-2 sm:block">
           Simulate (demo) = local setInterval strip fill only — NOT factory stamps / overnight HB.
         </p>
       </div>
@@ -681,7 +796,7 @@ function PlaceholderCard({
   body: string;
 }) {
   const dangerous = status.includes("DANGEROUSLY");
-  const parked = status.startsWith("PARKED");
+  const parked = status.startsWith("PARKED") || status.includes("PARKED");
   const badgeClass = dangerous
     ? "bg-red-600 text-white"
     : parked
@@ -969,6 +1084,7 @@ function CheckBlock({
   unlocked,
   canPass,
   assault,
+  wfBlocks = false,
   promptOpen,
   onTogglePrompt,
   onSetAssault,
@@ -981,6 +1097,7 @@ function CheckBlock({
   unlocked: boolean;
   canPass: boolean;
   assault: CheckAssault;
+  wfBlocks?: boolean;
   promptOpen: boolean;
   onTogglePrompt: () => void;
   onSetAssault: (agent: AssaultAgentId, verdict: AssaultVerdict) => void;
@@ -1032,7 +1149,12 @@ function CheckBlock({
           Assault has FAIL — Pass CHECK disabled until all four re-PASS (or Fail → same section).
         </p>
       )}
-      {unlocked && !allPass && !hasFail && (
+      {wfBlocks && (
+        <p className="px-4 pb-2 text-center text-sm font-semibold text-rose-800">
+          Walk-forward WEAK (demo) — Q5 blocks take seal / Pass CHECK until weak lamp cleared.
+        </p>
+      )}
+      {unlocked && !allPass && !hasFail && !wfBlocks && (
         <p className="px-4 pb-2 text-center text-sm text-orange-800">
           Strips unlocked — set all four assault agents to PASS to enable Pass CHECK.
         </p>
@@ -1177,5 +1299,138 @@ function OverseerPanel({
         </button>
       </div>
     </aside>
+  );
+}
+
+
+function GrillLocksStrip() {
+  const locks = [
+    { k: "KEEP", v: "PF > 1.2 only" },
+    { k: "SWEEP", v: "≥0.75 · <0.75 no sweep" },
+    { k: "Q4", v: "S≥B / B−S==1 hard no · B−S≥2 sweep" },
+    { k: "Q5 WF", v: "score never-seen · weak blocks" },
+    { k: "Q6", v: "FOR NOW borrow-single · OPEN revise" },
+  ];
+  return (
+    <div className="mt-4 rounded-xl border border-emerald-300 bg-emerald-50/80 px-3 py-3">
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+        <h3 className="text-sm font-bold uppercase tracking-wide text-emerald-900">
+          Grill locks summary
+        </h3>
+        <span className="rounded bg-emerald-700 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-white">
+          LOCKED · paper
+        </span>
+      </div>
+      <div className="flex gap-2 overflow-x-auto pb-1">
+        {locks.map((L) => (
+          <div
+            key={L.k}
+            className="min-w-[9.5rem] shrink-0 rounded-lg border border-emerald-200 bg-white px-3 py-2 shadow-sm"
+          >
+            <div className="text-[10px] font-extrabold uppercase tracking-wide text-emerald-700">
+              {L.k}
+            </div>
+            <div className="mt-0.5 text-xs font-medium leading-snug text-slate-800">{L.v}</div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-2 text-[11px] text-emerald-900/80">
+        Take geometry + walk-forward are real bearing (not cosmetic). No invented POI/banding numbers
+        here — see DAVID_GRILL_LOCKS.
+      </p>
+    </div>
+  );
+}
+
+/** Q5 walk-forward lamp / stamp — demo toggles on take-related stages 11–13 */
+function WalkForwardLamp({
+  stageId,
+  wf,
+  onToggleHeld,
+  onToggleWeak,
+  onNote,
+  onStamp,
+}: {
+  stageId: number;
+  wf: WalkForwardStamp;
+  onToggleHeld: () => void;
+  onToggleWeak: () => void;
+  onNote: (n: string) => void;
+  onStamp: () => void;
+}) {
+  const lamp =
+    wf.weakBlocks
+      ? "bg-rose-500"
+      : wf.stamped
+        ? "bg-emerald-500"
+        : wf.heldBack
+          ? "bg-amber-400"
+          : "bg-slate-300";
+  const lampLabel = wf.weakBlocks
+    ? "WEAK — blocks seal"
+    : wf.stamped
+      ? "STAMPED"
+      : wf.heldBack
+        ? "HELD BACK"
+        : "UNSET";
+  return (
+    <section className="mb-8 -mt-4 rounded-b-2xl border border-t-0 border-indigo-200 bg-indigo-50 px-5 py-4 shadow-sm">
+      <div className="flex flex-wrap items-center gap-3">
+        <span className={`inline-block h-3 w-3 rounded-full ${lamp}`} title={lampLabel} />
+        <h3 className="text-sm font-bold uppercase tracking-wide text-indigo-900">
+          Walk-forward (Q5) · stage {stageId}
+        </h3>
+        <span className="rounded bg-indigo-800 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-white">
+          {lampLabel} · demo
+        </span>
+      </div>
+      <p className="mt-1 text-sm text-indigo-800">
+        Hold back unseen while picking recipe; score never-seen before take seal / move-forward.
+        Weak score blocks seal (real bearing). Demo toggles only — not live PF.
+      </p>
+      <div className="mt-3 flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={onToggleHeld}
+          className={`rounded-lg px-3 py-1.5 text-sm font-semibold ${
+            wf.heldBack
+              ? "bg-amber-500 text-slate-950"
+              : "bg-white text-indigo-800 ring-1 ring-indigo-300"
+          }`}
+        >
+          {wf.heldBack ? "Held back ✓" : "Hold back unseen"}
+        </button>
+        <button
+          type="button"
+          onClick={onToggleWeak}
+          className={`rounded-lg px-3 py-1.5 text-sm font-semibold ${
+            wf.weakBlocks
+              ? "bg-rose-600 text-white"
+              : "bg-white text-rose-800 ring-1 ring-rose-300"
+          }`}
+        >
+          {wf.weakBlocks ? "Weak blocks ON" : "Toggle weak blocks"}
+        </button>
+        <button
+          type="button"
+          onClick={onStamp}
+          className="rounded-lg bg-indigo-700 px-3 py-1.5 text-sm font-semibold text-white hover:bg-indigo-600"
+        >
+          Stamp WF score (demo)
+        </button>
+        {wf.stampedAt && (
+          <span className="self-center text-xs text-indigo-700">
+            Stamped: {new Date(wf.stampedAt).toLocaleString()}
+          </span>
+        )}
+      </div>
+      <textarea
+        className="mt-3 w-full rounded-xl border border-indigo-200 bg-white p-2 text-sm text-slate-800 outline-none focus:ring-2 focus:ring-indigo-400"
+        rows={2}
+        placeholder="Optional demo note (no invented scores)…"
+        value={wf.note}
+        onChange={(e) => onNote(e.target.value)}
+      />
+    </section>
   );
 }

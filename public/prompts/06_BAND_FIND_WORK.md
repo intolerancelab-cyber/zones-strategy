@@ -6,7 +6,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Band PF LOCKED (David grill 5 Sep):** PF < 0.75 = do not sweep at all; PF ≥ 0.75 = sweep (revival/fix try; must not worsen vs pre-sweep); BOOST/KEEP label only if PF > 1.2; under 1.2 after sweep = SKIP for confluence/table. No 1.0 keep line (unused fork-hook note only). Reason: compounding / fewer loser streaks. See `DAVID_GRILL_LOCKS_2026-09-05.md`.
 **On/off filters:** binary no-line states; parked — ask David later.
 **NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level (not old wide map) → sweeps → **REMOVE DEADWOOD POIs** (only heavy lifters keep). Align DEC-063 / RESCORE-20. Prompt-dash admits cleaned POI set later — **do not invent keep/cut list**. Pending other session for cleaned set.
 **Band-find cross-cell (3-of-4 same POI×band)** — SEPARATE from **Stage-12 boost-count confluence (2/3/4 B×S)**. Output: CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT — not naked “BOOST candidate”. Ban lone word “Confluence” in headers.
@@ -24,16 +24,16 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 | Band sweep / Boost / Assemble / Stress / MC *(later)* | All-cell barrier wait (100% fleet) |
 | | Speedy lamp / emit-covered report steps |
 | | Champion talk-box choice |
-| | Locking 0.75 / 1.2 as final (provisional only) |
+| | Inventing Q5/Q6 answers; re-provisionalizing Band PF locks |
 
-**Hard rule:** Band find **is** MUST-SHARD. Wait 100% across all fleet cells before Stage 7 CHECK unlock. Do not shard the barrier wait itself or the CHECK. Do **not** shard the skip/KEEP **label decision** — compute shards, then stamp labels from provisional rules without inventing David locks.
+**Hard rule:** Band find **is** MUST-SHARD. Wait 100% across all fleet cells before Stage 7 CHECK unlock. Do not shard the barrier wait itself or the CHECK. Do **not** shard the skip/KEEP **label decision** — compute shards, then stamp labels from LOCKED David grill rules (do not invent Q5/Q6).
 
 ---
 
 ### 0. Header
-- **Stage # / name:** 6 — Band find (<0.75 SKIP no normal sweep; ~0.75 REVIVAL; keep lean >1.2)
+- **Stage # / name:** 6 — Band find (<0.75 no sweep; ≥0.75 sweep; KEEP label only if PF>1.2)
 - **Kind:** WORK
-- **Goal (one sentence):** Per fleet cell, find bands where baseline helped vs hurt; stamp provisional SKIP (<0.75, no *normal* sweep), REVIVAL (~0.75), keep-lean posture (PF > 1.2), and Band-find cross-cell 3-of-4 labels (CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT); unlock Stage 7 CHECK.
+- **Goal (one sentence):** Per fleet cell, find bands where baseline helped vs hurt; stamp SKIP if PF < 0.75 (no sweep at all); sweep if PF ≥ 0.75 (revival/fix try; must not worsen); KEEP/BOOST label only if PF > 1.2, and Band-find cross-cell 3-of-4 labels (CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT); unlock Stage 7 CHECK.
 - **Unlocks next:** Stage 7 CHECK
 - **Fleet cells:** ES 5m, ES 15m, NQ 5m, NQ 15m
 - **STRATEGY INPUT:** Checkbox selects entry set for later sweep — Reversal LOCKED 6 vs Continuation PLACEHOLDER (catalog minus `orb_*` — not operable OPEN; do not claim locked). Band find measures baseline-at-location; does not run full recipe sweep.
@@ -42,15 +42,16 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 
 ### 1. Goal
 - **Done means:**
-  - Per fleet cell: bands scored with cost-applied PF; labeled under provisional David-voice ladder:
-    - **<0.75** → SKIP (no *normal* sweep enqueue later)
-    - **~0.75** → REVIVAL class (one tailored revival sweep allowed later; still provisional)
-    - Keep/boost lean: PF **> 1.2** (grill at launch). Report 1.0 as sensitivity / fork-hook only — not an equal keep pick.
-    - After failed revival still under keep lean → **FAILED_REVIVAL** or **BELOW_KEEP** (not table / not keep). Do **not** dual-label the same band both SWEEP_CANDIDATE and DEAD_ZONE.
+  - Per fleet cell: bands scored with cost-applied PF; labeled under David grill LOCKED ladder (5 Sep):
+    - **PF < 0.75** → do **not** sweep at all → SKIP
+    - **PF ≥ 0.75** → sweep (revival/fix try; must not worsen vs pre-sweep)
+    - After sweep: BOOST/KEEP label **only if** PF **> 1.2**; under 1.2 → **SKIP** for confluence/table
+    - **No 1.0 keep line** (unused fork-hook note only). Reason: compounding / fewer loser streaks.
+    - Do **not** dual-label the same band both SWEEP_CANDIDATE and DEAD_ZONE.
   - **Band-find cross-cell (3-of-4 same POI×band):** for thin-n positive bands, stamp CROSS_CELL_BOOST_CANDIDATE (≥3/4 same-sign) or INSUFFICIENT (<3/4). Never naked “BOOST candidate”.
   - Strips 100% green; book-level band-find manifest + smoke identity written.
 - **Does NOT decide:**
-  - Final lock of 0.75 / 1.0 / 1.2 (OPEN with David — disclose provisional only)
+  - Band PF / keep / sweep gate: LOCKED (David grill 5 Sep). Q5 walk-forward LOCKED; Q6 alone-vs-together FOR NOW (OPEN to revise).
   - Bin count locks (DEC-063 zone-first banding notes exist — **do not invent** bin-count locks)
   - KEEP recipes / wide→narrow sweep (Stage 8)
   - Boost / Stage-12 boost-count confluence / take / on-off / assemble
@@ -101,22 +102,22 @@ If missing → STOP, do not invent.
 ### 4. Step-by-step (overseer path)
 1. Verify Stage 1–5 stamps: Freeze, Baseline, Stage 3 green, POI map, Stage 5 green; STOP if POI Silent Zero gate failed or hashes missing.
 2. Confirm bar_hash + poi_map_hash pins still match; mismatch → loop Stage 4 rebuild, do not patch labels on stale map.
-3. Read PROVISIONAL_BAND_PF_NOTE: instant_skip_below=0.75 provisional; revival ~0.75; boost lines 1.0|1.2 both reported — **do not lock**.
+3. Read BAND_PF note (Freeze): PF < 0.75 = no sweep; ≥0.75 = sweep (must not worsen); KEEP/BOOST label only if PF > 1.2; no 1.0 keep line — **LOCKED** David grill 5 Sep.
 4. Bind banding scheme: if DEC-063 zone-first notes used, stamp `banding_scheme_id` + `dec063_note=true` + `bin_count_locked=false`; do not invent a locked bin count.
 5. One-cell smoke: score bands with **cost model applied before PF**; verify skip/candidate labels, workers_used honesty, hash pin.
 6. Identity check: smoke `n_workers=1` hash == `n_workers=k` hash on same tiny set.
 7. Fan out fleet cells; per cell load bar+POI cache by hash; enqueue band-find shards only.
 8. Label bands under the coherent ladder:
-   - PF **<0.75** → SKIP (no *normal* Stage 8 sweep; must stay on SKIP_MAP)
-   - PF **~0.75** → REVIVAL class (one tailored revival sweep allowed later; not a normal sweep)
-   - Keep/boost lean: PF **> 1.2** (grill at launch). Report 1.0 as sensitivity / fork-hook only.
-   - After failed revival still under keep lean → stamp **FAILED_REVIVAL** or **BELOW_KEEP** (not table / not keep). Do **not** dual-label SWEEP_CANDIDATE + DEAD_ZONE.
+   - PF **< 0.75** → do **not** sweep at all → SKIP_MAP
+   - PF **≥ 0.75** → enqueue sweep (revival/fix try; must not worsen vs pre-sweep)
+   - After sweep: BOOST/KEEP label **only if** PF **> 1.2**; under 1.2 → SKIP for confluence/table
+   - **No 1.0 keep line.** Do **not** dual-label SWEEP_CANDIDATE + DEAD_ZONE.
 9. **Band-find cross-cell (3-of-4 same POI×band) — REQUIRED WORK step (not appendix):** For each thin-n positive (or negative/SKIP) POI×band on a cell, compare the **same POI × same band** across ES 5m / ES 15m / NQ 5m / NQ 15m. If ≥3 of 4 same-direction → stamp **CROSS_CELL_BOOST_CANDIDATE** (or cross-cell SKIP agreement). If <3 agree → stamp **INSUFFICIENT** — do **not** boost/skip-trust from that thin cell alone. Never use naked “BOOST candidate”. This is **not** Stage-12 boost-count confluence.
 10. Hunt band vs ATR/tick smell; flag for CHECK — do not silently relabel.
 11. **Strip orb_*; refuse doubles/pairs.** Do not claim Continuation LOCKED or operable OPEN (PLACEHOLDER).
 12. Holdout last ~20% reserved — take not sealed by this stage.
 13. Paint each cell strip 10%…100% with real chunk times; heartbeat under stack.
-14. Write per-cell band-find stamps + SKIP_MAP + REVIVAL_MAP + FAILED_REVIVAL/BELOW_KEEP notes + CROSS_CELL_3OF4 map + book-level manifest + smoke identity + provisional PF disclosure.
+14. Write per-cell band-find stamps + SKIP_MAP + REVIVAL_MAP + FAILED_REVIVAL/BELOW_KEEP notes + CROSS_CELL_3OF4 map + book-level manifest + smoke identity + BAND_PF_LOCKS disclosure.
 15. Barrier: wait all four cells 100% green → unlock Stage 7 CHECK (do not auto-pass CHECK).
 
 ---
@@ -131,15 +132,15 @@ If missing → STOP, do not invent.
 
 ### 6. Success stamps
 - `band_find/CELL/{cell}.json` — bands with PF (cost-applied), n, label ∈ {SKIP, REVIVAL, KEEP_LEAN_GT_1_2, FAILED_REVIVAL, BELOW_KEEP}, bar_hash, poi_map_hash, workers_used
-- `band_find/SKIP_MAP/{cell}.json` — explicit <0.75 skip band ids (no *normal* sweep; must stay omitted from normal Stage 8 enqueue)
-- `band_find/REVIVAL_MAP/{cell}.json` — ~0.75 REVIVAL-class band ids (one tailored revival sweep allowed later)
-- `band_find/FAILED_REVIVAL_OR_BELOW_KEEP/{cell}.json` — post-revival under keep lean (not table / not keep); never dual-label as SWEEP_CANDIDATE + DEAD_ZONE
+- `band_find/SKIP_MAP/{cell}.json` — PF < 0.75 band ids (do **not** sweep at all; omit from Stage 8 enqueue)
+- `band_find/SWEEP_GATE_MAP/{cell}.json` — PF ≥ 0.75 band ids (sweep / revival-fix try; must not worsen vs pre-sweep). Legacy name REVIVAL_MAP accepted as alias.
+- `band_find/FAILED_REVIVAL_OR_BELOW_KEEP/{cell}.json` — post-sweep under PF > 1.2 keep line (SKIP for confluence/table); never dual-label as SWEEP_CANDIDATE + DEAD_ZONE
 - `band_find/CROSS_CELL_3OF4/{cell}.json` + `band_find/CROSS_CELL_3OF4/BOOK.json` — per POI×band: readable cell count, same-sign vote, label ∈ {CROSS_CELL_BOOST_CANDIDATE, INSUFFICIENT, CROSS_CELL_SKIP_AGREE}
-- `band_find/MANIFEST.json` — fleet cells, banding_scheme_id, NEW_BANDING note, dec063_note flag, provisional ladder 0.75 / keep lean >1.2 (1.0 sensitivity only) **not locked**, entry_set_id, hashes, workers_used honesty, no_ORB / no_doubles, deadwood_poi_list=`NOT_INVENTED`
+- `band_find/MANIFEST.json` — fleet cells, banding_scheme_id, NEW_BANDING note, dec063_note flag, LOCKED ladder: <0.75 no sweep; ≥0.75 sweep; KEEP if PF > 1.2; no 1.0 keep line, entry_set_id, hashes, workers_used honesty, no_ORB / no_doubles, deadwood_poi_list=`NOT_INVENTED`
 - `band_find/SMOKE_IDENTITY.json` — one-core vs multi-core hash
-- `band_find/PROVISIONAL_PF_DISCLOSURE.json` — SKIP <0.75 (no normal sweep); REVIVAL ~0.75; keep lean PF > 1.2; 1.0 sensitivity / fork-hook only; David grill still OPEN
+- `band_find/BAND_PF_LOCKS.json` — LOCKED David grill 5 Sep: <0.75 no sweep; ≥0.75 sweep; KEEP label only if PF > 1.2; no 1.0 keep line. Alias PROVISIONAL_PF_DISCLOSURE may point here.
 - Strip paint 100% × 4 cells
-- What CHECK will read: SKIP/REVIVAL/FAILED_REVIVAL maps, CROSS_CELL_3OF4 stamps, cost-before-PF, provisional not locked, no *normal* sweep of <0.75, DEC-063 note without invented bin lock, label consistency, NEW BANDING / deadwood-not-invented
+- What CHECK will read: SKIP/REVIVAL/FAILED_REVIVAL maps, CROSS_CELL_3OF4 stamps, cost-before-PF, BAND_PF_LOCKS, no sweep of PF < 0.75, DEC-063 note without invented bin lock, label consistency, NEW BANDING / deadwood-not-invented
 
 ---
 
@@ -147,12 +148,12 @@ If missing → STOP, do not invent.
 - No ORB / no doubles
 - No factory code edits from this room
 - No sharding CHECK / barrier wait / final take decisions
-- No inventing OPEN David locks (0.75/1.2 final, continuation set, take rule, on/off list, POI list, bin-count lock)
+- No inventing OPEN David items (permanent Q6 combo-sweep, continuation set, on/off list, POI list, bin-count lock). Band PF + Q4 + Q5 LOCKED; Q6 FOR NOW.
 - No advancing without fleet 100%
 - No contaminating holdout (last ~20% reserved — take not sealed by this stage)
 - No Stage 8 recipe sweep in this stage
-- No *normal* sweeping or pre-enqueuing <0.75 skip bands (revival arms only where REVIVAL_MAP marked)
-- No locking 0.75/1.2 in stone in stamps
+- No sweeping PF < 0.75 bands at all. Only enqueue PF ≥ 0.75 (SWEEP_GATE_MAP / REVIVAL_MAP alias)
+- Do not re-provisionalize locked Band PF / keep lines; stamp LOCKED disclosure
 - No claiming Continuation LOCKED
 - No re-walking bars/POIs because a prompt word changed
 - No unlocking CHECK until all strips green
@@ -190,7 +191,7 @@ If missing → STOP, do not invent.
 
 ### 10. Handoff to CHECK
 - Feed Stage 7 bullets in CHECK_ASSAULT_OUTLINE.md / `07_BAND_FIND_CHECK.md` (outline Stage 6→7)
-- Give agents: band_find CELL + SKIP_MAP + REVIVAL_MAP + FAILED_REVIVAL_OR_BELOW_KEEP + CROSS_CELL_3OF4 ×4 + BOOK, MANIFEST, SMOKE_IDENTITY, PROVISIONAL_PF_DISCLOSURE, poi_map hashes, baseline stamps, Freeze COST_MODEL + PROVISIONAL_BAND_PF_NOTE, Stage 5 GREEN, explicit “no ORB/no doubles” + “provisional not locked” + NEW BANDING / deadwood-not-invented + DEC-063 note attestation, workers_used honesty proof
+- Give agents: band_find CELL + SKIP_MAP + REVIVAL_MAP + FAILED_REVIVAL_OR_BELOW_KEEP + CROSS_CELL_3OF4 ×4 + BOOK, MANIFEST, SMOKE_IDENTITY, BAND_PF_LOCKS (or PROVISIONAL_PF_DISCLOSURE alias), poi_map hashes, baseline stamps, Freeze COST_MODEL + BAND_PF_LOCKS, Stage 5 GREEN, explicit “no ORB/no doubles” + “Band PF LOCKED” + NEW BANDING / deadwood-not-invented + DEC-063 note attestation, workers_used honesty proof
 
 ---
 
@@ -200,7 +201,7 @@ If missing → STOP, do not invent.
 - [x] ORB DEAD + doubles DEFUNCT stated
 - [x] Fleet 4 cells + 10% strips + heartbeat + CHECK barrier stated
 - [x] Hash-first reuse stated
-- [x] Coherent ladder: <0.75 SKIP (no normal sweep); ~0.75 REVIVAL; keep lean >1.2; FAILED_REVIVAL/BELOW_KEEP
+- [x] LOCKED ladder: <0.75 no sweep; ≥0.75 sweep; KEEP label only if PF>1.2; under 1.2 after sweep = SKIP
 - [x] Band-find cross-cell 3-of-4 in WORK steps + stamps + NOT-to-do (not bolt-on only)
 - [x] NEW BANDING / deadwood-not-invented stated
 - [x] DEC-063 zone-first note without invented bin lock
