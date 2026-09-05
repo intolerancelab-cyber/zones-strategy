@@ -3,28 +3,30 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { STAGES, CHUNK_LABELS, type StageDef } from "../lib/stages";
 import {
+  ASSAULT_AGENTS,
   FLEET,
+  WORK_IDS,
   allStripsComplete,
   defaultState,
+  emptyAssault,
   emptyWork,
   formatTime,
   loadState,
   saveState,
+  workIdForCheck,
+  type AssaultAgentId,
+  type AssaultVerdict,
+  type CheckAssault,
   type DashState,
   type EntryMode,
   type OverseerStatus,
   type WorkProgress,
 } from "../lib/store";
 
-const WORK_IDS = [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
-
-function stageById(id: number): StageDef {
-  return STAGES.find((s) => s.id === id)!;
-}
-
 export default function PromptDash() {
   const [state, setState] = useState<DashState>(() => defaultState());
   const [hydrated, setHydrated] = useState(false);
+  const [openPromptId, setOpenPromptId] = useState<number | null>(null);
   const simRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
@@ -54,6 +56,7 @@ export default function PromptDash() {
     const fresh = defaultState();
     fresh.entered = true;
     setState(fresh);
+    setOpenPromptId(null);
   };
 
   const updateWork = (workId: number, fn: (w: WorkProgress) => WorkProgress) => {
@@ -86,7 +89,7 @@ export default function PromptDash() {
           strip.times = times;
           strips[cell] = strip;
           advanced = true;
-          break; // one chunk per tick across fleet for readable demo
+          break;
         }
       }
       wp.strips = strips;
@@ -95,23 +98,12 @@ export default function PromptDash() {
         : `hb ${new Date().toLocaleTimeString()} · complete`;
       if (allStripsComplete(wp)) wp.checkUnlockedOnce = true;
 
-      let activeWorkId = s.activeWorkId;
-      let overseer: OverseerStatus = s.overseer === "need_power" ? "need_power" : "moving";
-
-      // auto-advance active work pointer when current complete
-      if (allStripsComplete(wp)) {
-        const idx = WORK_IDS.indexOf(id);
-        if (idx >= 0 && idx < WORK_IDS.length - 1) {
-          // stay until check passed; pointer moves when check clicked
-        }
-      }
+      const overseer: OverseerStatus = s.overseer === "need_power" ? "need_power" : "moving";
 
       return {
         ...s,
         overseer,
-        activeWorkId,
         work: { ...s.work, [id]: wp },
-        toast: s.toast,
       };
     });
   }, []);
@@ -140,14 +132,60 @@ export default function PromptDash() {
     setState((s) => ({ ...s, overseer: "need_power", toast: "Overseer: need power / more cores" }));
   };
 
-  const passCheck = (workId: number) => {
+  const setAssault = (checkId: number, agent: AssaultAgentId, verdict: AssaultVerdict) => {
+    setState((s) => {
+      const cur = s.checkAssault[checkId] || emptyAssault();
+      return {
+        ...s,
+        checkAssault: {
+          ...s.checkAssault,
+          [checkId]: { ...cur, [agent]: verdict },
+        },
+      };
+    });
+  };
+
+  const passCheck = (checkId: number) => {
+    const workId = workIdForCheck(checkId);
     const wp = state.work[workId];
-    if (!wp || !allStripsComplete(wp)) return;
+    if (!wp || !allStripsComplete(wp)) {
+      setToast("CHECK locked — fleet strips must all be 100% green");
+      return;
+    }
     updateWork(workId, (w) => ({ ...w, checkPassed: true }));
-    const idx = WORK_IDS.indexOf(workId);
+    const idx = WORK_IDS.indexOf(workId as (typeof WORK_IDS)[number]);
     if (idx >= 0 && idx < WORK_IDS.length - 1) {
       setState((s) => ({ ...s, activeWorkId: WORK_IDS[idx + 1] }));
     }
+    setToast(`Stage ${checkId} CHECK passed (demo)`);
+  };
+
+  const failCheck = (checkId: number) => {
+    const workId = workIdForCheck(checkId);
+    updateWork(workId, (w) => ({ ...w, checkPassed: false }));
+    setToast(`Stage ${checkId} FAIL → loop same WORK section only`);
+  };
+
+  const bankChampion = (fromStageId: number) => {
+    const id = `champ-${Date.now()}`;
+    setState((s) => ({
+      ...s,
+      bankedChampions: [
+        ...s.bankedChampions,
+        {
+          id,
+          label: `Unused champion @ stage ${fromStageId}`,
+          fromStageId,
+          note: "Hook only — resume from this stage later with the other champion.",
+          bankedAt: new Date().toISOString(),
+        },
+      ],
+      toast: "Banked unused champion (checkpoint hook)",
+    }));
+  };
+
+  const togglePrompt = (stageId: number) => {
+    setOpenPromptId((cur) => (cur === stageId ? null : stageId));
   };
 
   if (!hydrated) {
@@ -182,7 +220,7 @@ export default function PromptDash() {
     <div className="mx-auto max-w-5xl px-4 pb-28 pt-8">
       <header className="mb-8 text-center">
         <h1 className="text-4xl font-bold tracking-tight text-slate-900">David&apos;s Prompt Dashboard</h1>
-        <p className="mt-2 text-lg text-slate-500">Trading Strategy · Stacked Flow</p>
+        <p className="mt-2 text-lg text-slate-500">Trading Strategy · Stacked Flow · Full framework</p>
       </header>
 
       {/* STRATEGY INPUT */}
@@ -191,7 +229,7 @@ export default function PromptDash() {
         <textarea
           className="w-full rounded-xl border border-slate-300 bg-white p-4 text-base leading-relaxed text-slate-800 outline-none focus:ring-2 focus:ring-emerald-400"
           rows={5}
-          placeholder="Paste strategy text / canonical handoff here…"
+          placeholder="Paste strategy text / canonical handoff here… (core chord stays)"
           value={state.strategyText}
           onChange={(e) => setState((s) => ({ ...s, strategyText: e.target.value }))}
         />
@@ -215,49 +253,132 @@ export default function PromptDash() {
             </span>
           </span>
         </label>
-        <p className="mt-3 text-sm text-amber-800 bg-amber-50 rounded-lg px-3 py-2">
-          Note: boost keep lean <strong>PF &gt; 1.2</strong> (1.0 as sensitivity only). ORB dead · doubles defunct — not in this UI.
+        <p className="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">
+          Note: boost keep lean <strong>PF &gt; 1.2</strong> (1.0 as sensitivity only). ORB dead · doubles
+          defunct — not in this UI.
         </p>
+
+        <div className="mt-5 grid gap-3 sm:grid-cols-3">
+          <PlaceholderCard
+            title="New banding"
+            status="Pending — other session"
+            body="Tighter near-level bands (THE STRATEGY branch). Do not invent bin counts here."
+          />
+          <PlaceholderCard
+            title="Cleaned POI list / deadwood cut"
+            status="Pending"
+            body="Admit cleaned POI set after deadwood cut. Do not invent keep/cut lists."
+          />
+          <PlaceholderCard
+            title="Final tables"
+            status="Pending"
+            body="Holy-grail / take tables land here when ready. Core chord stays."
+          />
+        </div>
       </section>
 
-      {/* STAGES */}
+      {/* Champion checkpoint hooks */}
+      <section className="mb-8 rounded-2xl border border-violet-200 bg-violet-50 p-5 shadow-sm">
+        <h2 className="text-lg font-bold text-violet-900">Champion checkpoint (hooks only)</h2>
+        <p className="mt-1 text-sm text-violet-800">
+          Bank an unused champion at a real fork; resume from that stage later. Full fork UX locked
+          later — this is page hooks only.
+        </p>
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={() => bankChampion(state.activeWorkId)}
+            className="rounded-lg bg-violet-700 px-4 py-2 text-sm font-semibold text-white hover:bg-violet-600"
+          >
+            Bank unused champion
+          </button>
+          <span className="text-sm text-violet-700">
+            Active WORK {state.activeWorkId} · banked: {state.bankedChampions.length}
+          </span>
+        </div>
+        {state.bankedChampions.length > 0 && (
+          <ul className="mt-3 space-y-2">
+            {state.bankedChampions.map((c) => (
+              <li
+                key={c.id}
+                className="rounded-lg border border-violet-200 bg-white px-3 py-2 text-sm text-violet-950"
+              >
+                <strong>{c.label}</strong>
+                <span className="mt-0.5 block text-violet-700">{c.note}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      {/* STAGES 1–21 — WORK and CHECK both visible */}
       {STAGES.map((stage) => {
         if (stage.kind === "WORK") {
           const wp = state.work[stage.id] || emptyWork();
           const unlocked = allStripsComplete(wp);
-          const check = STAGES.find((s) => s.id === stage.id + 1 && s.kind === "CHECK");
           return (
             <WorkBlock
               key={stage.id}
               stage={stage}
-              check={check}
               wp={wp}
               unlocked={unlocked}
-              onPassCheck={() => passCheck(stage.id)}
-              promptHref={stage.promptFile ? `/prompts/${stage.promptFile}` : undefined}
+              promptOpen={openPromptId === stage.id}
+              onTogglePrompt={() => togglePrompt(stage.id)}
+            />
+          );
+        }
+        if (stage.kind === "CHECK") {
+          const workId = workIdForCheck(stage.id);
+          const wp = state.work[workId] || emptyWork();
+          const unlocked = allStripsComplete(wp);
+          const assault = state.checkAssault[stage.id] || emptyAssault();
+          return (
+            <CheckBlock
+              key={stage.id}
+              stage={stage}
+              workId={workId}
+              wp={wp}
+              unlocked={unlocked}
+              assault={assault}
+              promptOpen={openPromptId === stage.id}
+              onTogglePrompt={() => togglePrompt(stage.id)}
+              onSetAssault={(agent, verdict) => setAssault(stage.id, agent, verdict)}
+              onPass={() => passCheck(stage.id)}
+              onFail={() => failCheck(stage.id)}
             />
           );
         }
         if (stage.kind === "DONE") {
-          const lastWork = state.work[20];
-          const done = lastWork?.checkPassed;
+          // Stage 20 has no following CHECK — unlock Done when 19 CHECK passed + 20 fleet complete
+          const stage19Passed = Boolean(state.work[18]?.checkPassed);
+          const stage20Done = allStripsComplete(state.work[20] || emptyWork());
+          const ready = stage19Passed && stage20Done;
           return (
             <section
               key={stage.id}
               className={`mb-8 rounded-2xl border-2 p-8 text-center ${
-                done ? "border-emerald-500 bg-emerald-50" : "border-slate-200 bg-white"
+                ready ? "border-emerald-500 bg-emerald-50" : "border-slate-200 bg-white"
               }`}
             >
-              <h2 className="text-3xl font-bold">{stage.id}. Done</h2>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <h2 className="text-3xl font-bold">{stage.id}. Done</h2>
+                {stage.promptFile && (
+                  <button
+                    type="button"
+                    onClick={() => togglePrompt(stage.id)}
+                    className="rounded-lg bg-emerald-700 px-3 py-1.5 text-sm font-semibold text-white hover:bg-emerald-600"
+                  >
+                    {openPromptId === stage.id ? "Hide prompt" : "Open DONE"}
+                  </button>
+                )}
+              </div>
               <p className="mt-2 text-slate-600">
-                {done
+                {ready
                   ? "Research book seal ready. (Demo — not live permission.)"
-                  : "Unlocks after Stage 20 check passes."}
+                  : "Unlocks after Stage 19 CHECK pass + Stage 20 fleet complete."}
               </p>
-              {stage.promptFile && (
-                <a className="mt-3 inline-block text-sm text-blue-600 underline" href={`/prompts/${stage.promptFile}`} target="_blank" rel="noreferrer">
-                  Open prompt
-                </a>
+              {openPromptId === stage.id && stage.promptFile && (
+                <PromptPanel file={stage.promptFile} onClose={() => setOpenPromptId(null)} />
               )}
             </section>
           );
@@ -266,10 +387,10 @@ export default function PromptDash() {
       })}
 
       <div className="mb-6 rounded-xl bg-violet-50 px-4 py-3 text-sm text-violet-900">
-        Fork = page hooks only (style later). Fail → same section only. Linear — no skip.
+        Fork = page hooks only (style later). Fail → same section only. Linear — no skip. Every CHECK =
+        four-agent assault (demo toggles).
       </div>
 
-      {/* OVERSEER + DEMO */}
       <OverseerPanel
         status={state.overseer}
         activeWorkId={state.activeWorkId}
@@ -280,19 +401,34 @@ export default function PromptDash() {
 
       <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200 bg-white/95 px-4 py-3 backdrop-blur">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-3">
-          <button onClick={startSimulate} className="rounded-lg bg-emerald-600 px-4 py-2 font-semibold text-white hover:bg-emerald-500">
+          <button
+            onClick={startSimulate}
+            className="rounded-lg bg-emerald-600 px-4 py-2 font-semibold text-white hover:bg-emerald-500"
+          >
             Simulate progress
           </button>
-          <button onClick={stopSimulate} className="rounded-lg bg-slate-600 px-4 py-2 font-semibold text-white hover:bg-slate-500">
+          <button
+            onClick={stopSimulate}
+            className="rounded-lg bg-slate-600 px-4 py-2 font-semibold text-white hover:bg-slate-500"
+          >
             Pause sim
           </button>
-          <button onClick={injectStall} className="rounded-lg bg-orange-600 px-4 py-2 font-semibold text-white hover:bg-orange-500">
+          <button
+            onClick={injectStall}
+            className="rounded-lg bg-orange-600 px-4 py-2 font-semibold text-white hover:bg-orange-500"
+          >
             Inject stall
           </button>
-          <button onClick={setNeedPower} className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-white hover:bg-amber-400">
+          <button
+            onClick={setNeedPower}
+            className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-white hover:bg-amber-400"
+          >
             Need power
           </button>
-          <button onClick={resetDemo} className="rounded-lg border border-slate-300 px-4 py-2 font-semibold text-slate-700 hover:bg-slate-50">
+          <button
+            onClick={resetDemo}
+            className="rounded-lg border border-slate-300 px-4 py-2 font-semibold text-slate-700 hover:bg-slate-50"
+          >
             Reset demo
           </button>
         </div>
@@ -307,20 +443,89 @@ export default function PromptDash() {
   );
 }
 
+function PlaceholderCard({
+  title,
+  status,
+  body,
+}: {
+  title: string;
+  status: string;
+  body: string;
+}) {
+  return (
+    <div className="rounded-xl border border-dashed border-slate-400 bg-white/80 p-4">
+      <div className="text-sm font-bold uppercase tracking-wide text-slate-500">Placeholder</div>
+      <h3 className="mt-1 text-base font-bold text-slate-900">{title}</h3>
+      <span className="mt-1 inline-block rounded bg-slate-200 px-2 py-0.5 text-xs font-semibold text-slate-700">
+        {status}
+      </span>
+      <p className="mt-2 text-sm text-slate-600">{body}</p>
+    </div>
+  );
+}
+
+function PromptPanel({ file, onClose }: { file: string; onClose: () => void }) {
+  const [md, setMd] = useState<string>("Loading…");
+  const [err, setErr] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setMd("Loading…");
+    setErr(null);
+    fetch(`/prompts/${file}`)
+      .then(async (r) => {
+        if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+        return r.text();
+      })
+      .then((text) => {
+        if (!cancelled) setMd(text);
+      })
+      .catch((e: Error) => {
+        if (!cancelled) {
+          setErr(e.message);
+          setMd("");
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [file]);
+
+  return (
+    <div className="mt-4 overflow-hidden rounded-xl border border-slate-300 bg-slate-50 text-left">
+      <div className="flex items-center justify-between gap-2 border-b border-slate-200 bg-slate-800 px-4 py-2 text-white">
+        <span className="truncate font-mono text-sm">/prompts/{file}</span>
+        <button
+          type="button"
+          onClick={onClose}
+          className="rounded bg-slate-700 px-2 py-1 text-xs font-semibold hover:bg-slate-600"
+        >
+          Close
+        </button>
+      </div>
+      {err ? (
+        <p className="p-4 text-sm text-red-700">Failed to fetch prompt: {err}</p>
+      ) : (
+        <pre className="max-h-[28rem] overflow-auto whitespace-pre-wrap p-4 font-mono text-xs leading-relaxed text-slate-800 md:text-sm">
+          {md}
+        </pre>
+      )}
+    </div>
+  );
+}
+
 function WorkBlock({
   stage,
-  check,
   wp,
   unlocked,
-  onPassCheck,
-  promptHref,
+  promptOpen,
+  onTogglePrompt,
 }: {
   stage: StageDef;
-  check?: StageDef;
   wp: WorkProgress;
   unlocked: boolean;
-  onPassCheck: () => void;
-  promptHref?: string;
+  promptOpen: boolean;
+  onTogglePrompt: () => void;
 }) {
   return (
     <section className="mb-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
@@ -328,16 +533,26 @@ function WorkBlock({
         <h2 className="text-xl font-bold">
           {stage.id}. WORK — {stage.title}
         </h2>
-        {promptHref && (
-          <a href={promptHref} target="_blank" rel="noreferrer" className="rounded bg-emerald-700/50 px-3 py-1 text-sm underline-offset-2 hover:underline">
-            Prompt
-          </a>
+        {stage.promptFile && (
+          <button
+            type="button"
+            onClick={onTogglePrompt}
+            className="rounded bg-emerald-700/60 px-3 py-1.5 text-sm font-semibold hover:bg-emerald-700"
+          >
+            {promptOpen ? "Hide WORK prompt" : "WORK — show prompt"}
+          </button>
         )}
       </div>
       {stage.note && <p className="bg-emerald-50 px-5 py-2 text-sm text-emerald-900">{stage.note}</p>}
 
-      <div className="flex flex-col gap-4 p-4 md:flex-row">
-        <div className="flex-1 space-y-3 rounded-xl bg-sky-50 p-4">
+      {promptOpen && stage.promptFile && (
+        <div className="px-4 pt-3">
+          <PromptPanel file={stage.promptFile} onClose={onTogglePrompt} />
+        </div>
+      )}
+
+      <div className="flex flex-col gap-4 p-4">
+        <div className="space-y-3 rounded-xl bg-sky-50 p-4">
           {FLEET.map((cell) => {
             const strip = wp.strips[cell] || { chunks: 0, times: Array(10).fill("--:--") };
             return (
@@ -371,51 +586,141 @@ function WorkBlock({
             );
           })}
           <div className="rounded-lg bg-white/80 px-3 py-2 text-sm text-slate-600">
-            Heartbeat: <span className="font-mono font-medium text-slate-800">{wp.heartbeat}</span>
+            Heartbeat:{" "}
+            <span className="font-mono font-medium text-slate-800">{wp.heartbeat}</span>
             {unlocked ? " · all cells 100%" : " · waiting for fleet"}
           </div>
         </div>
+        <p className="text-center text-xs text-slate-500">
+          Next orange CHECK unlocks only when every cell strip is 100% green.
+          {wp.checkPassed ? " · CHECK already passed." : ""}
+        </p>
+      </div>
+    </section>
+  );
+}
 
-        <div className="flex w-full flex-col items-stretch justify-center gap-3 md:w-52">
+function CheckBlock({
+  stage,
+  workId,
+  wp,
+  unlocked,
+  assault,
+  promptOpen,
+  onTogglePrompt,
+  onSetAssault,
+  onPass,
+  onFail,
+}: {
+  stage: StageDef;
+  workId: number;
+  wp: WorkProgress;
+  unlocked: boolean;
+  assault: CheckAssault;
+  promptOpen: boolean;
+  onTogglePrompt: () => void;
+  onSetAssault: (agent: AssaultAgentId, verdict: AssaultVerdict) => void;
+  onPass: () => void;
+  onFail: () => void;
+}) {
+  return (
+    <section className="mb-8 overflow-hidden rounded-2xl border-2 border-orange-300 bg-white shadow-sm">
+      <div className="flex flex-wrap items-center justify-between gap-2 bg-orange-500 px-5 py-3 text-white">
+        <h2 className="text-xl font-bold">
+          {stage.id}. CHECK — {stage.title}
+          {!unlocked && <span className="ml-2 text-base font-semibold">🔒 LOCKED</span>}
+          {unlocked && !wp.checkPassed && <span className="ml-2 text-base font-semibold">UNLOCKED</span>}
+          {wp.checkPassed && <span className="ml-2 text-base font-semibold">✓ PASSED</span>}
+        </h2>
+        {stage.promptFile && (
           <button
-            disabled={!unlocked || wp.checkPassed}
-            onClick={onPassCheck}
-            className={`rounded-xl px-4 py-4 text-center text-lg font-bold text-white shadow ${
-              wp.checkPassed
-                ? "bg-emerald-600"
-                : unlocked
-                  ? "bg-orange-500 hover:bg-orange-400"
-                  : "cursor-not-allowed bg-orange-300 opacity-80"
-            }`}
+            type="button"
+            onClick={onTogglePrompt}
+            className="rounded bg-orange-700/50 px-3 py-1.5 text-sm font-semibold hover:bg-orange-700"
           >
-            {wp.checkPassed
-              ? "CHECK passed ✓"
-              : unlocked
-                ? "CHECK unlocked"
-                : "CHECK LOCKED 🔒"}
+            {promptOpen ? "Hide CHECK prompt" : "CHECK — show prompt"}
           </button>
-          {check && (
-            <div className="rounded-lg border border-orange-200 bg-orange-50 p-3 text-sm text-orange-950">
-              <div className="font-semibold">
-                {check.id}. CHECK — {check.title}
-              </div>
-              {check.note && <div className="mt-1 text-orange-800/80">{check.note}</div>}
-              {check.promptFile && (
-                <a
-                  className="mt-2 inline-block text-orange-700 underline"
-                  href={`/prompts/${check.promptFile}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Open check prompt
-                </a>
-              )}
-            </div>
-          )}
-          <p className="text-center text-xs text-slate-500">
-            Orange CHECK only when every cell strip is 100% green.
-          </p>
+        )}
+      </div>
+      {stage.note && <p className="bg-orange-50 px-5 py-2 text-sm text-orange-950">{stage.note}</p>}
+      <p className="border-b border-orange-100 px-5 py-2 text-sm text-slate-600">
+        After WORK stage {workId}. Fail → loop that same section only. Four-agent assault (demo
+        toggles).
+      </p>
+
+      {promptOpen && stage.promptFile && (
+        <div className="px-4 pt-3">
+          <PromptPanel file={stage.promptFile} onClose={onTogglePrompt} />
         </div>
+      )}
+
+      <div className="grid gap-3 p-4 sm:grid-cols-2">
+        {ASSAULT_AGENTS.map((agent) => {
+          const v = assault[agent.id];
+          return (
+            <div
+              key={agent.id}
+              className={`rounded-xl border p-3 ${
+                v === "pass"
+                  ? "border-emerald-300 bg-emerald-50"
+                  : v === "fail"
+                    ? "border-red-300 bg-red-50"
+                    : "border-slate-200 bg-slate-50"
+              }`}
+            >
+              <div className="font-bold text-slate-900">{agent.label}</div>
+              <div className="mt-0.5 text-sm text-slate-600">{agent.question}</div>
+              <div className="mt-3 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => onSetAssault(agent.id, "pass")}
+                  className={`flex-1 rounded-lg px-2 py-1.5 text-sm font-semibold ${
+                    v === "pass"
+                      ? "bg-emerald-600 text-white"
+                      : "bg-white text-emerald-700 ring-1 ring-emerald-300 hover:bg-emerald-50"
+                  }`}
+                >
+                  Pass
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onSetAssault(agent.id, "fail")}
+                  className={`flex-1 rounded-lg px-2 py-1.5 text-sm font-semibold ${
+                    v === "fail"
+                      ? "bg-red-600 text-white"
+                      : "bg-white text-red-700 ring-1 ring-red-300 hover:bg-red-50"
+                  }`}
+                >
+                  Fail
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="flex flex-wrap items-center justify-center gap-3 border-t border-orange-100 bg-orange-50/60 px-4 py-4">
+        <button
+          type="button"
+          disabled={!unlocked || wp.checkPassed}
+          onClick={onPass}
+          className={`rounded-xl px-6 py-3 text-lg font-bold text-white shadow ${
+            wp.checkPassed
+              ? "bg-emerald-600"
+              : unlocked
+                ? "bg-orange-500 hover:bg-orange-400"
+                : "cursor-not-allowed bg-orange-300 opacity-80"
+          }`}
+        >
+          {wp.checkPassed ? "CHECK passed ✓" : unlocked ? "Pass CHECK" : "CHECK LOCKED 🔒"}
+        </button>
+        <button
+          type="button"
+          onClick={onFail}
+          className="rounded-xl border border-red-300 bg-white px-5 py-3 text-base font-semibold text-red-700 hover:bg-red-50"
+        >
+          Fail → same section
+        </button>
       </div>
     </section>
   );
@@ -436,8 +741,7 @@ function OverseerPanel({
 }) {
   const color =
     status === "moving" ? "bg-emerald-600" : status === "stall" ? "bg-orange-600" : "bg-amber-500";
-  const label =
-    status === "moving" ? "MOVING" : status === "stall" ? "STALL" : "NEED POWER";
+  const label = status === "moving" ? "MOVING" : status === "stall" ? "STALL" : "NEED POWER";
   return (
     <aside className="mb-24 overflow-hidden rounded-2xl border border-slate-700 bg-slate-800 text-white shadow-lg">
       <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
@@ -448,13 +752,22 @@ function OverseerPanel({
         <span className={`rounded-full px-4 py-1.5 text-sm font-bold ${color}`}>{label}</span>
       </div>
       <div className="flex flex-wrap gap-2 border-t border-slate-700 bg-slate-900/50 px-5 py-3">
-        <button onClick={onMoving} className="rounded bg-emerald-700 px-3 py-1.5 text-sm font-medium hover:bg-emerald-600">
+        <button
+          onClick={onMoving}
+          className="rounded bg-emerald-700 px-3 py-1.5 text-sm font-medium hover:bg-emerald-600"
+        >
           Mark moving
         </button>
-        <button onClick={onStall} className="rounded bg-orange-700 px-3 py-1.5 text-sm font-medium hover:bg-orange-600">
+        <button
+          onClick={onStall}
+          className="rounded bg-orange-700 px-3 py-1.5 text-sm font-medium hover:bg-orange-600"
+        >
           Stall
         </button>
-        <button onClick={onNeedPower} className="rounded bg-amber-600 px-3 py-1.5 text-sm font-medium hover:bg-amber-500">
+        <button
+          onClick={onNeedPower}
+          className="rounded bg-amber-600 px-3 py-1.5 text-sm font-medium hover:bg-amber-500"
+        >
           Need power
         </button>
       </div>
