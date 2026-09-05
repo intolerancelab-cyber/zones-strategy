@@ -8,13 +8,13 @@ Source locks: CHECK_ASSAULT_OUTLINE.md, CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOF
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m).
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
 **Dual-lamp:** boost search must stay sealed.
-**Continuation:** OPEN (catalog minus orb_*).
+**Continuation:** PLACEHOLDER (catalog minus orb_* — not operable OPEN; wait David before lock).
 **Multi-agent:** every check (this one included).
 **Compounding champion:** high-% bank risk fit, not vanity PF.
 **Same late area, two questions:** Stress = WF/capacity/ugly; Luck = Monte Carlo — both required.
-**NEW BANDING / on/off / deadwood:** do not invent lists; do not conflate cross-cell band confluence with boost-count confluence.
+**NEW BANDING / on/off / deadwood:** do not invent lists; do not conflate Band-find cross-cell (3-of-4) with Stage-12 boost-count confluence (2/3/4 B×S).
 
 ---
 
@@ -52,8 +52,8 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip <0.75; revival at ~0.75; boost lines 1.0|1.2 (not locked — report both, do not invent a lock).
-- Cost model present before any PF talk. Holdout last ~20% untouched for take decisions only.
+- Band PF provisional: skip <0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock).
+- Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
 - **Stage 19 add:** MANIFEST both_tracks=true; SEEDS.json hash pinned before LUCK CELL timestamps; WF fold counts reconcile; capacity scenario tables present; ugly regime list includes hurtful cases (anti-cherry-pick); MC distribution stats recompute from seed+assemble; left-tail under compounding stakes reported; smoke identity match; multiplicity caps respected.
 - Output: PASS / FAIL with tables: claimed vs recomputed, per cell; stress vs luck coverage matrix.
 
@@ -120,7 +120,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 - `checks/stage_19_stress_luck/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths, both-tracks coverage, left-tail tables, talk-box if any
 - `checks/stage_19_stress_luck/GREEN.stamp` — unlocks Stage 20 Final multi-agent assault WORK
 - `checks/stage_19_stress_luck/BOTH_TRACKS.json` — stress_complete=true; luck_complete=true; seeds_pinned=true; cherry_pick=false; capacity_reviewed=true
-- Attestations: no ORB, no doubles, fleet 4 cells, dual-lamp intact, holdout discipline, compounding lens, filter_list_invented=false, deadwood_poi_list not invented, Continuation still OPEN
+- Attestations: no ORB, no doubles, fleet 4 cells, dual-lamp intact, holdout discipline, compounding lens, filter_list_invented=false, deadwood_poi_list not invented, Continuation still PLACEHOLDER
 
 ---
 

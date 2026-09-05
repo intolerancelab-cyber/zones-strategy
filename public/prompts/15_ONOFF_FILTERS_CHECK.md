@@ -8,14 +8,14 @@ Source locks: CHECK_ASSAULT_OUTLINE.md, CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOF
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m).
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
 **Dual-lamp:** boost search must stay sealed.
-**Continuation:** OPEN (catalog minus orb_*).
+**Continuation:** PLACEHOLDER (catalog minus orb_* — not operable OPEN; wait David before lock).
 **Multi-agent:** every check (this one included).
 **Compounding champion:** high-% bank risk fit, not vanity PF.
 **On/off filters:** binary no-line states; PARKED detail — ask David later; **do not invent filter list**.
 **NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level → sweeps → REMOVE DEADWOOD POIs. Do not invent keep/cut list.
-**Cross-cell band confluence (David lock — Band-find labeling, NOT boost-count confluence):** ≥3 of 4 same POI×band / same sign for thin-n; SEPARATE from Stage 12 boost-count 2/3/4. Do not conflate.
+**Band-find cross-cell (3-of-4 same POI×band)** — NOT Stage-12 boost-count confluence: ≥3 of 4 same POI×band / same sign for thin-n; SEPARATE from Stage 12 boost-count 2/3/4. Do not conflate.
 
 ---
 
@@ -55,8 +55,8 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip <0.75; revival at ~0.75; boost lines 1.0|1.2 (not locked — report both, do not invent a lock).
-- Cost model present before any PF talk. Holdout last ~20% untouched for take decisions only.
+- Band PF provisional: skip <0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock).
+- Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
 - **Stage 15 add:**
   - PARKED: MANIFEST.mode=PARKED; PARKED.json ask_David_later=true; no FILTER_LIST claiming David lock; workers_used honest for park; no fake table deltas.
   - APPLIED: FILTER_LIST source_session + list_hash present; CELL ON vs OFF deltas reconcile to TABLE_WIDE_EFFECT; cost-applied; SKIP_OMISSION_UNDER_FILTERS proves Stage 6 SKIP_MAP still omitted; smoke identity match.
@@ -125,7 +125,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 - `checks/stage_15_onoff/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths, park-vs-apply honesty, talk-box if any
 - `checks/stage_15_onoff/GREEN.stamp` — unlocks Stage 16 Assemble + hold/flat WORK
 - `checks/stage_15_onoff/FILTER_POSTURE.json` — mode=PARKED|APPLIED; filter_list_invented=false; table_wide=true; band_surgery=false
-- Attestations: no ORB, no doubles, fleet 4 cells, skip omission under filters (or park), dual-lamp intact, holdout virgin, Continuation still OPEN, deadwood POI list not invented, NEW BANDING posture disclosed
+- Attestations: no ORB, no doubles, fleet 4 cells, skip omission under filters (or park), dual-lamp intact, holdout virgin, Continuation still PLACEHOLDER, deadwood POI list not invented, NEW BANDING posture disclosed
 
 ---
 

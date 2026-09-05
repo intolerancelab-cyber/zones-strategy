@@ -24,14 +24,14 @@ Read-only briefing for prompt-driven dash redesign. Aligns with PROMPT_DASH_HAND
 | 3 | Check (+ champion talk if needed) | CHECK |
 | 4 | POI map (value areas = POIs: D/W/M) | WORK |
 | 5 | Check | CHECK |
-| 6 | Band find (under ~0.75 → SKIP; ≥~0.75 → sweep candidate) | WORK |
+| 6 | Band find (<0.75 SKIP no normal sweep; ~0.75 REVIVAL; keep lean >1.2; Band-find cross-cell 3-of-4) | WORK |
 | 7 | Check | CHECK |
 | 8 | Band sweep (wide→narrow KEEP; entry set from checkbox) | WORK |
 | 9 | Check | CHECK |
-| 10 | Boost-alone → mark B×S table (unlocks confluence) | WORK |
+| 10 | Boost-alone → mark *candidate* B×S occupancy (unlocks Stage-12 path after 11) | WORK |
 | 11 | Check (cost shock + trade-count floor) | CHECK |
-| 12 | Confluence table (2/3/4 on allowlisted squares) | WORK |
-| 13 | Check (take rule / holy-grail + dependence) | CHECK |
+| 12 | Stage-12 boost-count confluence (2/3/4 B×S allowlisted; draw-a-line take-table FOR NOW) | WORK |
+| 13 | Check (draw-a-line take-table FOR NOW / holy-grail + dependence; never-1B WARN) | CHECK |
 | 14 | On/off filters | WORK |
 | 15 | Check | CHECK |
 | 16 | Assemble + hold/flat | WORK |
@@ -48,7 +48,7 @@ Read-only briefing for prompt-driven dash redesign. Aligns with PROMPT_DASH_HAND
 
 ## Entry-method reminder
 - Reversal: LOCKED 6 (see HANDOFF).
-- Continuation: OPEN — catalog minus orb_*; wait David.
+- Continuation: PLACEHOLDER — catalog minus orb_*; not operable OPEN; ask David before lock.
 
 ## Check-prompt hunt list
 Silent Zero, fake ticks, percent paint, wrong folder, smell gaps, leftover polish, roster defaults, ORB/doubles copy leaking into UI
@@ -60,3 +60,10 @@ PROMPT_DASH_HANDOFF.md, DAVID_BRIEF_2026-09-05.md, GATE_PLAN_V1.md, agent memory
 - Every WORK = detailed handbook incl. full sharding guide.
 - On/off filters = binary no-line states; ask David later / other session.
 
+
+## NEW BANDING (pending other session)
+- Branch `codex/rty-replay-parity-20260702`: fewer/tighter near-level bands → sweeps → remove deadwood POIs.
+- Prompt-dash admits cleaned POI set later — **do not invent keep/cut list**. Pending other session.
+- Band-find cross-cell (3-of-4 same POI×band) ≠ Stage-12 boost-count confluence (2/3/4 B×S).
+- Coherent PF ladder: <0.75 SKIP (no normal sweep); ~0.75 REVIVAL; keep lean PF > 1.2; FAILED_REVIVAL/BELOW_KEEP after failed revival.
+- Continuation = PLACEHOLDER (not operable OPEN). Take path = draw-a-line take-table FOR NOW (not old B−S notes as locked rule).

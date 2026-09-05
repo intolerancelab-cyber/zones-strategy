@@ -6,11 +6,11 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only (checkpoint + bank unused champion if dual talk).
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
 **Dual-lamp:** boost-alone sealed before confluence; do not reopen boost search.
 **On/off filters:** binary no-line; may be PARKED — consume Stage 15 posture; do not invent filter list.
 **NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level → sweeps → REMOVE DEADWOOD POIs. Do not invent keep/cut list.
-**Cross-cell band confluence (David lock — Band-find labeling, NOT boost-count confluence):** ≥3 of 4 same POI×band / same sign for thin-n; SEPARATE from Stage 12. Do not conflate.
+**Band-find cross-cell (3-of-4 same POI×band)** — NOT Stage-12 boost-count confluence: ≥3 of 4 same POI×band / same sign for thin-n; SEPARATE from Stage 12. Do not conflate.
 **Take-table line:** consume Stage 12/13 take / don’t-take (best recipe by B; cheap combo shapes; amalgamation OPEN).
 
 ---
@@ -39,7 +39,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 - **Goal:** Assemble the research book from stamped recipes / take-line / on-off posture only; run micro hold-vs-flat evidence; stamp assembled book + hold/flat path; unlock Stage 17 CHECK. No last-minute method invention.
 - **Unlocks next:** Stage 17 CHECK
 - **Fleet cells:** ES 5m, ES 15m, NQ 5m, NQ 15m
-- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED 6 vs Continuation OPEN (catalog minus `orb_*`; do not claim locked). Assemble binds only stamped KEEP / take-line under that set.
+- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED 6 vs Continuation PLACEHOLDER (catalog minus `orb_*` — not operable OPEN; do not claim locked). Assemble binds only stamped KEEP / take-line under that set.
 
 ---
 
@@ -63,7 +63,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 If missing → STOP, do not invent.
 - Stage 1 Freeze/admit: BOOK_SEAL, COST_MODEL, SESSION_LOCKS, ENTRY_SET, PROVISIONAL_BAND_PF_NOTE, MANIFEST
 - Stages 2–12: baseline → POI → band find/sweep → boost-alone → confluence TAKE_LINE + HOLY_GRAIL_CANDIDATE + BEST_RECIPE_BY_B + SKIP_OMISSION proofs
-- Stage 13 GREEN + TAKE_LINE_REVIEWED + DUAL_LAMP (`boost_search_open=false`)
+- Stage 13 GREEN + TAKE_LINE_REVIEWED + DUAL_LAMP (`boost_search_closed=true` after Stage 13)
 - Stage 14/15: onoff MANIFEST + FILTER_POSTURE (PARKED|APPLIED); Stage 15 GREEN
 - Cache pins: all prior hashes must match; mismatch → rebuild prior section
 - Entry-method set = STRATEGY INPUT checkbox (match Freeze); **strip orb_*; refuse doubles/pairs**
@@ -109,7 +109,7 @@ If missing → STOP, do not invent.
 8. Run **micro hold-vs-flat** evidence (KEEP cheap loop) per cell / session slice; stamp evidence tables.
 9. Stamp hold vs flat path from evidence (MUST-NOT: do not shard the choice; talk-box only if real dual path under compounding lens); **checkpoint hook** banks unused champion if fork.
 10. Write Monday-runbook-shaped research artifact (costs, size note, entry set, skips, filters) — paper only, no live deploy language.
-11. Holdout last ~20% still virgin for take seal (do not burn as assemble fuel).
+11. Holdout last ~20% still virgin — holdout reserved; take not sealed by this stage (do not burn as assemble fuel).
 12. Paint strips 10%…100%; heartbeat under stack.
 13. Barrier: all four cells 100% green → unlock Stage 17 CHECK (do not auto-pass).
 

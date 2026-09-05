@@ -6,7 +6,7 @@ Every WORK clickable prompt must be a **detailed overseer handbook**, not a one-
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only.
-**Band PF provisional:** skip &lt;0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
+**Band PF provisional:** skip &lt;0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
 **On/off filters:** binary no-line states; parked — ask David later.
 
 ---
@@ -19,7 +19,7 @@ Every WORK clickable prompt must be a **detailed overseer handbook**, not a one-
 | POI map | Checks (all of them) |
 | Baseline | Take / KEEP decisions |
 | Band find / band sweep | Hold / grade alone |
-| Boost-alone / confluence fill | All-cell barrier wait (100% fleet) |
+| Boost-alone / Stage-12 boost-count confluence fill | All-cell barrier wait (100% fleet) |
 | Assemble | Speedy lamp / emit-covered report steps |
 | Stress / Monte Carlo | Champion talk-box choice |
 
@@ -95,7 +95,7 @@ Numbered. No skips. Include smoke → fleet → stamp.
 - No sharding identity decisions
 - No inventing OPEN David locks (0.75/1.2, continuation set, take rule, on/off list, POI list)
 - No advancing without fleet 100%
-- No contaminating holdout (last ~20% for take only)
+- No contaminating holdout (last ~20% reserved — take not sealed by this stage)
 
 ### 8. Heartbeat / stuck
 - Heartbeat cadence
@@ -121,7 +121,7 @@ Depth David wants: sharding handbook style. Use as the bar for other heavy WORKs
 - **Goal:** Wide→narrow KEEP sweep of tailored entry/TP recipes on sweep-candidate bands only (≥~0.75 provisional); stamp keepers per fleet cell; unlock Stage 9 CHECK.
 - **Unlocks next:** Stage 9 CHECK
 - **Fleet cells:** ES 5m, ES 15m, NQ 5m, NQ 15m
-- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED (`close_back_inside`, `n_close_back_inside`, `wick_rejection_completed_bar`, `touch`, `close_confirm`, `pullback_to_level`) OR Continuation OPEN (catalog minus `orb_*`; do not claim locked).
+- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED (`close_back_inside`, `n_close_back_inside`, `wick_rejection_completed_bar`, `touch`, `close_confirm`, `pullback_to_level`) OR Continuation PLACEHOLDER (catalog minus `orb_*` — not operable OPEN; do not claim locked).
 
 ### 1. Goal
 - For each fleet cell: take Band-find KEEP/sweep-candidate bands; run wide→narrow entry×TP recipes; stamp KEEP recipes + drop dead arms; paint strips to 100%.
@@ -133,7 +133,7 @@ Depth David wants: sharding handbook style. Use as the bar for other heavy WORKs
 - Stage 3 CHECK green
 - Stage 4 POI map hashes (value areas as POIs)
 - Stage 5 CHECK green
-- Stage 6 Band find: skip (&lt;0.75), revival (~0.75), sweep candidates; DEAD_ZONE notes if present
+- Stage 6 Band find: SKIP (<0.75), REVIVAL (~0.75), keep lean >1.2, FAILED_REVIVAL/BELOW_KEEP; CROSS_CELL_3OF4
 - Stage 7 CHECK green
 - Cache pins: bars + POI map hashes must match; if mismatch → rebuild map section, do not silent continue
 - Entry-method set = current STRATEGY INPUT checkbox value

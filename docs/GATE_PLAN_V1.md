@@ -12,8 +12,8 @@ David: layout KEEP (stacked per-cell strips). Fleet ES+NQ × 5m+15m. Wait 100% a
 4. **POI map** (value areas = POIs) → **5 Check**
 6. **Band find** → **7 Check**
 8. **Band sweep** (wide→narrow; entry set from Reversal/Continuation checkbox) → **9 Check**
-10. **Boost-alone** → mark B×S table → **11 Check** (cost shock + trade-count floor; unlocks confluence)
-12. **Confluence table** (2/3/4 allowlisted) → **13 Check** (take / holy-grail + dependence)
+10. **Boost-alone** → mark *candidate* B×S occupancy → **11 Check** (cost shock + trade-count floor; unlocks Stage-12 path)
+12. **Stage-12 boost-count confluence** (2/3/4 B×S allowlisted; draw-a-line take-table FOR NOW) → **13 Check** (take-table grill / holy-grail + dependence; never-1B WARN)
 14. **On/off filters** → **15 Check**
 16. **Assemble + hold/flat** → **17 Check**
 18. **Stress + luck** (Stress = WF/capacity/ugly regimes; Luck = Monte Carlo) → **19 Check**
@@ -30,18 +30,20 @@ David: layout KEEP (stacked per-cell strips). Fleet ES+NQ × 5m+15m. Wait 100% a
 Freeze alone, baseline alone, take/KEEP alone, hold alone, grade alone, Speedy lamp, emit-covered report steps
 
 ## Cheap feedback loops
-Cell paint 100%; Silent Zero/fake-tick; roster+folder; one-cell smoke; n+PF floors; holdout last 20% for take only; ablate one POI/skip; hold-vs-flat micro before stress/luck; cost model early; RTH vs overnight; ES+NQ overlap; null shuffle; multiplicity control; cache never re-walk
+Cell paint 100%; Silent Zero/fake-tick; roster+folder; one-cell smoke; n+PF floors; holdout last 20% reserved — take not sealed by stage (until real holdout take-read stamp); ablate one POI/skip; hold-vs-flat micro before stress/luck; cost model early; RTH vs overnight; ES+NQ overlap; null shuffle; multiplicity control; cache never re-walk
 
 ## Often skipped (non-ORB) smell checks
 Session/calendar; band vs ATR/tick; thin-open slippage; POI look-ahead; ES+NQ correlation; never-tag failure mode
 
 ## Product locks baked in
-- Boost-alone → confluence dual-lamp is the take path (holy grail = final table); confluence does not re-open boost search.
+- Boost-alone → Stage-12 boost-count confluence dual-lamp is the take path (holy grail = final table); Stage 12 does not re-open boost-family search; `boost_search_closed` seals at Stage 13 CHECK.
 - Reversal vs Continuation checkbox selects entry-method set.
-- Reversal set LOCKED 6; Continuation OPEN (catalog minus orb_* — wait David).
-- Band ~0.75 skip vs sweep — OPEN confirm with David (PF?).
-- Take notes OPEN: B−S≥2, B in 2..7; never B<2; never S≥3; leaning 2B alone or 3B+1S; never 1B alone — confirm on table.
+- Reversal set LOCKED 6; Continuation PLACEHOLDER (catalog minus orb_* — not operable OPEN; ask David before lock).
+- Coherent PF ladder (provisional): <0.75 SKIP (no *normal* sweep); ~0.75 REVIVAL exception; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only). After failed revival under keep = FAILED_REVIVAL / BELOW_KEEP — do not dual-label SWEEP_CANDIDATE + DEAD_ZONE.
+- **Take path FOR NOW:** draw-a-line take-table across B×S (best recipe by B). Old B−S take-notes remain OPEN notes — not the locked rule. never-1B = WARN at Stage 13 until David locks.
 - Wide→narrow KEEP.
+- NEW BANDING pending other session (tighter bands → sweeps → deadwood POI remove; do not invent keep/cut).
+- Band-find cross-cell (3-of-4) ≠ Stage-12 boost-count confluence (2/3/4 B×S).
 
 ## Historical / superseded (do not revive)
 - Any DOUBLES / pairs / ORB gates from earlier gate drafts — **DEAD / DEFUNCT**.

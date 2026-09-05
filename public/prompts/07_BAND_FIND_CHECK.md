@@ -8,18 +8,19 @@ Source locks: CHECK_ASSAULT_OUTLINE.md, CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOF
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m).
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
-**Continuation:** OPEN (catalog minus orb_*).
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Continuation:** PLACEHOLDER (catalog minus orb_* — not operable OPEN; wait David before lock).
 **Multi-agent:** every check (this one included).
 
 ---
 
 ## Prior WORK context
-Stage 6 found bands where baseline helped vs hurt. Under ~0.75 → **SKIP** (no sweep). ≥~0.75 → sweep candidate / revival path. Band PF figures **PROVISIONAL** (not locked). DEC-063 zone-first banding notes may be referenced — bin count **not** invented-locked.
+Stage 6 found bands where baseline helped vs hurt. Under ~0.75 → **SKIP** (no *normal* sweep). ~0.75 → REVIVAL class (one tailored sweep). Keep lean PF > 1.2; post-failed-revival under keep = FAILED_REVIVAL / BELOW_KEEP. Band PF figures **PROVISIONAL** (not locked). DEC-063 zone-first banding notes may be referenced — bin count **not** invented-locked.
 
 **Agents must know:**
-- instant_skip_below = 0.75 provisional; revival at ~0.75; boost lines 1.0|1.2 both reported, owner picks before check read.
-- Between 0.75 and chosen boost line = DEAD_ZONE (not in table) — provisional story.
+- Coherent ladder: PF <0.75 → SKIP (no *normal* sweep); ~0.75 → REVIVAL; keep lean PF > 1.2 (1.0 sensitivity / fork-hook only); post-failed-revival under keep → FAILED_REVIVAL / BELOW_KEEP. Do **not** dual-label SWEEP_CANDIDATE + DEAD_ZONE.
+- **Band-find cross-cell (3-of-4 same POI×band)** must be stamped (CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT) — SEPARATE from Stage-12 boost-count confluence.
+- NEW BANDING / deadwood POI keep/cut list not invented.
 - DEC-063 zone-first banding notes exist; do not invent bin count locks.
 - Cost model before any PF talk.
 
@@ -32,7 +33,7 @@ If any missing → FAIL (mistake hunter); do not invent.
 - Stage 3: `checks/stage_03_baseline/GREEN.stamp`
 - Stage 4: `poi_map/CELL/{cell}.json`, `poi_map/MANIFEST.json`, `poi_map/SILENT_ZERO_GATE.json`
 - Stage 5: `checks/stage_05_poi_map/GREEN.stamp`
-- Stage 6: `band_find/CELL/{ES_5m,ES_15m,NQ_5m,NQ_15m}.json`, `band_find/SKIP_MAP/{cell}.json`, `band_find/CANDIDATE_MAP/{cell}.json`, `band_find/MANIFEST.json`, `band_find/SMOKE_IDENTITY.json`, `band_find/PROVISIONAL_PF_DISCLOSURE.json`
+- Stage 6: `band_find/CELL/{ES_5m,ES_15m,NQ_5m,NQ_15m}.json`, `band_find/SKIP_MAP/{cell}.json`, `band_find/REVIVAL_MAP/{cell}.json`, `band_find/FAILED_REVIVAL_OR_BELOW_KEEP/{cell}.json`, `band_find/CROSS_CELL_3OF4/{cell}.json`, `band_find/CROSS_CELL_3OF4/BOOK.json`, `band_find/MANIFEST.json`, `band_find/SMOKE_IDENTITY.json`, `band_find/PROVISIONAL_PF_DISCLOSURE.json`
 - Strip paint evidence: all four cells 100% green before this CHECK was clickable
 
 ---
@@ -45,15 +46,15 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 **Question:** Was a mistake made?
 - Hunt: Silent Zero, fake ticks, percent paint without work, wrong folder/roster, smell gaps, leftover polish, roster defaults, ORB/doubles copy leaking into UI or stamps.
 - Hunt: skipped stamp, wrong entry-method set vs STRATEGY INPUT checkbox, 1m accidentally in fleet, re-walk of cached bars/POIs, identity stage that was sharded when it must not be.
-- **Stage 7 add:** sweeping or pre-enqueuing a <0.75 skip band; locking 0.75/1.2 as final without David grill; skip/KEEP labels swapped across cells; missing SKIP_MAP; Stage 8 work done early; CHECK clicked before all strips green; invented bin-count lock from DEC-063 notes.
+- **Stage 7 add:** *normal* sweeping or pre-enqueuing a <0.75 skip band; locking 0.75/1.2 as final without David grill; skip/KEEP labels swapped across cells; missing SKIP_MAP / REVIVAL_MAP / CROSS_CELL_3OF4; thin-n BOOST without 3-of-4; naked “BOOST candidate” label; dual-label SWEEP_CANDIDATE+DEAD_ZONE; invented deadwood POI keep/cut; Stage 8 work done early; CHECK clicked before all strips green; invented bin-count lock from DEC-063 notes.
 - Output: PASS / FAIL with concrete file/stamp/path evidence. No vibes.
 
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades/bands, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip <0.75; revival at ~0.75; boost lines 1.0|1.2 (not locked — report both, do not invent a lock).
-- Cost model present before any PF talk. Holdout last ~20% untouched for take decisions only.
-- **Stage 7 add:** every SKIP_MAP id has PF <0.75 (cost-applied); every SWEEP_CANDIDATE has PF ≥~0.75; DEAD_ZONE notes consistent with provisional story; bar_hash/poi_map_hash match prior stamps; no inflated workers_used.
+- Band PF provisional: skip <0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock).
+- Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
+- **Stage 7 add:** every SKIP_MAP id has PF <0.75 (cost-applied); every REVIVAL_MAP id is ~0.75; FAILED_REVIVAL/BELOW_KEEP used instead of dual SWEEP_CANDIDATE+DEAD_ZONE; every CROSS_CELL_BOOST_CANDIDATE has ≥3/4 same-sign readable cells; INSUFFICIENT when <3; bar_hash/poi_map_hash match prior stamps; no inflated workers_used.
 - Output: PASS / FAIL with tables: claimed vs recomputed, per cell.
 
 ### Role 3 — Real-life trader lens
@@ -92,10 +93,15 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ---
 
 ## Stage 7 — cheap kills specific
-- Sweeping a <0.75 skip band
-- Locking 0.75/1.2 in stamps as final without David grill
+- *Normal* sweeping a <0.75 skip band (revival is the only exception class at ~0.75)
+- Locking 0.75/1.2 as final without David grill; treating 1.0 as equal keep pick vs lean >1.2
 - Band vs ATR/tick smell ignored
 - Skip/KEEP labels swapped across cells
+- Missing CROSS_CELL_3OF4 stamps / BOOK
+- Thin-n single-cell mint of CROSS_CELL_BOOST_CANDIDATE without ≥3/4 same-sign
+- Naked “BOOST candidate” label (must be CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT)
+- Dual-label SWEEP_CANDIDATE + DEAD_ZONE on the same band
+- Invented deadwood POI keep/cut list
 
 ---
 
@@ -116,15 +122,17 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ## Success stamp (CHECK green)
 - `checks/stage_07_band_find/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths, talk-box outcome if any
 - `checks/stage_07_band_find/GREEN.stamp` — unlocks Stage 8 Band sweep WORK
-- Attestations: no ORB, no doubles, fleet 4 cells, skip map intact, provisional PF disclosed not locked, DEC-063 note without invented bin lock, holdout virgin, Continuation still OPEN
+- Attestations: no ORB, no doubles, fleet 4 cells, SKIP/REVIVAL/FAILED_REVIVAL maps intact, CROSS_CELL_3OF4 stamped, provisional PF disclosed not locked, NEW BANDING / deadwood-not-invented, DEC-063 note without invented bin lock, holdout reserved — take not sealed by this stage, Continuation still PLACEHOLDER
 
 ---
 
 ## Fail loop
 - FAIL → return to **Stage 6** (`06_BAND_FIND_WORK.md`) only; preserve prior greens unless Role 1 proves earlier identity break.
-- Do not skip to Band sweep. Do not start boost/confluence.
+- Do not skip to Band sweep. Do not start boost / Stage-12 boost-count confluence.
 
-### Stage-specific — cross-cell band confluence
-- Thin n (~50) on one cell must not alone mint BOOST; require ≥3/4 cells same-sign on that POI×band, else FAIL or INSUFFICIENT.
+### Stage-specific — Band-find cross-cell (3-of-4 same POI×band)
+- Thin n (~50) on one cell must not alone mint CROSS_CELL_BOOST_CANDIDATE; require ≥3/4 cells same-sign on that POI×band, else FAIL or stamp **INSUFFICIENT**.
 - Attack any boost stamped from a single thin cell without sibling agreement.
+- Attack missing CROSS_CELL_3OF4 WORK stamps (must be in Stage 6 body, not appendix-only).
+- SEPARATE from Stage-12 boost-count confluence (2/3/4 B×S) — do not conflate.
 

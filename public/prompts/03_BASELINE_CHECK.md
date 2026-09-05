@@ -8,8 +8,8 @@ Source locks: CHECK_ASSAULT_OUTLINE.md, CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOF
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m).
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
-**Continuation:** OPEN (catalog minus orb_*).
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Continuation:** PLACEHOLDER (catalog minus orb_* — not operable OPEN; wait David before lock).
 **Multi-agent:** every check (this one included).
 
 ---
@@ -19,7 +19,7 @@ Stage 2 ran **baseline alone** per fleet cell. Expect **mediocre PF (~0.9 / brea
 
 **Agents must know:**
 - Cost/session locks from Freeze (Stage 1) stamped; no ORB in intake.
-- Entry-method set from STRATEGY INPUT checkbox (Reversal LOCKED 6; Continuation OPEN minus orb_*).
+- Entry-method set from STRATEGY INPUT checkbox (Reversal LOCKED 6; Continuation PLACEHOLDER minus orb_* (not operable OPEN)).
 - Baseline is alone — no POI/boost yet.
 
 ---
@@ -47,8 +47,8 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip <0.75; revival at ~0.75; boost lines 1.0|1.2 (not locked — report both, do not invent a lock). *Baseline itself is pre-band; confirm provisional note not forged as final.*
-- Cost model present before any PF talk. Holdout last ~20% untouched for take decisions only.
+- Band PF provisional: skip <0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock). *Baseline itself is pre-band; confirm provisional note not forged as final.*
+- Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
 - **Stage 3 add:** mediocre PF (~0.9 / breakeven) is expected — do not FAIL solely for “low” baseline PF if cost-applied and counts reconcile; FAIL if PF talked without cost or workers_used inflated.
 - Output: PASS / FAIL with tables: claimed vs recomputed, per cell.
 
@@ -71,7 +71,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 
 ### Shared verdict protocol
 1. Any FAIL from roles 1–2 → CHECK fail → loop same WORK section (Stage 2; Stage 1 only if freeze identity broken); do not advance.
-2. WARN from role 3 → talk box only if a real choice exists (e.g. multiple baseline champion types); else stamp WARN and proceed only if David/overseer accepts.
+2. WARN from role 3 → talk box + champion checkpoint/bank only if a real choice exists (e.g. multiple baseline champion types); else stamp WARN and proceed only if David/overseer accepts.
 3. Role 4 REFUTED items that are fixable → same-section loop; if OPEN with David → park, do not invent.
 4. All four PASS (or WARN accepted) → stamp CHECK green; unlock Stage 4 POI map WORK.
 
@@ -104,16 +104,18 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ---
 
 ## Talk-before-check (only if real choice)
-- If `CHAMPION_TYPES_NOTE` lists **multiple** baseline champion types → talk box: compounding / high-% bank risk lens (not max PF vanity). Fork = hooks only (bank note; no fork UX).
+- If `CHAMPION_TYPES_NOTE` lists **multiple** baseline champion types → **talk box + champion checkpoint**: compounding / high-% bank risk lens (not max PF vanity). **Bank unused champion** via checkpoint hook for later resume. Fork = hooks only (no fork UX).
+- Stamp `checks/stage_03_baseline/CHECKPOINT_HOOKS.json` when dual/multi types talked (fork stamp + banked unused champion id/path).
 - If single type or none → no forced talk; proceed to verdict.
-- Do **not** invent take locks, POI list, 0.75/1.2 final, or Continuation shortlist.
+- Do **not** invent take locks, POI list, 0.75/1.2 final, or Continuation shortlist (Continuation = PLACEHOLDER).
 
 ---
 
 ## Success stamp (CHECK green)
-- `checks/stage_03_baseline/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths, talk-box outcome if any
+- `checks/stage_03_baseline/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths, talk-box / checkpoint outcome if any
 - `checks/stage_03_baseline/GREEN.stamp` — unlocks Stage 4 POI map WORK
-- Attestations: no ORB, no doubles, fleet 4 cells, cost-before-PF, mediocre-PF-expected acknowledged, holdout virgin, Continuation still OPEN
+- `checks/stage_03_baseline/CHECKPOINT_HOOKS.json` — if multi champion types: fork stamp + banked unused champion (hooks only)
+- Attestations: no ORB, no doubles, fleet 4 cells, cost-before-PF, mediocre-PF-expected acknowledged, holdout reserved — take not sealed by this stage, Continuation still PLACEHOLDER
 
 ---
 

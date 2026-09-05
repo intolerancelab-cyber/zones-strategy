@@ -6,7 +6,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
 **On/off filters:** binary no-line states; parked — ask David later.
 
 ---
@@ -34,7 +34,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 - **Goal (one sentence):** Build per-cell POI maps with value areas (daily / weekly / monthly) calculated then treated as POIs — hash-first, no ORB, Silent Zero fail-closed — and unlock Stage 5 CHECK.
 - **Unlocks next:** Stage 5 CHECK
 - **Fleet cells:** ES 5m, ES 15m, NQ 5m, NQ 15m
-- **STRATEGY INPUT:** Checkbox still binds entry set for later stages — Reversal LOCKED 6 vs Continuation OPEN (catalog minus `orb_*`; do not claim locked). POI map itself does not sweep entries.
+- **STRATEGY INPUT:** Checkbox still binds entry set for later stages — Reversal LOCKED 6 vs Continuation PLACEHOLDER (catalog minus `orb_*` — not operable OPEN; do not claim locked). POI map itself does not sweep entries.
 
 ---
 
@@ -134,7 +134,7 @@ If missing → STOP, do not invent.
 - No sharding identity decisions / CHECK / barrier wait
 - No inventing OPEN David locks (exact POI list names, 0.75/1.2 final, continuation set, take rule, on/off list)
 - No advancing without fleet 100%
-- No contaminating holdout (last ~20% for take only)
+- No contaminating holdout (last ~20% reserved — take not sealed by this stage)
 - No band find / sweep / boost / confluence in this stage
 - No treating weekly/monthly as fleet timeframes
 - No double-counting value areas as a separate forever-VA stage **and** POIs

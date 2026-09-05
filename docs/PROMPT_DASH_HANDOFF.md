@@ -11,7 +11,7 @@ Scope: webpage + clickable prompts + sequence. NOT live engine. NOT POI chunk co
 - **Stages 10–13 prompts written:** boost-alone → cost-shock/trade-count CHECK → confluence take-table line (best recipe by B; cheap combo shapes; amalgamation OPEN) → holy-grail/dependence CHECK. Dual-lamp locked.
 - **UI lock (David happy):** vertical scroll; STRATEGY INPUT top; each WORK stage = green WORK bar + stacked blue RESULTS strips (one strip per fleet cell: asset×TF); each strip = 10 chunks (10%…100%) with time under chunks; heartbeat/stuck under stack; orange CHECK unlocks only when every strip is 100% green; failed check loops to that section only; stamp each phase; linear (no skip); talk-before-check only for real choices; fork = page hooks only.
 - **ORB DEAD / doubles DEFUNCT:** stripped from active plan/UI copy (historical DEAD/DEFUNCT markers only). Do not delete factory code elsewhere.
-- **Stage map baked:** Freeze → Baseline → POI map → Band find → Band sweep → Boost-alone → Confluence → On/off filters → Assemble+hold → Stress+luck → Final assault (WORK/CHECK pairs 1–21; boost/confluence dual-lamp).
+- **Stage map baked:** Freeze → Baseline → POI map → Band find → Band sweep → Boost-alone → Stage-12 boost-count confluence → On/off filters → Assemble+hold → Stress+luck → Final assault (WORK/CHECK pairs 1–21; boost/confluence dual-lamp).
 - **CHECK = multi-agent every stage:** mistake hunt, numbers legit?, real-life?, what went wrong? Final assault = whole book same questions.
 - **WORK prompts = detailed handbook:** each clickable work prompt carries full sharding / reuse / machines / step-by-step overseer guide (even when code exists).
 - **On/off filters:** binary no-line POIs (trend/range day, gamma env, …) that affect the whole table — detail later from David / other session; ask when ready.
@@ -78,7 +78,7 @@ Stay linear. Stamp each phase.
 | 9 | Check | CHECK |
 | 10 | Boost-alone → mark B×S table (unlocks confluence) | WORK |
 | 11 | Check (cost shock + trade-count floor) | CHECK |
-| 12 | Confluence table (2/3/4 on allowlisted squares) | WORK |
+| 12 | Stage-12 boost-count confluence (2/3/4 B×S on allowlisted squares) | WORK |
 | 13 | Check (take rule / holy-grail + dependence) | CHECK |
 | 14 | On/off filters | WORK |
 | 15 | Check | CHECK |
@@ -108,10 +108,10 @@ Stay linear. Stamp each phase.
 ## How edge is built (product locks)
 1. **Baseline alone** (often ~0.9 / breakeven) — best you can.
 2. **POI map** from list; **value areas = POIs** (daily/weekly/monthly) per asset×TF.
-3. **Band find:** where baseline helped vs hurt. Under ~0.75 → **SKIP** zone (no sweep). ≥~0.75 → tailored sweep. **OPEN with David:** confirm 0.75 = band PF.
+3. **Band find:** where baseline helped vs hurt. Coherent ladder: <0.75 → **SKIP** (no *normal* sweep); ~0.75 → **REVIVAL**; keep lean PF > 1.2; FAILED_REVIVAL/BELOW_KEEP after failed revival. **Band-find cross-cell (3-of-4)** → CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT. **OPEN with David:** confirm 0.75 = band PF.
 4. **Band sweep:** tailored entry/TP recipes per location; keep recipes; wide→narrow KEEP.
-5. **Boost path (dual-lamp):** boost-alone → mark table → CHECK unlock → confluence (2/3/4) on allowlisted squares only; confluence does not re-open boost search; **holy grail** = final table.
-6. **Take rule notes (OPEN with David — confirm on table):** B−S ≥ 2, B in 2..7; never B<2; never S≥3; leaning 2B alone or 3B+1S; confirm never 1B alone.
+5. **Boost path (dual-lamp):** boost-alone → mark *candidate* B×S occupancy → CHECK unlock → **Stage-12 boost-count confluence (2/3/4 B×S)** on allowlisted squares only; does not re-open boost-family search; `boost_search_closed` at Stage 13; **holy grail** = final table.
+6. **Take path FOR NOW:** draw-a-line take-table across B×S (best recipe by B). Old B−S notes remain OPEN (B−S ≥ 2, B in 2..7; never B<2; never S≥3; lean 2B or 3B+1S; never 1B alone) — Stage 13 treats never-1B as WARN until David locks.
 7. **On/off filters** late (trend/range, calendar, half-days…).
 8. **Assemble + hold/flat.**
 9. **Stress + luck** — same late area, two questions: Stress = walk-forward / capacity / ugly regimes; Luck = Monte Carlo.
@@ -120,7 +120,7 @@ Stay linear. Stamp each phase.
 ## Pro quant KEEP loops
 - One-cell smoke before fleet.
 - Count/PF floors early.
-- Holdout last ~20% for take decision only.
+- Holdout last ~20% reserved — take not sealed by this stage.
 - Ablate one POI/skip family.
 - Cost model before PF talk.
 - RTH vs overnight; ES+NQ overlap; null tests; multiplicity control.
@@ -133,7 +133,7 @@ Stay linear. Stamp each phase.
 
 ## Take-table line (FOR NOW — David)
 - After boost-alone + confluence table: draw take/don’t-take line across B×S squares; use best boost recipe for that square’s boost count.
-- Cheap combo pass over shapes (2B0S, 3B0S/1S, 4B…, 5B×skips…) without new heavy sweeps; tighten if weak.
+- Cheap combo pass over shapes (2B0S, 3B0S/1S, 4B…, 5B0S/1S/2S…) without new heavy sweeps; **5B3S = PROBE_ONLY**; tighten if weak.
 - Amalgamated multi-boost TP vs best recipe = OPEN test later.
 - Detail: `DAVID_NOTES_2026-09-05_TALKBOX_TAKE.md`
 
@@ -143,14 +143,14 @@ Stay linear. Stamp each phase.
 
 
 
-## Cross-cell band confluence (David 5 Sep — LOCK for Band find)
+## Band-find cross-cell (3-of-4 same POI×band) (David 5 Sep — LOCK for Band find)
 When a POI×band (e.g. BEFORE) looks strong on one cell but **n is thin** (example: ~50 trades):
 - Look at the **same POI × same band position** on the other fleet cells (ES 5m, ES 15m, NQ 5m, NQ 15m).
-- If **≥3 of 4** cells show the **same-direction positive effect**, treat that band as a **BOOST candidate** (sibling / cross-asset×TF confluence), even if one cell alone is under a local n floor.
-- If fewer than 3 agree → do **not** boost from that thin cell alone; mark INSUFFICIENT / no boost (or SKIP path if negative rules apply).
+- If **≥3 of 4** cells show the **same-direction positive effect**, stamp that band **CROSS_CELL_BOOST_CANDIDATE** (Band-find cross-cell 3-of-4; not naked “BOOST candidate”), even if one cell alone is under a local n floor.
+- If fewer than 3 agree → do **not** boost from that thin cell alone; stamp **INSUFFICIENT** / no boost (or SKIP path if negative rules apply). Never use naked “BOOST candidate”.
 - Same idea for negative/SKIP: multi-cell agreement before trusting a thin skip label.
 - Aligns with RESCORE-20 `scopes.confluence`: 3 of 4 val cells readable + same sign (INSUFFICIENT_CONFLUENCE if &lt;3 readable).
-- This is **Band-find / band-label** confluence — separate from later boost-count confluence table (2/3/4 boosts).
+- This is **Band-find cross-cell (3-of-4 same POI×band)** — separate from **Stage-12 boost-count confluence (2/3/4 B×S)**. Output labels: CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT — not naked “BOOST candidate”.
 
 ## New banding + deadwood (David 5 Sep — branch `codex/rty-replay-parity-20260702`)
 - Source checkout: Halls_Laptop `C:\Users\David\THE STRATEGY` on `codex/rty-replay-parity-20260702` (active; includes RESCORE-20 / DEC-063 work).
@@ -166,8 +166,8 @@ Source (Halls_Laptop, read 5 Sep): `C:\Users\David\THE STRATEGY\_orderflow_poi_c
 Working draft from Stage-2 thresholds (do **not** set in stone until that campaign finishes; grill David before launch):
 - **instant_skip_below = 0.75** PF (profit factor) — below this after/without revival → skip zone.
 - **~0.75 SKIP bands get a revival sweep** (new TP/entry arms); if still under the chosen boost line → stay skip.
-- **Boost keep lines both reported: 1.0 and 1.2** — owner picks 1.0 vs 1.2 in LEDGERS **before** the check read (`owner_open_items`). David voice today leans keep-if-over-1.2.
-- Between 0.75 and chosen boost line = DEAD_ZONE (not in table).
+- **Keep/boost lean: **PF > 1.2** (grill at launch). Report 1.0 as sensitivity / fork-hook only (not an equal pick). Owner fork hook in LEDGERS before check read if a real choice exists (`owner_open_items`).
+- Between 0.75 and keep lean (PF > 1.2) after failed revival = FAILED_REVIVAL or BELOW_KEEP (not table / not keep). Do **not** dual-label SWEEP_CANDIDATE + DEAD_ZONE.
 - Example story matches: baseline ~0.8, at a POI drops to 0.74 → skip; at 0.75 → try revive; end must clear chosen line (lean 1.2).
 
 Also noted for prompt-dash champions: aim is **compounding / high % of bank risk** — champion pick (baseline + band sweep) should be whatever fits that staking system, not generic PF alone. Money sim in prereg currently stakes 0.5%/1%/2% with mini caps — confirm later.
@@ -192,7 +192,7 @@ Related: DEC-063 zone-first banding (28 bins); confluence_primary in same file c
 - Exact POI list (incoming).
 - New strategy text (incoming).
 - **Band skip 0.75:** still provisional from RESCORE-20 until campaign done.
-- **Boost keep line:** David lean **PF > 1.2** for now (still grill at launch). Report 1.0 as sensitivity only.
-- **Continuation entry-method set:** dig found LTF-4 KEEP list (see above); checkbox still PLACEHOLDER — ask David at final assemble if unresolved.
-- Take rule confirmation on table (never 1B alone; 2B alone vs 3B+1S lean).
+- **Boost keep lean:** David lean **PF > 1.2** (still grill at launch). Report 1.0 as sensitivity / fork-hook only — not an equal pick.
+- **Continuation entry-method set:** dig found LTF-4 KEEP list (see above); checkbox still **PLACEHOLDER (not operable OPEN)** — **ask David before locking** (Done seal must ask).
+- Take path = draw-a-line FOR NOW; B−S notes OPEN; never-1B WARN at Stage 13 until David locks.
 - Highest-boost recipe + vote grading (tested elsewhere — notes only).

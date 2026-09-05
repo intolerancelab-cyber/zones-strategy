@@ -6,11 +6,11 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
 **Dual-lamp:** boost search stays sealed.
 **On/off filters:** PARKED or APPLIED per Stage 15 — do not invent list.
 **NEW BANDING:** do not invent deadwood POI keep/cut list.
-**Cross-cell band confluence ≠ boost-count confluence** — do not conflate.
+**Band-find cross-cell (3-of-4) ≠ Stage-12 boost-count confluence (2/3/4 B×S)** — do not conflate.
 **Same late area, two questions:**
 - **Stress** = walk-forward / capacity / ugly regimes
 - **Luck** = Monte Carlo
@@ -43,7 +43,7 @@ Both required; one does not replace the other. **MUST-SHARD** both compute paths
 - **Goal:** On the assembled book, answer two late-area questions: (1) Stress — walk-forward, capacity, ugly regimes; (2) Luck — Monte Carlo with stamped seeds. Stamp both; unlock Stage 19 CHECK.
 - **Unlocks next:** Stage 19 CHECK
 - **Fleet cells:** ES 5m, ES 15m, NQ 5m, NQ 15m
-- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED 6 vs Continuation OPEN (catalog minus `orb_*`; do not claim locked). Stress/luck consume assembled book under that set.
+- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED 6 vs Continuation PLACEHOLDER (catalog minus `orb_*` — not operable OPEN; do not claim locked). Stress/luck consume assembled book under that set.
 
 ---
 

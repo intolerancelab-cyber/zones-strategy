@@ -6,11 +6,11 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
 **Dual-lamp:** boost-alone sealed before confluence; holy grail = final table (already grilled at Stage 13) — do not reopen boost search.
 **On/off filters:** binary no-line states (trend/range, gamma env, calendar, half-days, …) that affect the **WHOLE table**, not a single band. **PARKED detail — ask David later / other session. DO NOT invent the filter list.**
 **NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level → sweeps → **REMOVE DEADWOOD POIs**. Prompt-dash admits cleaned POI set later — **do not invent keep/cut list**.
-**Cross-cell band confluence (David lock — Band-find labeling, NOT boost-count confluence):** ≥3 of 4 same POI×band / same sign for thin-n; SEPARATE from Stage 12 boost-count 2/3/4. Do not conflate.
+**Band-find cross-cell (3-of-4 same POI×band)** — NOT Stage-12 boost-count confluence: ≥3 of 4 same POI×band / same sign for thin-n; SEPARATE from Stage 12 boost-count 2/3/4. Do not conflate.
 
 ---
 
@@ -40,7 +40,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 - **Goal:** Scaffold handbook for binary no-line on/off filter states that affect the **whole table**; apply only a **David-supplied** (or other-session) filter list when present; stamp PARKED if list absent; unlock Stage 15 CHECK. Does **not** invent filters or run band surgery.
 - **Unlocks next:** Stage 15 CHECK
 - **Fleet cells:** ES 5m, ES 15m, NQ 5m, NQ 15m
-- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED 6 vs Continuation OPEN (catalog minus `orb_*`; do not claim locked). On/off consumes stamped take-line / holy-grail candidate under that set.
+- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED 6 vs Continuation PLACEHOLDER (catalog minus `orb_*` — not operable OPEN; do not claim locked). On/off consumes stamped take-line / holy-grail candidate under that set.
 
 ---
 
@@ -64,7 +64,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 If missing → STOP, do not invent.
 - Stage 1 Freeze/admit: BOOK_SEAL, COST_MODEL, SESSION_LOCKS, ENTRY_SET, PROVISIONAL_BAND_PF_NOTE, MANIFEST
 - Stages 2–12 greens + confluence TAKE_LINE + HOLY_GRAIL_CANDIDATE + ALLOWLIST_USED + dual-lamp intact
-- Stage 13 GREEN: `checks/stage_13_confluence/GREEN.stamp`, TAKE_LINE_REVIEWED, DUAL_LAMP (`boost_search_open=false`)
+- Stage 13 GREEN: `checks/stage_13_confluence/GREEN.stamp`, TAKE_LINE_REVIEWED, DUAL_LAMP (`boost_search_closed=true` after Stage 13)
 - Cache pins: bars + POI + KEEP + boost + confluence hashes must match; mismatch → rebuild prior section
 - Entry-method set = STRATEGY INPUT checkbox (match Freeze); **strip orb_*; refuse doubles/pairs**
 - **Filter list:** only if David/other-session artifact present — else PARK; **DO NOT invent list**
@@ -101,7 +101,7 @@ If missing → STOP, do not invent.
 ---
 
 ### 4. Step-by-step (overseer path)
-1. Verify Stage 13 GREEN + dual-lamp `boost_search_open=false` + TAKE_LINE_REVIEWED; STOP if missing.
+1. Verify Stage 13 GREEN + dual-lamp `boost_search_closed=true` + TAKE_LINE_REVIEWED; STOP if missing.
 2. Read STRATEGY INPUT; strip orb_*; refuse doubles/pairs; Continuation stamped OPEN if selected.
 3. **Filter list gate:** look for David / other-session supplied list artifact.
    - **Absent → PARK path:** stamp `onoff/PARKED.json` with `ask_David_later=true`, `list_not_invented=true`, illustrative families noted as **non-authoritative examples only**; skip invent; go to step 10 park paint.

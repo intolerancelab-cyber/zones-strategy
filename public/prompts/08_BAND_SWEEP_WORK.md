@@ -6,8 +6,10 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
 **On/off filters:** binary no-line states; parked — ask David later.
+**NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level (not old wide map) → sweeps → **REMOVE DEADWOOD POIs** (only heavy lifters keep). Align DEC-063 / RESCORE-20. Prompt-dash admits cleaned POI set later — **do not invent keep/cut list**. Pending other session for cleaned set.
+**Band-find cross-cell (3-of-4 same POI×band)** ≠ **Stage-12 boost-count confluence (2/3/4 B×S)** — do not conflate.
 
 ---
 
@@ -34,7 +36,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 - **Goal:** Wide→narrow KEEP sweep of tailored entry/TP recipes on sweep-candidate bands only (≥~0.75 provisional); stamp keepers per fleet cell; unlock Stage 9 CHECK.
 - **Unlocks next:** Stage 9 CHECK
 - **Fleet cells:** ES 5m, ES 15m, NQ 5m, NQ 15m
-- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED (`close_back_inside`, `n_close_back_inside`, `wick_rejection_completed_bar`, `touch`, `close_confirm`, `pullback_to_level`) OR Continuation OPEN (catalog minus `orb_*`; do not claim locked).
+- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED (`close_back_inside`, `n_close_back_inside`, `wick_rejection_completed_bar`, `touch`, `close_confirm`, `pullback_to_level`) OR Continuation PLACEHOLDER (catalog minus `orb_*` — not operable OPEN; do not claim locked).
 
 ---
 
@@ -52,7 +54,7 @@ If missing → STOP, do not invent.
 - Stage 3 CHECK green
 - Stage 4 POI map hashes (value areas as POIs) + SILENT_ZERO_GATE
 - Stage 5 CHECK green
-- Stage 6 Band find: skip (<0.75), revival (~0.75), sweep candidates; DEAD_ZONE notes if present; SKIP_MAP + CANDIDATE_MAP
+- Stage 6 Band find: SKIP (<0.75 no normal sweep), REVIVAL (~0.75), keep lean >1.2, FAILED_REVIVAL/BELOW_KEEP; SKIP_MAP + REVIVAL_MAP + CROSS_CELL_3OF4
 - Stage 7 CHECK green
 - Cache pins: bars + POI map hashes must match; if mismatch → rebuild map section, do not silent continue
 - Entry-method set = current STRATEGY INPUT checkbox value (must match Freeze ENTRY_SET)
@@ -126,6 +128,7 @@ If missing → STOP, do not invent.
 
 ### 7. What NOT to do
 - Do not sweep doubles/pairs (DEFUNCT)
+- Do not invent deadwood POI keep/cut list (NEW BANDING cleaned set pending other session)
 - Do not include orb_* methods (ORB DEAD)
 - Do not lock 0.75/1.2 in stone
 - Do not claim Continuation set locked

@@ -24,10 +24,10 @@ Source: David voice notes to DASHBOARD OVERSEER. Build page + prompts only. No f
 2. Layer POIs per asset × TF.
 3. Value areas (daily / weekly / monthly) are POIs in that list — calculate them, then treat as POIs. Not a separate “value area stage” forever.
 4. Find bands: where baseline is helped vs hurt.
-5. Under PF ~0.75 in a band → SKIP zone (no sweep). At end, trades in skip zones are omitted. **OPEN:** confirm 0.75 = band PF.
-6. From ~0.75 up → sweep tailored TP / entry methods / etc for that location; keep recipes. Wide→narrow KEEP.
+5. Under PF ~0.75 in a band → SKIP (no *normal* sweep; revival is the exception at ~0.75). At end, trades in skip zones are omitted. **OPEN:** confirm 0.75 = band PF.
+6. At ~0.75 → REVIVAL class (one tailored sweep); keep lean PF > 1.2; after failed revival → FAILED_REVIVAL/BELOW_KEEP. Wide→narrow KEEP.
 7. Boost model: sweep **each boost alone** → mark table → scan confluences (2/3/4) across book. Holy grail = final table.
-8. Take rule notes (**OPEN — confirm with table**): B−S ≥ 2, B in 2..7; never B<2; never S≥3; leaning 2B alone or 3B+1S; confirm never 1B alone.
+8. Take path FOR NOW: draw-a-line take-table. B−S notes OPEN: B−S ≥ 2, B in 2..7; never B<2; never S≥3; lean 2B alone or 3B+1S; never 1B alone (Stage 13 WARN until David locks).
 9. On/off filters (no bands): ranging/trending, bad calendar days, half-days, low volume, later gamma etc. Prefer sweep near the end.
 10. Assemble + hold vs flat.
 11. Stress + luck — same late area, two questions: Stress = walk-forward / capacity / ugly regimes; Luck = Monte Carlo.

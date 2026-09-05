@@ -6,11 +6,11 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange next (Done) only when assault green.
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked) — disclose, do not forge locked.
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked) — disclose, do not forge locked.
 **Dual-lamp:** boost-alone sealed before confluence; holy grail = final table only.
 **On/off filters:** PARKED or APPLIED — do not invent list.
 **NEW BANDING:** do not invent deadwood POI keep/cut list.
-**Cross-cell band confluence ≠ boost-count confluence** — do not conflate.
+**Band-find cross-cell (3-of-4) ≠ Stage-12 boost-count confluence (2/3/4 B×S)** — do not conflate.
 **Scope:** WHOLE finished research book — separate from per-stage CHECKs. Same four roles; extra brief: legit? can it trade? real life?
 
 ---
@@ -38,7 +38,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 - **Goal:** Run whole-book multi-agent assault (mistake / legit / real-life / wrong) with extra brief: is the final result legit? can it trade (research-book sense)? would it work in real life? Stamp assault verdict; unlock Stage 21 Done only on PASS.
 - **Unlocks next:** Stage 21 Done (only if assault GREEN)
 - **Fleet cells:** ES 5m, ES 15m, NQ 5m, NQ 15m (whole-book view across all)
-- **STRATEGY INPUT:** Reversal LOCKED 6 vs Continuation OPEN (catalog minus `orb_*`; do not claim locked) — must match Freeze ENTRY_SET through the book.
+- **STRATEGY INPUT:** Reversal LOCKED 6 vs Continuation PLACEHOLDER (catalog minus `orb_*` — not operable OPEN; do not claim locked) — must match Freeze ENTRY_SET through the book; Done must ask David before any continuation lock.
 
 ---
 
@@ -46,7 +46,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 - **Done means:**
   - Four roles spawned in parallel on the **whole finished book** with full stamp chain.
   - Extra brief answered explicitly:
-    - **Legit?** hashes, stamps, holdout virgin for take, no ORB/doubles, provisional PF lines disclosed, dual-lamp integrity, both stress+luck tracks, no invented lists.
+    - **Legit?** hashes, stamps, holdout reserved — take not sealed, no ORB/doubles, provisional PF lines disclosed, dual-lamp integrity, both stress+luck tracks, no invented lists.
     - **Can it trade?** research-book sense: coherent runbook, costs, size note, skip zones omitted, entry set clear — **not** live permission.
     - **Real life?** Monday failure modes across the chain; compounding / high-% bank risk fit of banked champion.
   - Assault VERDICT stamped PASS (or FAIL with section pointer).
@@ -63,7 +63,7 @@ If missing → STOP / FAIL assault; do not invent.
 - **All prior CHECK greens:** Stages 3, 5, 7, 9, 11, 13, 15, 17, 19 GREEN.stamps
 - Stage 1 Freeze/admit full seal (cost/session; no ORB)
 - Full WORK chain stamps: baseline → POI → band find/sweep → boost-alone → confluence take-line → onoff posture → assemble book + hold/flat → stress+luck both tracks
-- Dual-lamp attestations through chain (`boost_search_open=false` after Stage 10/11)
+- Dual-lamp attestations through chain (`boost_search_closed=true` only after Stage 13; soft false before)
 - Holdout virgin attestation
 - Fleet strip completion evidence for every WORK stage
 - Checkpoint hooks if dual champions banked
@@ -105,7 +105,7 @@ If missing → STOP / FAIL assault; do not invent.
 6. Role 3 — Real-life trader: Monday runbook coherence; slippage/capacity/ES+NQ overlap; compounding fit; on/off live-proxy WARN if parked/undefined; “can it trade?” in research-book sense only.
 7. Role 4 — Claim refuter: attack “holy grail locked,” “live ready,” “filters David-locked” (if invented), “stress skipped,” “done already,” etc.; demand disconfirming evidence.
 8. Apply shared verdict protocol: FAIL → point to **specific section** to loop; PASS → stamp Stage 20 assault green.
-9. Paint assault progress honestly (book-level strip or four cell confirmations as dash design allows); no fake ticks.
+9. Paint assault progress honestly with **stacked fleet cells mandatory** (ES 5m, ES 15m, NQ 5m, NQ 15m — four stacked strips / confirmations required; no dash-design escape hatch); no fake ticks.
 10. Write FINAL_ASSAULT artifacts; unlock Stage 21 Done **only** on PASS (do not auto-stamp Done here).
 
 ---
@@ -140,7 +140,7 @@ If missing → STOP / FAIL assault; do not invent.
 - Do not edit factory code from this room
 - Do not revive ORB or doubles
 - Do not shard the assault verdict
-- Do not conflate cross-cell band confluence with boost-count confluence
+- Do not conflate Band-find cross-cell (3-of-4) with Stage-12 boost-count confluence (2/3/4 B×S)
 - Do not claim Stress or Luck optional
 
 ---
@@ -176,7 +176,7 @@ If missing → STOP / FAIL assault; do not invent.
 
 ## Extra brief for all four roles (paste)
 - Can it trade? (research-book sense: coherent runbook, costs, size, skip zones omitted, entry set clear)
-- Is the final result legit? (hashes, stamps, holdout virgin for take, no ORB/doubles, provisional PF lines disclosed)
+- Is the final result legit? (hashes, stamps, holdout reserved — take not sealed, no ORB/doubles, provisional PF lines disclosed)
 - Compounding / high-% bank risk fit of the banked champion
 - Dual-lamp integrity: boost-alone sealed before confluence; holy grail = final table only
 

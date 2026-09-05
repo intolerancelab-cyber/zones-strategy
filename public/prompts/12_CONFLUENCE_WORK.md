@@ -1,4 +1,4 @@
-# Stage 12 — Confluence table WORK handbook (5 Sep 2026)
+# Stage 12 — Stage-12 boost-count confluence (2/3/4 B×S) WORK handbook (5 Sep 2026)
 
 Owner: DASHBOARD OVERSEER. Paper only. No factory code edits.
 Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLATE.md, DAVID_NOTES_2026-09-05_TALKBOX_TAKE.md.
@@ -6,11 +6,11 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
-**Dual-lamp:** boost-alone sealed (Stage 10+11); this stage fills confluence on **allowlisted squares only**. Confluence does **not** re-open boost search.
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Dual-lamp:** Stage 10+11 allowlist sealed; this stage fills **Stage-12 boost-count confluence (2/3/4 B×S)** on **allowlisted squares only**. Does **not** re-open boost-family search. `boost_search_closed` + “table ready for take” seal only after Stage 13 CHECK — not here.
 **On/off filters:** binary no-line states; parked — ask David later.
 **NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level (not old wide map) → sweeps → **REMOVE DEADWOOD POIs** (only heavy lifters keep). Align DEC-063 / RESCORE-20. Prompt-dash admits cleaned POI set later — **do not invent keep/cut list**.
-**Cross-cell band confluence (David lock — Band-find labeling, NOT Stage 12):** If a POI×band (e.g. BEFORE) is strongly positive but thin n (~50) on one cell, look at the **SAME POI×SAME band** on the other fleet cells (ES/NQ × 5m/15m). If **≥3 of 4** show same-direction positive effect → BOOST candidate. If fewer than 3 agree → **do not boost from that thin cell alone**. Same idea for SKIP. This is **Band-find labeling confluence** — **SEPARATE** from later boost-count (2/3/4) confluence table. Aligns RESCORE-20 3-of-4 val cells same sign.
+**Band-find cross-cell (3-of-4 same POI×band)** — NOT Stage-12 boost-count confluence: If a POI×band (e.g. BEFORE) is strongly positive but thin n (~50) on one cell, look at the **SAME POI×SAME band** on the other fleet cells (ES/NQ × 5m/15m). If **≥3 of 4** show same-direction positive effect → **CROSS_CELL_BOOST_CANDIDATE**. If fewer than 3 agree → stamp **INSUFFICIENT** — **do not boost from that thin cell alone**. Same idea for SKIP. This is **Band-find cross-cell (3-of-4 same POI×band)** — **SEPARATE** from **Stage-12 boost-count confluence (2/3/4 B×S)**. Aligns RESCORE-20 3-of-4 val cells same sign.
 
 ---
 
@@ -20,7 +20,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 |----------------------------|--------------------------------|
 | Bar load | Freezes / admit seals |
 | Prior maps / sweeps / boost-alone *(prior)* | Checks (all of them) |
-| **Confluence fill** ← this stage | Take / KEEP final decisions *(OPEN — draw line, do not lock)* |
+| **Stage-12 boost-count confluence fill** ← this stage | Take / KEEP final decisions *(OPEN — draw line, do not lock)* |
 | Assemble / Stress / MC *(later)* | Hold / grade alone |
 | | All-cell barrier wait (100% fleet) |
 | | Speedy lamp / emit-covered report steps |
@@ -29,17 +29,17 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 | | Inventing deadwood POI keep/cut list |
 | | Re-litigating Band-find 3-of-4 labeling confluence |
 
-**Hard rule:** Confluence fill **is** MUST-SHARD. Wait 100% across all fleet cells before Stage 13 CHECK unlock. Do not shard the barrier wait, the CHECK, or the final take/holy-grail decision. Allowlist only — no boost re-search.
+**Hard rule:** Stage-12 boost-count confluence fill **is** MUST-SHARD. Wait 100% across all fleet cells before Stage 13 CHECK unlock. Do not shard the barrier wait, the CHECK, or the final take/holy-grail decision. Allowlist only — no boost re-search.
 
 ---
 
 ### 0. Header
-- **Stage # / name:** 12 — Confluence table (2/3/4 on allowlisted squares)
+- **Stage # / name:** 12 — Stage-12 boost-count confluence (2/3/4 B×S on allowlisted squares)
 - **Kind:** WORK
 - **Goal:** On Stage 11–sealed allowlisted B×S squares only, fill **boost-count** confluence 2/3/4 (SEPARATE from Band-find cross-cell labeling confluence / 3-of-4); **FOR NOW** draw David take-table line (take / don’t-take across B×S) using **best boost recipe for that square’s boost count**; cheap combo pass over shapes (2B0S, 3B0S/1S, 4B…, 5B×skips) **without new heavy sweeps**; unlock Stage 13 CHECK.
 - **Unlocks next:** Stage 13 CHECK
 - **Fleet cells:** ES 5m, ES 15m, NQ 5m, NQ 15m
-- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED 6 vs Continuation OPEN (catalog minus `orb_*`; do not claim locked). Confluence consumes stamped allowlist + best recipes under that set.
+- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED 6 vs Continuation PLACEHOLDER (catalog minus `orb_*` — not operable OPEN; do not claim locked). Confluence consumes stamped allowlist + best recipes under that set.
 
 ---
 
@@ -51,7 +51,8 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
     - 2B 0S
     - 3B 0S / 3B 1S
     - 4B 0S / 4B 1S
-    - 5B 0S / 5B 1S / 5B 2S / 5B 3S
+    - 5B 0S / 5B 1S / 5B 2S
+    - **5B 3S → PROBE_ONLY** (tag explicitly; never-S≥3 is stated as geometry notes — do not promote 5B3S as keep/geometry until David locks)
     - (and neighbours already on allowlist)
   - If overall weak → knock off / tighten (e.g. only 4B1S) **without** new heavy sweeps.
   - Dual-champion talk-box if real fork; **checkpoint hook** banks unused champion for later resume.
@@ -63,7 +64,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
   - Deadwood POI keep/cut list (admit cleaned set later — do not invent).
   - On/off filters, assemble, stress/luck.
   - Lock of 0.75 / 1.0 / 1.2.
-  - Holdout take using last ~20% as research fuel (holdout stays virgin for take seal).
+  - Holdout used as research fuel (holdout reserved — take not sealed by this stage).
 
 ---
 
@@ -71,8 +72,8 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 If missing → STOP, do not invent.
 - Stage 1 Freeze/admit: BOOK_SEAL, COST_MODEL, SESSION_LOCKS, ENTRY_SET, PROVISIONAL_BAND_PF_NOTE, MANIFEST
 - Stages 2–9 greens + band_sweep KEEP_RECIPES + SKIP_OMISSION_PROOF + TP_POLICY
-- Stage 10: BXS_TABLE, BEST_RECIPE_BY_B, CELL alone scores, MANIFEST (`boost_search_open=false`), PROVISIONAL_BOOST_LINES, TAKE_NOTES_OPEN
-- Stage 11 GREEN + `checks/stage_11_boost_alone/ALLOWLIST_SEALED.json` + `DUAL_LAMP.json` (confluence_unlock=true; boost_search_open=false)
+- Stage 10: BXS_TABLE (candidate occupancy; multi_B_proven=false), BEST_RECIPE_BY_B, CELL alone scores, MANIFEST (`boost_search_closed=false`; `table_ready_for_take=false`), PROVISIONAL_BOOST_LINES, TAKE_NOTES_OPEN
+- Stage 11 GREEN + `checks/stage_11_boost_alone/ALLOWLIST_SEALED.json` + `DUAL_LAMP.json` (stage12_unlock=true; boost_search_closed=false)
 - Cache pins: bars + POI + KEEP + boost-alone hashes must match; mismatch → rebuild prior section
 - Entry-method set = STRATEGY INPUT checkbox (match Freeze); **strip orb_*; refuse doubles/pairs**
 - **Banding / POI posture:** NEW BANDING (tighter near-level) expected upstream; deadwood POI removal is a later admit of cleaned set — **do not invent keep/cut list** in this stage
@@ -107,18 +108,18 @@ If missing → STOP, do not invent.
 ---
 
 ### 4. Step-by-step (overseer path)
-1. Verify Stage 11 GREEN + ALLOWLIST_SEALED + DUAL_LAMP; STOP if boost_search_open≠false or allowlist missing.
+1. Verify Stage 11 GREEN + ALLOWLIST_SEALED + DUAL_LAMP; STOP if allowlist missing or stage12_unlock≠true.
 2. Read STRATEGY INPUT; strip orb_*; refuse doubles/pairs; Continuation stamped OPEN if selected.
 3. Load BEST_RECIPE_BY_B — confluence take-line uses **best recipe for that boost count**, not amalgamation (amalgamation = OPEN later).
 4. One-cell smoke: confluence k=2 on one allowlisted square; cost-applied PF; workers_used honesty; hash pin.
 5. Identity check: n_workers=1 hash == n_workers=k on same tiny set.
-6. Fan out fleet; enqueue **only** allowlisted squares × confluence 2/3/4 × cheap combo shapes (2B0S, 3B0S/1S, 4B0S/1S, 5B×skips neighbours on allowlist).
+6. Fan out fleet; enqueue **only** allowlisted squares × boost-count confluence 2/3/4 × cheap combo shapes (2B0S, 3B0S/1S, 4B0S/1S, 5B0S/1S/2S; **5B3S = PROBE_ONLY** if present).
 7. **Draw take / don’t-take line** across B×S from results (FOR NOW David path); stamp line + reasons; if weak → tighten (e.g. drop to 4B1S only) **without** new heavy sweeps.
 8. Flag dependence / correlation smells across boosts for Stage 13 (do not silently merge same underlying signal as 3 “boosts”).
 9. **Talk-box** only if dual champions (real fork under compounding lens); **checkpoint hook:** stamp fork + bank unused champion for later resume (hooks only — no fork UX).
-10. Holdout last ~20% untouched for take seal (not fuel for confluence fill).
+10. Holdout last ~20% reserved — take not sealed by this stage (not fuel for boost-count confluence fill).
 11. Paint strips 10%…100%; heartbeat under stack.
-12. Write confluence table + take-line + cheap-combo results + dual-lamp integrity + checkpoint hooks; barrier → unlock Stage 13 CHECK (do not auto-pass; do not claim holy-grail locked).
+12. Write Stage-12 boost-count confluence table + **draw-a-line take-table FOR NOW** + cheap-combo results (5B3S PROBE_ONLY) + dual-lamp soft integrity (`boost_search_closed` still pending Stage 13) + checkpoint hooks; barrier → unlock Stage 13 CHECK (do not auto-pass; do not claim holy-grail locked or table-ready sealed).
 
 ---
 
@@ -127,14 +128,14 @@ If missing → STOP, do not invent.
 - Heartbeat every N seconds; stuck if no chunk advance or worker death
 - Silent Zero / fake tick / percent paint without jobs → fail this section
 - Orange Stage 13 CHECK locked until every strip 100% green
-- Boost-alone search UI stays sealed (dual-lamp — do not reopen)
+- Boost-family search UI stays paused (dual-lamp — do not reopen; closed seal waits for Stage 13)
 
 ---
 
 ### 6. Success stamps
 - `confluence/CELL/{cell}.json` — confluence 2/3/4 results on allowlisted squares; n, PF (cost-applied), recipe refs (best-by-B), workers_used, hashes
 - `confluence/TAKE_LINE.json` — take / don’t-take across B×S (FOR NOW); shapes kept/knocked; best-recipe-by-B policy stamped; amalgamation_policy=`OPEN_LATER`
-- `confluence/CHEAP_COMBO_PASS.json` — shapes tried (2B0S, 3B0S/1S, 4B…, 5B×skips…); no_new_heavy_sweeps=true
+- `confluence/CHEAP_COMBO_PASS.json` — shapes tried (2B0S, 3B0S/1S, 4B…, 5B0S/1S/2S…); **5B3S tagged PROBE_ONLY** if present; no_new_heavy_sweeps=true
 - `confluence/HOLY_GRAIL_CANDIDATE.json` — final-table **candidate** for Stage 13 grill (not locked take)
 - `confluence/ALLOWLIST_USED.json` — exact Stage 11 seal hash + square ids used (prove no extras)
 - `confluence/MANIFEST.json` — entry_set_id, lock_state, dual_lamp integrity, no_ORB / no_doubles, workers_used, hashes, NEW_BANDING note + deadwood_poi_list=`NOT_INVENTED`
@@ -162,7 +163,9 @@ If missing → STOP, do not invent.
 - Do not edit factory code from this room
 - Do not contaminate holdout
 - Do not unlock CHECK until all strips green
-- Do not take 1B alone / S≥3 / B<2 as locked (notes only until Stage 13 grill)
+- Do not take 1B alone / S≥3 / B<2 as locked (notes only; Stage 13 treats never-1B as WARN until David locks)
+- Do not promote 5B3S beyond PROBE_ONLY while never-S≥3 geometry notes stand
+- Do not stamp boost_search_closed or “table ready for take” in this stage (Stage 13 CHECK seals)
 
 ---
 

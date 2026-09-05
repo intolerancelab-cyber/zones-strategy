@@ -22,8 +22,8 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip &lt;0.75; revival at ~0.75; boost lines 1.0|1.2 (not locked — report both, do not invent a lock).
-- Cost model present before any PF talk. Holdout last ~20% untouched for take decisions only.
+- Band PF provisional: skip &lt;0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock).
+- Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
 - Output: PASS / FAIL with tables: claimed vs recomputed, per cell.
 
 ### Role 3 — Real-life trader lens
@@ -61,7 +61,7 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 
 **Agents must know:**
 - Cost/session locks from Freeze (stage 1) stamped; no ORB in intake.
-- Entry-method set from STRATEGY INPUT checkbox (Reversal LOCKED 6; Continuation OPEN minus orb_*).
+- Entry-method set from STRATEGY INPUT checkbox (Reversal LOCKED 6; Continuation PLACEHOLDER minus orb_* (not operable OPEN)).
 - Baseline is alone — no POI/boost yet.
 
 **Cheap kills specific:**
@@ -101,16 +101,18 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 ---
 
 ### Stage 6→7 — Check (after Band find WORK)
-**Prior WORK context:** Stage 6 found bands where baseline helped vs hurt. Under ~0.75 → SKIP (no sweep). ≥~0.75 → sweep candidate / revival path. Band PF figures PROVISIONAL (not locked).
+**Prior WORK context:** Stage 6 found bands where baseline helped vs hurt under the coherent ladder: <0.75 → SKIP (no *normal* sweep); ~0.75 → REVIVAL; keep lean PF > 1.2; post-failed-revival → FAILED_REVIVAL / BELOW_KEEP. **Band-find cross-cell (3-of-4)** stamps CROSS_CELL_BOOST_CANDIDATE / INSUFFICIENT required. NEW BANDING / deadwood-not-invented. Band PF figures PROVISIONAL (not locked).
 
 **Agents must know:**
-- instant_skip_below = 0.75 provisional; revival at ~0.75; boost lines 1.0|1.2 both reported, owner picks before check read.
-- Between 0.75 and chosen boost line = DEAD_ZONE (not in table) — provisional story.
+- instant_skip_below = 0.75 provisional; revival at ~0.75; keep lean PF > 1.2 (grill at launch); 1.0 = sensitivity / fork-hook only — owner fork hook before check read if a real choice exists.
+- Between 0.75 and keep lean (PF > 1.2) after failed revival = FAILED_REVIVAL or BELOW_KEEP (not table / not keep) — provisional story. Do **not** dual-label SWEEP_CANDIDATE + DEAD_ZONE.
 - DEC-063 zone-first banding notes exist; do not invent bin count locks.
 
 **Cheap kills specific:**
-- Sweeping a &lt;0.75 skip band
-- Locking 0.75/1.2 in stamps as final without David grill
+- *Normal* sweeping a <0.75 skip band (revival exception only at ~0.75)
+- Locking 0.75/1.2 as final; treating 1.0 as equal keep pick vs lean >1.2
+- Missing CROSS_CELL_3OF4 / thin-n BOOST without 3-of-4 / naked “BOOST candidate”
+- Dual-label SWEEP_CANDIDATE + DEAD_ZONE
 - Band vs ATR/tick smell ignored
 - Skip/KEEP labels swapped across cells
 
@@ -134,7 +136,7 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 - Doubles/pairs arms present
 - Narrow KEEP without wide evidence
 - Holdout contaminated during sweep
-- Continuation set claimed LOCKED (it is OPEN)
+- Continuation set claimed LOCKED or operable OPEN (it is PLACEHOLDER)
 
 **Real-life failure modes:**
 - Overfit entry/TP to one year; fails walk-forward later
@@ -165,8 +167,8 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 
 ---
 
-### Stage 13 — Check (after Confluence table WORK) — take rule / holy-grail + dependence
-**Prior WORK context:** Stage 12 confluence 2/3/4 on allowlisted squares only. Holy grail = final table. Dependence / correlation across boosts must be challenged.
+### Stage 13 — Check (after Stage-12 boost-count confluence WORK) — draw-a-line take-table FOR NOW / holy-grail + dependence
+**Prior WORK context:** Stage 12 Stage-12 boost-count confluence (2/3/4 B×S) on allowlisted squares only. **Operating take path = draw-a-line take-table FOR NOW** (best recipe by B) — not old B−S take-notes as the locked rule. 5B3S = PROBE_ONLY. Holy grail = final table candidate. Dependence / correlation across boosts must be challenged. never-1B = WARN not FAIL until David locks.
 
 **Agents must know:**
 - Allowlist only; no re-open of boost search.
@@ -175,7 +177,7 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 
 **Cheap kills specific:**
 - Non-allowlisted squares in holy-grail
-- 1B alone taken
+- 1B alone on take-line → WARN (not FAIL) until David locks never-1B
 - S≥3 or B&lt;2 taken
 - Dependence ignored (same underlying signal counted as 3 “boosts”)
 - Holdout used during confluence fill
@@ -272,14 +274,14 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 
 ### Extra brief for all four roles
 - Can it trade? (research-book sense: coherent runbook, costs, size, skip zones omitted, entry set clear)
-- Is the final result legit? (hashes, stamps, holdout virgin for take, no ORB/doubles, provisional PF lines disclosed)
+- Is the final result legit? (hashes, stamps, holdout reserved — take not sealed, no ORB/doubles, provisional PF lines disclosed)
 - Compounding / high-% bank risk fit of the banked champion
-- Dual-lamp integrity: boost-alone sealed before confluence; holy grail = final table only
+- Dual-lamp integrity: boost_search_closed after Stage 13; Stage-12 allowlist-only; holy grail = final table only; draw-a-line take-table FOR NOW
 
 ### Final assault cheap kills
 - Any stage stamp missing or forged percent paint
 - Boost search reopened after confluence
-- Skip &lt;0.75 zones still trading
+- SKIP <0.75 zones still trading (no normal sweep; revival exception only at ~0.75)
 - Continuation set silently locked
 - Fork UX invented (hooks only)
 - Factory code edited from this room
@@ -296,5 +298,6 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 - Talk-before-check only for real choices (champions, OPEN David items).
 
 
-## Cross-cell band confluence (David 5 Sep)
-Thin one-cell band (~50 n) → BOOST only if ≥3/4 cells same-sign on that POI×band. Separate from boost-count confluence table.
+## Band-find cross-cell (3-of-4 same POI×band) (David 5 Sep)
+Thin one-cell band (~50 n) → **CROSS_CELL_BOOST_CANDIDATE** only if ≥3/4 cells same-sign on that POI×band; else **INSUFFICIENT**. Separate from **Stage-12 boost-count confluence (2/3/4 B×S)**.
+Must appear in Stage 6 WORK steps + required stamps + NOT-to-do, and Stage 7 cheap kills — not appendix-only.

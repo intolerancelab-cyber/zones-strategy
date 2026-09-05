@@ -24,7 +24,11 @@
 - Fail to same WORK section only; linear; no skip.
 - ORB = DEAD, doubles/pairs = DEFUNCT.
 - Reversal LOCKED 6; Continuation OPEN (wait David).
-- Boost lean: keep if PF > 1.2 (1.0 sensitivity only).
+- Keep lean: PF > 1.2 (1.0 sensitivity / fork-hook only — not equal pick).
+- PF ladder: <0.75 SKIP (no normal sweep); ~0.75 REVIVAL; FAILED_REVIVAL/BELOW_KEEP after failed revival.
+- Band-find cross-cell (3-of-4) ≠ Stage-12 boost-count confluence (2/3/4 B×S).
+- Continuation = PLACEHOLDER (not operable OPEN).
+- Take path = draw-a-line take-table FOR NOW; never-1B WARN until David locks.
 - Do not invent POI keep/cut lists, banding bin counts, or final table numbers.
 - STRATEGY INPUT placeholders pending; core chord stays.
 - Champion fork = hooks only.
@@ -53,3 +57,9 @@ npm run build must succeed before push.
 - Pushing to GitHub (parent pushes)
 - Live factory/engine code changes
 - Deleting ORB code elsewhere
+
+### Honesty / demo labels (5 Sep honesty pass)
+- Splash + fixed bar: **DEMO ONLY / DEMO — NOT LIVE** (non-dismissible).
+- Button **Simulate (demo)** = local setInterval strips — not factory stamps / overnight HB.
+- Placeholders: banding **PARKED**, POI **OPEN — DANGEROUSLY SILENT**, tables **OPEN**.
+- Paper seal ≠ live_permission. See docs/MONDAY_OPERATOR_RUNBOOK.md and docs/REAL_LIFE_ATTACK_FOLDOUT_2026-09-05.md.

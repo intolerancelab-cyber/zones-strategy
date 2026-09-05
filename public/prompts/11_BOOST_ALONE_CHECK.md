@@ -8,13 +8,13 @@ Source locks: CHECK_ASSAULT_OUTLINE.md, CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOF
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m).
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
-**Dual-lamp:** this CHECK gates confluence unlock; confluence must not re-open boost search.
-**Continuation:** OPEN (catalog minus orb_*).
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Dual-lamp:** this CHECK gates Stage-12 boost-count confluence unlock; Stage 12 must not re-open boost-family search. Still do **not** seal `boost_search_closed` or “table ready for take” — that waits for Stage 12 / Stage 13 CHECK.
+**Continuation:** PLACEHOLDER (catalog minus orb_* — not operable OPEN; wait David before lock).
 **Multi-agent:** every check (this one included).
 **Compounding champion:** high-% bank risk fit, not vanity PF.
 **NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level (not old wide map) → sweeps → **REMOVE DEADWOOD POIs** (only heavy lifters keep). Align DEC-063 / RESCORE-20. Prompt-dash admits cleaned POI set later — **do not invent keep/cut list**.
-**Cross-cell band confluence (David lock — Band-find labeling, NOT Stage 12):** If a POI×band (e.g. BEFORE) is strongly positive but thin n (~50) on one cell, look at the **SAME POI×SAME band** on the other fleet cells (ES/NQ × 5m/15m). If **≥3 of 4** show same-direction positive effect → BOOST candidate. If fewer than 3 agree → **do not boost from that thin cell alone**. Same idea for SKIP. This is **Band-find labeling confluence** — **SEPARATE** from later boost-count (2/3/4) confluence table. Aligns RESCORE-20 3-of-4 val cells same sign.
+**Band-find cross-cell (3-of-4 same POI×band)** — NOT Stage-12 boost-count confluence: If a POI×band (e.g. BEFORE) is strongly positive but thin n (~50) on one cell, look at the **SAME POI×SAME band** on the other fleet cells (ES/NQ × 5m/15m). If **≥3 of 4** show same-direction positive effect → **CROSS_CELL_BOOST_CANDIDATE**. If fewer than 3 agree → stamp **INSUFFICIENT** — **do not boost from that thin cell alone**. Same idea for SKIP. This is **Band-find cross-cell (3-of-4 same POI×band)** — **SEPARATE** from **Stage-12 boost-count confluence (2/3/4 B×S)**. Aligns RESCORE-20 3-of-4 val cells same sign.
 
 ---
 
@@ -37,7 +37,7 @@ If any missing → FAIL (mistake hunter); do not invent.
 - Stages 2–9: baseline, Stage 3 GREEN, poi_map, Stage 5 GREEN, band_find SKIP_MAP+CANDIDATE_MAP, Stage 7 GREEN, band_sweep KEEP_RECIPES+SKIP_OMISSION_PROOF+TP_POLICY, Stage 9 GREEN
 - Stage 10: `boost_alone/CELL/{ES_5m,ES_15m,NQ_5m,NQ_15m}.json`, `boost_alone/BXS_TABLE/{cell}.json`, `boost_alone/BXS_TABLE/BOOK.json`, `boost_alone/BEST_RECIPE_BY_B/{cell}.json`, `boost_alone/ALLOWLIST_CANDIDATES.json`, `boost_alone/MANIFEST.json`, `boost_alone/SMOKE_IDENTITY.json`, `boost_alone/PROVISIONAL_BOOST_LINES.json`, `boost_alone/TAKE_NOTES_OPEN.json`
 - Strip paint evidence: all four cells 100% green before this CHECK was clickable
-- Attestation required: confluence job count = 0 during Stage 10; `boost_search_open=false` after mark
+- Attestation required: Stage-12 job count = 0 during Stage 10; `boost_search_closed=false`; `table_ready_for_take=false`; multi_B_proven=false from alone-path
 
 ---
 
@@ -55,8 +55,8 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip <0.75; revival at ~0.75; boost lines 1.0|1.2 (not locked — report both, do not invent a lock).
-- Cost model present before any PF talk. Holdout last ~20% untouched for take decisions only.
+- Band PF provisional: skip <0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock).
+- Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
 - **Stage 11 add — cost shock:** recompute PF under Freeze COST_MODEL with an adverse cost bump (shock); any square that only clears keep lines under fantasy/zero cost → FAIL or demote from allowlist. Tables: claimed PF vs cost-shocked PF per cell × boost family.
 - **Stage 11 add — trade-count floor:** enforce floor on n before allowlist; thin-n squares must not enter confluence allowlist. Tables: n vs floor per square; workers_used honesty; smoke identity match.
 - **Take-table sanity (pro quant KEEP from handoff — if stamps in hand):** one-cell smoke done; count/PF floors early; cost before PF; RTH vs overnight sample; ES+NQ overlap note; multiplicity control; cache reuse; holdout virgin. Do not invent floors David did not stamp — report missing as FAIL/OPEN.
@@ -83,7 +83,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 1. Any FAIL from roles 1–2 → CHECK fail → loop same WORK section (Stage 10; Stage 8 if KEEP identity broken); do not advance; do **not** unlock confluence.
 2. WARN from role 3 → talk box only if a real choice exists (e.g. boost keep line 1.0 vs 1.2; dual boost-family champion types under compounding lens); else stamp WARN and proceed only if David/overseer accepts.
 3. Role 4 REFUTED items that are fixable → same-section loop; if OPEN with David (take rule, 1.0|1.2 final) → park, do not invent.
-4. All four PASS (or WARN accepted) → stamp CHECK green; **seal allowlist** (post shock+floor); unlock Stage 12 Confluence WORK; attest `boost_search_open=false` and confluence may start on allowlisted squares only.
+4. All four PASS (or WARN accepted) → stamp CHECK green; **seal allowlist** (post shock+floor); unlock Stage 12 Stage-12 boost-count confluence WORK; attest allowlist-only path; `boost_search_closed` remains false until Stage 13; Stage 12 may start on allowlisted squares only.
 
 ---
 
@@ -138,13 +138,13 @@ Apply if stamps present; otherwise flag OPEN — do not invent numbers:
 
 ## Success stamp (CHECK green)
 - `checks/stage_11_boost_alone/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths, cost-shock tables, trade-count floor tables, talk-box outcome if any
-- `checks/stage_11_boost_alone/GREEN.stamp` — unlocks Stage 12 Confluence WORK
+- `checks/stage_11_boost_alone/GREEN.stamp` — unlocks Stage 12 Stage-12 boost-count confluence WORK
 - `checks/stage_11_boost_alone/ALLOWLIST_SEALED.json` — post shock+floor allowlisted B×S squares only
-- `checks/stage_11_boost_alone/DUAL_LAMP.json` — boost_search_open=false; confluence_unlock=true on allowlist only
-- Attestations: no ORB, no doubles, fleet 4 cells, cost shock applied, trade-count floor enforced, confluence not started during Stage 10, provisional 1.0|1.2 disclosed, take notes still OPEN, holdout virgin, Continuation still OPEN
+- `checks/stage_11_boost_alone/DUAL_LAMP.json` — boost_search_closed=false (soft); stage12_unlock=true on allowlist only; table_ready_for_take=false
+- Attestations: no ORB, no doubles, fleet 4 cells, cost shock applied, trade-count floor enforced, confluence not started during Stage 10, provisional 1.0|1.2 disclosed, take notes still OPEN, holdout virgin, Continuation still PLACEHOLDER
 
 ---
 
 ## Fail loop
 - FAIL → return to **Stage 10** (`10_BOOST_ALONE_WORK.md`) only; if KEEP recipes / skip maps broken → Stage 8 or Stage 6 only; preserve earlier greens otherwise.
-- Do not skip to Confluence. Do not re-open boost search as a “fix.” Do not invent take locks to force PASS.
+- Do not skip to Stage-12 boost-count confluence. Do not re-open boost-family search as a “fix.” Do not invent take locks or seal table-ready-for-take to force PASS.

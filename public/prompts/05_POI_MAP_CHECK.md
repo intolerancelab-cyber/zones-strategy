@@ -8,8 +8,8 @@ Source locks: CHECK_ASSAULT_OUTLINE.md, CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOF
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m).
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
-**Continuation:** OPEN (catalog minus orb_*).
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Continuation:** PLACEHOLDER (catalog minus orb_* — not operable OPEN; wait David before lock).
 **Multi-agent:** every check (this one included).
 
 ---
@@ -49,8 +49,8 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF (if any map-adjacent stats claimed), n levels/POIs, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip <0.75; revival at ~0.75; boost lines 1.0|1.2 (not locked — report both, do not invent a lock). *POI map is pre-band; confirm provisional note not forged as final and not used to skip/sweep here.*
-- Cost model present from Freeze. Holdout last ~20% untouched for take decisions only.
+- Band PF provisional: skip <0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock). *POI map is pre-band; confirm provisional note not forged as final and not used to skip/sweep here.*
+- Cost model present from Freeze. Holdout last ~20% reserved — take not sealed by this stage.
 - **Stage 5 add:** per-cell non-empty proof vs SILENT_ZERO_GATE; bar_hash ↔ poi_map_hash consistency; D/W/M value-area POI counts present; no inflated workers_used on tiny smoke.
 - Output: PASS / FAIL with tables: claimed vs recomputed, per cell.
 
@@ -115,7 +115,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ## Success stamp (CHECK green)
 - `checks/stage_05_poi_map/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths
 - `checks/stage_05_poi_map/GREEN.stamp` — unlocks Stage 6 Band find WORK
-- Attestations: no ORB, no doubles, fleet 4 cells, Silent Zero gate passed, VA=POIs D/W/M, poi_list_state disclosed, holdout virgin, Continuation still OPEN
+- Attestations: no ORB, no doubles, fleet 4 cells, Silent Zero gate passed, VA=POIs D/W/M, poi_list_state disclosed, holdout virgin, Continuation still PLACEHOLDER
 
 ---
 

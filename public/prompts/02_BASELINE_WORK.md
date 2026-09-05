@@ -6,7 +6,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m). 10% progress strips per cell; orange CHECK only when all green.
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
 **On/off filters:** binary no-line states; parked — ask David later.
 
 ---
@@ -33,7 +33,7 @@ Source locks: CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOFF.md, WORK_HANDBOOK_TEMPLA
 - **Goal (one sentence):** Run baseline-alone per fleet cell (hash-first, cost-applied) to stamp n+PF floors and strip paint — expect mediocre PF (~0.9 / breakeven); unlock Stage 3 CHECK.
 - **Unlocks next:** Stage 3 CHECK
 - **Fleet cells:** ES 5m, ES 15m, NQ 5m, NQ 15m
-- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED (`close_back_inside`, `n_close_back_inside`, `wick_rejection_completed_bar`, `touch`, `close_confirm`, `pullback_to_level`) OR Continuation OPEN (catalog minus `orb_*`; do not claim locked).
+- **STRATEGY INPUT:** Checkbox selects entry set — Reversal LOCKED (`close_back_inside`, `n_close_back_inside`, `wick_rejection_completed_bar`, `touch`, `close_confirm`, `pullback_to_level`) OR Continuation PLACEHOLDER (catalog minus `orb_*` — not operable OPEN; do not claim locked).
 
 ---
 
@@ -126,7 +126,7 @@ If missing → STOP, do not invent.
 - No sharding identity decisions / CHECK / barrier wait
 - No inventing OPEN David locks (0.75/1.2, continuation set, take rule, on/off list, POI list)
 - No advancing without fleet 100%
-- No contaminating holdout (last ~20% for take only)
+- No contaminating holdout (last ~20% reserved — take not sealed by this stage)
 - No POI / band / boost / confluence in this stage
 - No talking baseline PF up as proven edge
 - No re-walking bars because a prompt word changed

@@ -8,20 +8,22 @@ Source locks: CHECK_ASSAULT_OUTLINE.md, CURRENT_STAGE_MAP.md, PROMPT_DASH_HANDOF
 **Product dead (never revive):** Doubles/pairs = DEFUNCT. ORB = DEAD.
 **Fleet:** ES + NQ × 5m + 15m only (no 1m).
 **Fork:** hooks only.
-**Band PF provisional:** skip <0.75; revival ~0.75; boost lines 1.0|1.2 (not locked).
-**Continuation:** OPEN (catalog minus orb_*).
+**NEW BANDING (David confirmed, branch `codex/rty-replay-parity-20260702`):** fewer/tighter bands near the level (not old wide map) → sweeps → **REMOVE DEADWOOD POIs** (only heavy lifters keep). Align DEC-063 / RESCORE-20. Prompt-dash admits cleaned POI set later — **do not invent keep/cut list**. Pending other session for cleaned set.
+**Band-find cross-cell (3-of-4 same POI×band)** ≠ **Stage-12 boost-count confluence (2/3/4 B×S)** — do not conflate.
+**Band PF provisional:** skip <0.75; revival ~0.75; keep lean PF > 1.2 (grill at launch; 1.0 = sensitivity / fork-hook only; not locked).
+**Continuation:** PLACEHOLDER (catalog minus orb_* — not operable OPEN; wait David before lock).
 **Multi-agent:** every check (this one included).
 
 ---
 
 ## Prior WORK context
-Stage 8 band sweep — **wide→narrow KEEP**; tailored entry/TP per location; entry set from Reversal/Continuation checkbox. TP today = original + fractions + ATR 1.2–5.0 (**structural TP DEC-061 research-only** — not production swap-in). Skip bands (<0.75) omitted.
+Stage 8 band sweep — **wide→narrow KEEP**; tailored entry/TP per location; entry set from Reversal/Continuation checkbox. TP today = original + fractions + ATR 1.2–5.0 (**structural TP DEC-061 research-only** — not production swap-in). SKIP bands (<0.75) omitted from *normal* sweep; REVIVAL (~0.75) arms only where REVIVAL_MAP marked; keep lean PF > 1.2.
 
 **Agents must know:**
 - Wide→narrow KEEP path; one-cell smoke before fleet.
 - Doubles/pairs DEFUNCT — must not appear in sweep arms.
 - ORB entry methods stripped.
-- Continuation set must **not** be claimed LOCKED.
+- Continuation is PLACEHOLDER — must **not** be claimed LOCKED or operable OPEN.
 - Holdout last ~20% untouched during sweep.
 
 ---
@@ -49,8 +51,8 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ### Role 2 — Number auditor
 **Question:** Are these numbers legit?
 - Reconcile counts, PF, n trades, workers_used honesty (`min(requested, item_count)`), hash pins vs one-core where claimed.
-- Band PF provisional: skip <0.75; revival at ~0.75; boost lines 1.0|1.2 (not locked — report both, do not invent a lock).
-- Cost model present before any PF talk. Holdout last ~20% untouched for take decisions only.
+- Band PF provisional: skip <0.75; revival at ~0.75; keep lean PF > 1.2 (grill at launch; report 1.0 as sensitivity / fork-hook only — do not invent a lock).
+- Cost model present before any PF talk. Holdout last ~20% reserved — take not sealed by this stage.
 - **Stage 9 add:** SKIP_OMISSION_PROOF vs Stage 6 SKIP_MAP — every skip id absent from KEEP_RECIPES; entry_set_id matches checkbox/Freeze; TP_POLICY tags research-only vs ATR deployable correctly; smoke identity matches; no inflated workers_used on tiny job count.
 - Output: PASS / FAIL with tables: claimed vs recomputed, per cell.
 
@@ -73,7 +75,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 
 ### Shared verdict protocol
 1. Any FAIL from roles 1–2 → CHECK fail → loop same WORK section (Stage 8; Stage 6 if skip/candidate identity broken); do not advance.
-2. WARN from role 3 → talk box only if a real choice exists (e.g. multiple KEEP recipe champion **types** under compounding lens); else stamp WARN and proceed only if David/overseer accepts.
+2. WARN from role 3 → talk box + champion checkpoint/bank only if a real choice exists (e.g. multiple KEEP recipe champion **types** under compounding lens); else stamp WARN and proceed only if David/overseer accepts.
 3. Role 4 REFUTED items that are fixable → same-section loop; if OPEN with David → park, do not invent.
 4. All four PASS (or WARN accepted) → stamp CHECK green; unlock Stage 10 Boost-alone WORK.
 
@@ -94,7 +96,7 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 - Doubles/pairs arms present
 - Narrow KEEP without wide evidence
 - Holdout contaminated during sweep
-- Continuation set claimed LOCKED (it is OPEN)
+- Continuation set claimed LOCKED or operable OPEN (it is PLACEHOLDER)
 
 ---
 
@@ -106,7 +108,8 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ---
 
 ## Talk-before-check (only if real choice)
-- If multiple KEEP champion **types** appear → talk box: compounding / high-% bank risk lens (not max PF vanity). Fork = hooks only (bank note; no fork UX).
+- If multiple KEEP champion **types** appear → **talk box + champion checkpoint**: compounding / high-% bank risk lens (not max PF vanity). **Bank unused champion** via checkpoint hook for later resume. Fork = hooks only (no fork UX).
+- Stamp `checks/stage_09_band_sweep/CHECKPOINT_HOOKS.json` when dual/multi KEEP types talked (fork stamp + banked unused champion id/path).
 - If single type or none → no forced talk; proceed to verdict.
 - Do **not** invent take locks, POI list, 0.75/1.2 final, or Continuation shortlist.
 - Structural TP remains research-only — not a talk to “promote” it to deployable without David.
@@ -114,9 +117,10 @@ Spawn **four agents in parallel**. Each gets: (a) stamped inputs above, (b) flee
 ---
 
 ## Success stamp (CHECK green)
-- `checks/stage_09_band_sweep/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths, talk-box outcome if any
+- `checks/stage_09_band_sweep/VERDICT.json` — roles 1–4 PASS/WARN/FAIL, evidence paths, talk-box / checkpoint outcome if any
+- `checks/stage_09_band_sweep/CHECKPOINT_HOOKS.json` — if multi KEEP champion types: fork stamp + banked unused champion (hooks only)
 - `checks/stage_09_band_sweep/GREEN.stamp` — unlocks Stage 10 Boost-alone WORK
-- Attestations: no ORB, no doubles, fleet 4 cells, skip bands omitted, wide→narrow evidenced, cost-before-PF, provisional PF not locked, Continuation still OPEN, structural TP research-only, holdout virgin
+- Attestations: no ORB, no doubles, fleet 4 cells, skip bands omitted, wide→narrow evidenced, cost-before-PF, provisional PF not locked, Continuation still PLACEHOLDER, structural TP research-only, holdout virgin
 
 ---
 

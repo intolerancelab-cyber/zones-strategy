@@ -21,7 +21,7 @@ Elsewhere: stamp and move; no chat for tiny stops.
 
 ## Entry sets / wide→narrow (status from dig — do not invent “code is perfect”)
 - Reversal LOCKED 6 from TABLE_SWEEP.
-- Continuation OPEN (catalog minus orb_*); David still chooses full vs short list.
+- Continuation PLACEHOLDER (catalog minus orb_* — not operable OPEN); David still chooses full vs short list.
 - Wide→narrow is **design-alive** (Stage 2 / AGENTS / David brief). Structural TP (VA opposite / swings) = RESEARCH_ONLY (DEC-061); ATR/rr = deployable lane.
 - Prompt-dash room does **not** claim live code health on laptop without a fresh verify — note as VERIFY LATER, not “all good.”
 
@@ -48,9 +48,9 @@ Yes (for now):
 - Tighter to level, fewer bands → sweeps → remove deadwood POIs (only heavy lifters keep).
 - Do not lock keep/cut list until that campaign finishes.
 
-## Cross-cell band confluence (Band find)
+## Band-find cross-cell (3-of-4 same POI×band)
 - Thin positive on one cell (e.g. before-band, n≈50) → check same POI×band on other asset×TFs.
-- ≥3 of 4 same-sign positive → BOOST candidate; else do not boost from thin alone.
+- ≥3 of 4 same-sign positive → **CROSS_CELL_BOOST_CANDIDATE**; else stamp **INSUFFICIENT** — do not boost from thin alone.
 - Same for SKIP agreement. Separate from later B×S confluence table.
 
 ## NEW BANDING / deadwood POIs (David confirmed 5 Sep)
