@@ -133,9 +133,37 @@ export type ScorecardRow = {
   shelf: ScorecardShelf;
 };
 
+/** Re-lamp / import overlap gate (Attack A11) — board-level strip. */
+export type RelampImportGate = {
+  /** Operator-entered import pack size n */
+  importN: string;
+  /** Operator-entered overlapping trade-id count */
+  overlapN: string;
+  /** Explicit "ids overlap verified" checkbox */
+  importVerified: boolean;
+  /**
+   * When true, Soft KEEP / Promote require re-lamp overlap gate.
+   * Operators must enable before importing CW+FR packs.
+   */
+  enforcePath: boolean;
+};
+
+/** Minimum overlap/n ratio when not using verified checkbox path. */
+export const RELAMP_OVERLAP_FLOOR = 0.8;
+
+export function emptyRelampImportGate(): RelampImportGate {
+  return {
+    importN: "",
+    overlapN: "",
+    importVerified: false,
+    enforcePath: false,
+  };
+}
+
 export type Stage2Scorecard = {
   holdoutCut: string;
   rows: ScorecardRow[];
+  relamp: RelampImportGate;
 };
 
 export function emptyScorecardRow(
@@ -155,6 +183,232 @@ export function emptyStage2Scorecard(): Stage2Scorecard {
   return {
     holdoutCut: DEFAULT_HOLDOUT_CUT,
     rows: [],
+    relamp: emptyRelampImportGate(),
+  };
+}
+
+/** Normalize operator lamp text for case-insensitive checks. */
+export function lampNorm(v: string | undefined | null): string {
+  return (v ?? "").trim().toUpperCase();
+}
+
+/** PASS/YES/TRUE/GREEN/OK style — not empty / FAIL / NO. */
+export function lampLooksPass(v: string | undefined | null): boolean {
+  const t = lampNorm(v);
+  if (!t) return false;
+  if (
+    t === "FAIL" ||
+    t === "NO" ||
+    t === "FALSE" ||
+    t === "RED" ||
+    t === "LOSE" ||
+    t.startsWith("FAIL") ||
+    t.startsWith("NO ") ||
+    t.includes(" FAIL")
+  ) {
+    return false;
+  }
+  return (
+    t === "PASS" ||
+    t === "YES" ||
+    t === "TRUE" ||
+    t === "GREEN" ||
+    t === "OK" ||
+    t.startsWith("PASS") ||
+    t.startsWith("YES") ||
+    t.startsWith("TRUE") ||
+    t.startsWith("GREEN") ||
+    t.startsWith("OK") ||
+    /\b(PASS|YES|TRUE|GREEN|OK)\b/.test(t)
+  );
+}
+
+function lampEmpty(v: string | undefined | null): boolean {
+  return lampNorm(v) === "";
+}
+
+function lampLooksFailOrEmpty(v: string | undefined | null): boolean {
+  const t = lampNorm(v);
+  if (!t) return true;
+  return (
+    t === "FAIL" ||
+    t === "NO" ||
+    t === "FALSE" ||
+    t === "RED" ||
+    t === "LOSE" ||
+    t.startsWith("FAIL")
+  );
+}
+
+function softHoleIndicatesYes(v: string | undefined | null): boolean {
+  const t = lampNorm(v);
+  if (!t) return false;
+  return (
+    t === "YES" ||
+    t === "SOFT" ||
+    t === "TRUE" ||
+    t === "SOFT_HOLE" ||
+    t.startsWith("YES") ||
+    t.startsWith("SOFT") ||
+    t.includes("SOFT_HOLE")
+  );
+}
+
+function softHoleOnlyStyle(v: string | undefined | null): boolean {
+  const t = lampNorm(v);
+  if (!t) return false;
+  return (
+    t.includes("ONLY") ||
+    t.includes("SOFT_HOLE_ONLY") ||
+    t.includes("HOLE_ONLY") ||
+    t.includes("SOLE")
+  );
+}
+
+export type PromoteGateResult = {
+  ok: boolean;
+  missing: string[];
+  warnings: string[];
+};
+
+/**
+ * Practical UI promote gate from operator-entered §4 column strings.
+ * Never auto-promotes — caller must still confirm Soft KEEP→Promote.
+ */
+export function evaluatePromoteGate(row: ScorecardRow): PromoteGateResult {
+  const v = row.values || {};
+  const missing: string[] = [];
+  const warnings: string[] = [];
+
+  if (!lampLooksPass(v.dual_vs_noTP)) {
+    missing.push("dual_vs_noTP (need PASS/YES/TRUE/GREEN/OK)");
+  }
+  if (!lampLooksPass(v.holdout_dual)) {
+    missing.push("holdout_dual (need PASS/YES/TRUE/GREEN/OK)");
+  }
+
+  const comm = lampNorm(v.commission_status);
+  if (
+    !comm ||
+    comm === "NA" ||
+    comm === "COMMISSION_NA" ||
+    comm === "N/A" ||
+    comm.startsWith("COMMISSION_NA")
+  ) {
+    missing.push("commission_status (present and ≠ COMMISSION_NA/NA)");
+  }
+
+  // ¬soft_hole_only_juice
+  if (softHoleOnlyStyle(v.soft_hole_2020)) {
+    missing.push("soft_hole_only_juice (soft_hole_2020 looks sole-juice / ONLY)");
+  } else if (
+    softHoleIndicatesYes(v.soft_hole_2020) &&
+    lampLooksFailOrEmpty(v.year_2016_dual) &&
+    lampLooksFailOrEmpty(v.year_2020_dR)
+  ) {
+    missing.push(
+      "soft_hole_only_juice (soft_hole YES/SOFT with year lamps empty/FAIL)",
+    );
+  }
+
+  // year_meat_ok — prefer year_2016_dual not empty FAIL
+  if (lampLooksFailOrEmpty(v.year_2016_dual)) {
+    missing.push("year_meat_ok (year_2016_dual empty/FAIL)");
+  }
+
+  // honesty PASS — pf_honest required; fantasy-only / honesty FAIL blocks
+  if (lampEmpty(v.pf_honest)) {
+    missing.push("honesty (pf_honest empty)");
+  }
+  const notes = lampNorm(v.notes);
+  const honestyBlob = `${lampNorm(v.pf_honest)} ${notes}`;
+  if (
+    honestyBlob.includes("FANTASY-ONLY") ||
+    honestyBlob.includes("FANTASY ONLY") ||
+    honestyBlob.includes("HONESTY FAIL") ||
+    honestyBlob.includes("HONESTY_FAIL") ||
+    (/\bFANTASY\b/.test(honestyBlob) && honestyBlob.includes("ONLY"))
+  ) {
+    missing.push("honesty PASS (fantasy-only / honesty FAIL in lamps/notes)");
+  }
+
+  // ¬ES_ONLY_if_policy_requires_NQ — block explicit ES_ONLY tags in notes/lamps
+  const esOnlyBlob = `${notes} ${lampNorm(v.dual_vs_noTP)} ${lampNorm(
+    v.soft_keep_or_promote,
+  )}`;
+  if (
+    esOnlyBlob.includes("ES_ONLY") ||
+    esOnlyBlob.includes("ES-ONLY") ||
+    /\bES ONLY\b/.test(esOnlyBlob)
+  ) {
+    missing.push("¬ES_ONLY_if_policy_requires_NQ (clear ES_ONLY tag or ASK DAVID)");
+  }
+
+  // adverse_slip_green — optional warn, not hard block
+  if (lampEmpty(v.adverse_slip_green)) {
+    warnings.push("adverse_slip_green empty (warn only)");
+  } else if (lampLooksFailOrEmpty(v.adverse_slip_green) && !lampLooksPass(v.adverse_slip_green)) {
+    warnings.push("adverse_slip_green not GREEN (warn only)");
+  }
+
+  return { ok: missing.length === 0, missing, warnings };
+}
+
+/** Soft KEEP with empty dual or honesty lamps needs confirm. */
+export function softKeepNeedsEmptyLampConfirm(row: ScorecardRow): boolean {
+  const v = row.values || {};
+  return lampEmpty(v.dual_vs_noTP) || lampEmpty(v.pf_honest);
+}
+
+export type RelampGateResult = {
+  ok: boolean;
+  reason: string;
+};
+
+/**
+ * Re-lamp import overlap gate: both n and overlap filled AND
+ * (overlap/n ≥ RELAMP_OVERLAP_FLOOR OR importVerified).
+ */
+export function evaluateRelampOverlapGate(
+  relamp: RelampImportGate | undefined | null,
+): RelampGateResult {
+  const g = relamp || emptyRelampImportGate();
+  const nStr = (g.importN ?? "").trim();
+  const oStr = (g.overlapN ?? "").trim();
+  if (!nStr || !oStr) {
+    return {
+      ok: false,
+      reason:
+        "Re-lamp gate: fill import n and overlap n (operators must verify before importing CW+FR packs — Attack A11)",
+    };
+  }
+  const n = Number(nStr);
+  const o = Number(oStr);
+  if (!Number.isFinite(n) || !Number.isFinite(o) || n <= 0) {
+    return {
+      ok: false,
+      reason: "Re-lamp gate: import n and overlap must be finite numbers with n > 0",
+    };
+  }
+  if (o < 0 || o > n) {
+    return {
+      ok: false,
+      reason: "Re-lamp gate: overlap must be in [0, n]",
+    };
+  }
+  const ratio = o / n;
+  if (ratio >= RELAMP_OVERLAP_FLOOR) {
+    return { ok: true, reason: `overlap/n=${ratio.toFixed(3)} ≥ ${RELAMP_OVERLAP_FLOOR}` };
+  }
+  if (g.importVerified) {
+    return {
+      ok: true,
+      reason: `verified checkbox with n=${n} overlap=${o} (ratio ${ratio.toFixed(3)} < ${RELAMP_OVERLAP_FLOOR})`,
+    };
+  }
+  return {
+    ok: false,
+    reason: `Re-lamp gate: overlap/n=${ratio.toFixed(3)} < ${RELAMP_OVERLAP_FLOOR} — raise overlap or check "ids overlap verified"`,
   };
 }
 
@@ -273,6 +527,10 @@ export function loadState(): DashState {
         holdoutCut:
           parsed.stage2Scorecard?.holdoutCut || base.stage2Scorecard.holdoutCut,
         rows: parsed.stage2Scorecard?.rows ?? base.stage2Scorecard.rows,
+        relamp: {
+          ...emptyRelampImportGate(),
+          ...(parsed.stage2Scorecard?.relamp || {}),
+        },
       },
     };
   } catch {

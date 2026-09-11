@@ -56,25 +56,37 @@ Spawn four agents in parallel. Each gets: (a) stamped inputs from prior WORK, (b
 
 ## Per-stage CHECK bullets
 
-### Stage 3 — Check (after Baseline alone WORK)
-**Prior WORK context:** Stage 2 ran baseline alone per fleet cell. Expect mediocre PF (~0.9 / breakeven) — that is normal; juice comes later. Champion talk only if multiple baseline champion types appear.
+### Stage 3 — Check (after Baseline + first-sweep WORK)
+**Prior WORK context:** Stage 2 is **two-part**: Part A baseline floors (no-TP / paper-style ctl; mediocre PF ~0.9 expected as dual_vs_noTP yardstick) + Part B Phase1 first sweep (sparse Fixed-R + entry clocks on honesty; §4 scorecard; Soft KEEP ≠ promote). Champion talk only if multiple baseline champion types **or** per-cell Soft KEEP research-shelf choice — Soft KEEP ≠ paper replace. Binding: `/workspace/tick-handoff/PHASE1_FIRST_SWEEP_PLAN_20260911.md` · `/workspace/tick-handoff/H2_STAGE2_LOOP_FREEZE_ASK_DAVID_20260911.md` (legal-next ≡ Phase1 §2.3 / H2 §1.4).
 
 **Agents must know:**
 - Cost/session locks from Freeze (stage 1) stamped; no ORB in intake.
 - Entry-method set from STRATEGY INPUT checkbox (Reversal LOCKED 6; Continuation PLACEHOLDER minus orb_* (not operable OPEN)).
-- Baseline is alone — no POI/boost yet.
+- Part A floors + Part B first-sweep — no POI/boost yet.
+- Soft KEEP ≠ promote; honesty lamps mandatory; holdout cut declared (`entry_time ≥ 2022-02-09` default) as holdout dual print.
+- Paper champ `esnq_v2_champion_20260701` untouched; invent PARKED.
 
 **Cheap kills specific:**
-- Baseline PF talked up as “edge” already
+- Baseline PF talked up as “edge” already (Part A)
 - Cost model missing before PF
 - Wrong entry set vs checkbox
 - One-cell smoke skipped before fleet
 - workers_used inflated on tiny job count
+- Soft KEEP painted as promote / paper green language
+- Empty §4 scorecard / missing dual_vs_noTP / holdout / year / commission lamps on any Soft KEEP row
+- Fantasy-only PF (honesty lamps missing)
+- ES15 Soft KEEP greened across fleet strips / silent crown
+- Reachable Fixed-R grid absent when claiming first-sweep done
+- Per-cell freeze paste (NQ loaded with ES BE/trail)
+- Promote tag with COMMISSION_NA or YEAR_FRAGILE soft-hole-only juice
+- Param fish / widen-default / invent reopen / free-hypothesise beyond H2 §1.4 ≡ Phase1 §2.3
 
 **Real-life failure modes:**
 - Session filter wrong (RTH vs overnight mix)
 - Tick/ATR units wrong → baseline silent-zero or absurd trade count
 - Champion picked for vanity PF instead of compounding fit
+- Soft KEEP washed to “ready for paper” without promote gate
+- ES15 research juice silently crowned across NQ/5m strips
 
 ---
 

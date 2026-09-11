@@ -6,6 +6,7 @@ import {
   ASSAULT_AGENTS,
   FLEET,
   PROMOTE_GATE_TEXT,
+  RELAMP_OVERLAP_FLOOR,
   SCORECARD_COLUMNS,
   TALK_BOX_LABELS,
   TALK_BOX_STAGE_IDS,
@@ -15,17 +16,21 @@ import {
   assaultHasFail,
   defaultState,
   emptyAssault,
+  emptyRelampImportGate,
   emptyScorecardRow,
   emptyStage2Scorecard,
   emptyTalkNote,
   emptyWalkForward,
   emptyWork,
+  evaluatePromoteGate,
+  evaluateRelampOverlapGate,
   formatTime,
   isStuckStatus,
   loadState,
   overseerBlocksPaint,
   overseerLabel,
   saveState,
+  softKeepNeedsEmptyLampConfirm,
   walkForwardBlocksSeal,
   workIdForCheck,
   type AssaultAgentId,
@@ -34,6 +39,7 @@ import {
   type DashState,
   type EntryMode,
   type OverseerStatus,
+  type RelampImportGate,
   type ScorecardColumn,
   type ScorecardRow,
   type ScorecardShelf,
@@ -596,6 +602,7 @@ export default function PromptDash() {
                 <Stage2ScorecardPanel
                   board={state.stage2Scorecard || emptyStage2Scorecard()}
                   onChange={updateStage2Scorecard}
+                  onToast={setToast}
                 />
               )}
               {WF_STAGE_IDS.includes(stage.id as (typeof WF_STAGE_IDS)[number]) && (
@@ -1462,18 +1469,29 @@ function WalkForwardLamp({
 function Stage2ScorecardPanel({
   board,
   onChange,
+  onToast,
 }: {
   board: Stage2Scorecard;
   onChange: (fn: (b: Stage2Scorecard) => Stage2Scorecard) => void;
+  onToast: (msg: string | null) => void;
 }) {
   const valueCols = SCORECARD_COLUMNS.filter((c) => c !== "soft_keep_or_promote");
+  const relamp = board.relamp || emptyRelampImportGate();
 
   const softRows = board.rows.filter((r) => r.shelf === "soft_keep");
   const promoteRows = board.rows.filter((r) => r.shelf === "promote");
   const unsetRows = board.rows.filter((r) => r.shelf === "unset");
 
+  const [gateBanner, setGateBanner] = useState<string | null>(null);
+
   const setHoldout = (holdoutCut: string) =>
     onChange((b) => ({ ...b, holdoutCut }));
+
+  const patchRelamp = (patch: Partial<RelampImportGate>) =>
+    onChange((b) => ({
+      ...b,
+      relamp: { ...(b.relamp || emptyRelampImportGate()), ...patch },
+    }));
 
   const addRow = () =>
     onChange((b) => ({ ...b, rows: [...b.rows, emptyScorecardRow("ES 15m")] }));
@@ -1500,7 +1518,7 @@ function Stage2ScorecardPanel({
       ),
     }));
 
-  const setShelf = (id: string, shelf: ScorecardShelf) =>
+  const applyShelf = (id: string, shelf: ScorecardShelf) =>
     onChange((b) => ({
       ...b,
       rows: b.rows.map((r) =>
@@ -1521,6 +1539,76 @@ function Stage2ScorecardPanel({
           : r,
       ),
     }));
+
+  const checkRelampOrBlock = (): boolean => {
+    if (!relamp.enforcePath) return true;
+    const g = evaluateRelampOverlapGate(relamp);
+    if (g.ok) return true;
+    setGateBanner(g.reason);
+    onToast(g.reason);
+    return false;
+  };
+
+  const requestShelf = (row: ScorecardRow, next: ScorecardShelf) => {
+    const cur = row.shelf;
+    if (next === cur) return;
+
+    // unset is always free
+    if (next === "unset") {
+      setGateBanner(null);
+      applyShelf(row.id, "unset");
+      return;
+    }
+
+    // Import/re-lamp path gate (Attack A11) — Soft KEEP and Promote
+    if (!checkRelampOrBlock()) return;
+
+    if (next === "promote") {
+      const gate = evaluatePromoteGate(row);
+      if (!gate.ok) {
+        const msg = `Promote blocked — missing: ${gate.missing.join("; ")}`;
+        setGateBanner(msg + (gate.warnings.length ? ` · warn: ${gate.warnings.join("; ")}` : ""));
+        onToast(msg);
+        // keep shelf unset or soft_keep — never set promote
+        return;
+      }
+      if (cur === "soft_keep") {
+        const ok = window.confirm(
+          "Promote requires full gate — paper talk only after gate.\n\nSwitch Soft KEEP → Promote?",
+        );
+        if (!ok) return;
+      } else {
+        const ok = window.confirm(
+          "Promote requires full gate — paper talk only after gate.\n\nTag this row Promote (emerald)?",
+        );
+        if (!ok) return;
+      }
+      if (gate.warnings.length) {
+        onToast(`Promote OK (warn: ${gate.warnings.join("; ")})`);
+      } else {
+        onToast("Promote tagged — gate PASS (paper talk later)");
+      }
+      setGateBanner(null);
+      applyShelf(row.id, "promote");
+      return;
+    }
+
+    // next === soft_keep
+    if (cur === "promote") {
+      const ok = window.confirm(
+        "Demote Promote → Soft KEEP?\n\nEmerald promote tag will be cleared; research shelf only.",
+      );
+      if (!ok) return;
+    } else if (softKeepNeedsEmptyLampConfirm(row)) {
+      const ok = window.confirm(
+        "Soft KEEP with empty lamps — research shelf only, not promote.\n\n(dual_vs_noTP and/or pf_honest empty.) Continue?",
+      );
+      if (!ok) return;
+    }
+
+    setGateBanner(null);
+    applyShelf(row.id, "soft_keep");
+  };
 
   const renderRow = (row: ScorecardRow) => (
     <tr key={row.id} className="border-t border-slate-200 align-top">
@@ -1560,7 +1648,7 @@ function Stage2ScorecardPanel({
         <div className="flex flex-col gap-1">
           <button
             type="button"
-            onClick={() => setShelf(row.id, "soft_keep")}
+            onClick={() => requestShelf(row, "soft_keep")}
             className={`rounded px-2 py-1 text-[10px] font-extrabold uppercase tracking-wide ${
               row.shelf === "soft_keep"
                 ? "bg-amber-500 text-slate-950 ring-2 ring-amber-700"
@@ -1572,19 +1660,19 @@ function Stage2ScorecardPanel({
           </button>
           <button
             type="button"
-            onClick={() => setShelf(row.id, "promote")}
+            onClick={() => requestShelf(row, "promote")}
             className={`rounded px-2 py-1 text-[10px] font-extrabold uppercase tracking-wide ${
               row.shelf === "promote"
                 ? "bg-emerald-600 text-white ring-2 ring-emerald-800"
                 : "bg-emerald-50 text-emerald-900 ring-1 ring-emerald-300"
             }`}
-            title="Full promote gate only"
+            title="Full promote gate only — blocked if lamps fail"
           >
             Promote
           </button>
           <button
             type="button"
-            onClick={() => setShelf(row.id, "unset")}
+            onClick={() => requestShelf(row, "unset")}
             className={`rounded px-2 py-0.5 text-[10px] font-semibold ${
               row.shelf === "unset"
                 ? "bg-slate-400 text-white"
@@ -1607,6 +1695,8 @@ function Stage2ScorecardPanel({
     </tr>
   );
 
+  const relampEval = evaluateRelampOverlapGate(relamp);
+
   return (
     <section className="mb-8 -mt-4 rounded-b-2xl border border-t-0 border-violet-200 bg-violet-50 px-5 py-4 shadow-sm">
       <div className="flex flex-wrap items-center gap-3">
@@ -1616,20 +1706,89 @@ function Stage2ScorecardPanel({
         <span className="rounded bg-violet-800 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-white">
           Soft KEEP ≠ promote
         </span>
+        <span className="rounded bg-emerald-800 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-white">
+          Promote gated
+        </span>
       </div>
       <p className="mt-1 text-sm text-violet-900">
         Binding columns only — fill lamps from measures; do not invent numbers. Paper champ /
-        live configs untouched.
+        live configs untouched. Soft KEEP amber ≠ Promote emerald.
       </p>
 
       <div className="mt-3 rounded-xl border border-violet-200 bg-white px-3 py-2">
         <div className="text-[10px] font-bold uppercase tracking-wide text-violet-800">
-          Promote gate
+          Promote gate (enforced on Promote click)
         </div>
         <code className="mt-1 block whitespace-pre-wrap break-words text-[11px] text-slate-800">
           {PROMOTE_GATE_TEXT}
         </code>
       </div>
+
+      {/* Re-lamp import strip — Attack A11 */}
+      <div className="mt-3 rounded-xl border border-sky-300 bg-sky-50 px-3 py-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-[10px] font-extrabold uppercase tracking-wide text-sky-950">
+            Re-lamp import
+          </span>
+          <span className="text-[11px] text-sky-900">
+            Verify trade-id overlap before importing CW+FR packs (Attack A11). Soft KEEP /
+            Promote blocked on this path unless overlap/n ≥ {RELAMP_OVERLAP_FLOOR} or verified.
+          </span>
+        </div>
+        <div className="mt-2 flex flex-wrap items-end gap-3">
+          <label className="text-[11px] font-semibold text-sky-950">
+            import n
+            <input
+              className="ml-1 w-20 rounded border border-sky-300 bg-white px-2 py-1 font-mono text-xs"
+              inputMode="numeric"
+              placeholder="n"
+              value={relamp.importN}
+              onChange={(e) => patchRelamp({ importN: e.target.value })}
+            />
+          </label>
+          <label className="text-[11px] font-semibold text-sky-950">
+            overlap n
+            <input
+              className="ml-1 w-20 rounded border border-sky-300 bg-white px-2 py-1 font-mono text-xs"
+              inputMode="numeric"
+              placeholder="overlap"
+              value={relamp.overlapN}
+              onChange={(e) => patchRelamp({ overlapN: e.target.value })}
+            />
+          </label>
+          <label className="flex items-center gap-1.5 text-[11px] font-semibold text-sky-950">
+            <input
+              type="checkbox"
+              checked={!!relamp.importVerified}
+              onChange={(e) => patchRelamp({ importVerified: e.target.checked })}
+            />
+            ids overlap verified
+          </label>
+          <label className="flex items-center gap-1.5 text-[11px] font-extrabold text-sky-950">
+            <input
+              type="checkbox"
+              checked={!!relamp.enforcePath}
+              onChange={(e) => patchRelamp({ enforcePath: e.target.checked })}
+            />
+            Import/re-lamp path (enforce on Soft KEEP / Promote)
+          </label>
+        </div>
+        {relamp.enforcePath && (
+          <p
+            className={`mt-1 text-[11px] font-semibold ${
+              relampEval.ok ? "text-emerald-800" : "text-rose-700"
+            }`}
+          >
+            {relampEval.ok ? `Re-lamp gate OK — ${relampEval.reason}` : relampEval.reason}
+          </p>
+        )}
+      </div>
+
+      {gateBanner && (
+        <div className="mt-3 rounded-xl border border-rose-400 bg-rose-50 px-3 py-2 text-[12px] font-semibold text-rose-900">
+          {gateBanner}
+        </div>
+      )}
 
       <div className="mt-3 flex flex-wrap items-center gap-3">
         <label className="text-xs font-semibold text-violet-900">

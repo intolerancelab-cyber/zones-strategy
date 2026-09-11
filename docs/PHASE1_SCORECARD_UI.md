@@ -18,5 +18,6 @@
 - **Shelves:** Soft KEEP = amber research shelf (never paper green). Promote = emerald only after full gate.
 - **Holdout cut default:** `entry_time ≥ 2022-02-09`.
 - **Promote gate (short):** `dual_vs_noTP ∧ holdout_dual ∧ ¬soft_hole_only_juice ∧ year_meat_ok ∧ commission≠NA ∧ ¬ES_ONLY_if_policy_requires_NQ ∧ honesty PASS`
+- **H3 enforce (2026-09-11):** Promote click evaluates lamps — blocked + toast/inline on fail (never free emerald). Soft KEEP empty-lamp confirm; Soft KEEP↔Promote confirms. Re-lamp import strip: n/overlap ≥0.8 or verified when import path enforced (Attack A11). Stamp: `tick-handoff/PHASE1_H3_PROMOTE_GATE_UI_20260911.md`.
 
 Operators fill lamps from measured packs — **do not invent measures**. Paper champ / live configs untouched.

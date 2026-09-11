@@ -1,4 +1,4 @@
-# Factory prompt-dash stage map (5 Sep 2026)
+# Factory prompt-dash stage map (11 Sep 2026 — Stage 2 Phase1 fold)
 Read-only briefing for prompt-driven dash redesign. Aligns with PROMPT_DASH_HANDOFF.md.
 
 ## UI lock (David happy 5 Sep)
@@ -20,7 +20,7 @@ Read-only briefing for prompt-driven dash redesign. Aligns with PROMPT_DASH_HAND
 | # | Stage | Kind |
 |---|--------|------|
 | 1 | Freeze / admit (+ cost/session locks; no ORB) | WORK |
-| 2 | Baseline alone | WORK |
+| 2 | Baseline + first-sweep (TP/method) — Part A floors + Part B Phase1 sparse Fixed-R/clocks; Soft KEEP≠promote; H2 LOOP | WORK |
 | 3 | Check (+ champion talk if needed) | CHECK |
 | 4 | POI map (value areas = POIs: D/W/M) | WORK |
 | 5 | Check | CHECK |
@@ -55,6 +55,8 @@ Silent Zero, fake ticks, percent paint, wrong folder, smell gaps, leftover polis
 
 ## Sources
 PROMPT_DASH_HANDOFF.md, DAVID_BRIEF_2026-09-05.md, GATE_PLAN_V1.md, agent memory Aug/Sep 2026
+Phase1: `/workspace/tick-handoff/PHASE1_FIRST_SWEEP_PLAN_20260911.md` · H2 LOOP: `/workspace/tick-handoff/H2_STAGE2_LOOP_FREEZE_ASK_DAVID_20260911.md`
+**Stage 2 name lock:** stays #2 (two-part WORK). Do **not** invent Stage-2b or renumber 3–21.
 ## Check / work prompt locks (5 Sep)
 - Every CHECK = multi-agent (mistake / legit / real-life / wrong). Final = whole book.
 - Every WORK = detailed handbook incl. full sharding guide.
