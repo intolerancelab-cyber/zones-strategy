@@ -253,7 +253,7 @@ Also report (lamps / notes): exit mix `tp/sl/eod`, fantasy ΔR vs honesty, cell 
 - Heartbeat every N seconds; stuck if no chunk advance within threshold or worker death
 - Silent Zero / fake tick / percent paint without jobs → fail this section
 - Orange Stage 3 CHECK stays locked until every strip 100% green
-- Soft KEEP = amber research shelf; Promote = emerald (display only until H3 — **do not** tag Promote without full gate)
+- Soft KEEP = amber research shelf; Promote = emerald (H3 gate enforced — **do not** tag Promote without full gate)
 
 ---
 
