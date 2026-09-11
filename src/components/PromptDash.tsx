@@ -19,8 +19,10 @@ import {
   emptyRelampImportGate,
   emptyScorecardRow,
   emptyStage2Scorecard,
+  honestyModeFromNotes,
   mergeImportedScorecardRows,
   parseScorecardRowsJson,
+  scorecardRowNeedsHonestyWarn,
   emptyTalkNote,
   emptyWalkForward,
   emptyWork,
@@ -1500,29 +1502,50 @@ function Stage2ScorecardPanel({
 
 
   const fileRef = useRef<HTMLInputElement | null>(null);
+  const [pasteOpen, setPasteOpen] = useState(false);
+  const [pasteText, setPasteText] = useState("");
+
+  const applyImportRaw = (raw: unknown) => {
+    const parsed = parseScorecardRowsJson(raw);
+    if (parsed.rows.length === 0) {
+      onToast("Import: no rows found in JSON");
+      return;
+    }
+    const warnN = parsed.rows.filter((r) => scorecardRowNeedsHonestyWarn(r)).length;
+    onChange((b) => {
+      const m = mergeImportedScorecardRows(b, parsed.rows, parsed.holdoutCut);
+      const warnBit =
+        warnN > 0
+          ? ` · WARN ${warnN} row(s) missing honesty_mode (fantasy dual risk)`
+          : "";
+      onToast(
+        `Imported ${parsed.rows.length} row(s) — +${m.added} new, ${m.replaced} replaced · shelf unset · fleet_pass=false · Soft KEEP/Promote still H3${warnBit}`,
+      );
+      return m.board;
+    });
+  };
 
   const onImportFile = async (file: File | null) => {
     if (!file) return;
     try {
       const text = await file.text();
-      const raw = JSON.parse(text) as unknown;
-      const parsed = parseScorecardRowsJson(raw);
-      if (parsed.rows.length === 0) {
-        onToast("Import: no rows found in JSON");
-        return;
-      }
-      onChange((b) => {
-        const m = mergeImportedScorecardRows(b, parsed.rows, parsed.holdoutCut);
-        onToast(
-          `Imported ${parsed.rows.length} row(s) — +${m.added} new, ${m.replaced} replaced · shelf unset (Soft KEEP/Promote still H3)`,
-        );
-        return m.board;
-      });
+      applyImportRaw(JSON.parse(text) as unknown);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       onToast(`Import failed — board unchanged (${msg})`);
     } finally {
       if (fileRef.current) fileRef.current.value = "";
+    }
+  };
+
+  const onImportPaste = () => {
+    try {
+      applyImportRaw(JSON.parse(pasteText) as unknown);
+      setPasteText("");
+      setPasteOpen(false);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      onToast(`Paste import failed — board unchanged (${msg})`);
     }
   };
 
@@ -1663,6 +1686,24 @@ function Stage2ScorecardPanel({
           value={row.armId}
           onChange={(e) => patchRow(row.id, { armId: e.target.value })}
         />
+        {(() => {
+          const hm = honestyModeFromNotes(row.values.notes);
+          if (hm) {
+            return (
+              <div className="mt-1 rounded bg-emerald-50 px-1 py-0.5 font-mono text-[9px] text-emerald-900 ring-1 ring-emerald-200">
+                honesty_mode={hm}
+              </div>
+            );
+          }
+          if (scorecardRowNeedsHonestyWarn(row)) {
+            return (
+              <div className="mt-1 rounded bg-amber-100 px-1 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-amber-950 ring-1 ring-amber-400">
+                WARN no honesty_mode
+              </div>
+            );
+          }
+          return null;
+        })()}
       </td>
       {valueCols.map((col) => (
         <td key={col} className="p-1.5">
@@ -1850,14 +1891,65 @@ function Stage2ScorecardPanel({
           type="button"
           onClick={() => fileRef.current?.click()}
           className="rounded-lg border border-violet-400 bg-white px-3 py-1.5 text-sm font-semibold text-violet-900 hover:bg-violet-100"
-          title="Load measure lamps from scorecard_rows.json — shelf stays unset"
+          title="Load measure lamps from scorecard_rows.json — shelf stays unset · fleet_pass false"
         >
           Import JSON
         </button>
+        <button
+          type="button"
+          onClick={() => setPasteOpen((v) => !v)}
+          className="rounded-lg border border-violet-400 bg-white px-3 py-1.5 text-sm font-semibold text-violet-900 hover:bg-violet-100"
+          title="Paste scorecard_rows.json text"
+        >
+          Paste JSON
+        </button>
         <span className="text-[11px] text-violet-700">
-          Import lamps only — Soft KEEP / Promote still H3
+          Import lamps only — shelf unset · fleet_pass=false · Soft KEEP / Promote still H3
         </span>
       </div>
+
+      {pasteOpen && (
+        <div className="mt-3 rounded-xl border border-violet-300 bg-white px-3 py-2">
+          <div className="text-[10px] font-extrabold uppercase tracking-wide text-violet-900">
+            Paste scorecard_rows.json
+          </div>
+          <textarea
+            className="mt-2 w-full rounded border border-violet-200 bg-violet-50/40 p-2 font-mono text-[11px] text-slate-800"
+            rows={6}
+            placeholder='[{"id":"es15::…","cell":"es15","armId":"…","values":{…},"shelf":"unset"}] or {"rows":[…]}'
+            value={pasteText}
+            onChange={(e) => setPasteText(e.target.value)}
+          />
+          <div className="mt-2 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={onImportPaste}
+              className="rounded-lg bg-violet-700 px-3 py-1.5 text-sm font-semibold text-white hover:bg-violet-600"
+            >
+              Apply paste
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setPasteOpen(false);
+                setPasteText("");
+              }}
+              className="rounded-lg bg-slate-200 px-3 py-1.5 text-sm font-semibold text-slate-700"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+      {board.rows.some((r) => scorecardRowNeedsHonestyWarn(r)) && (
+        <div className="mt-3 rounded-xl border border-amber-500 bg-amber-50 px-3 py-2 text-[12px] font-semibold text-amber-950">
+          WARN — {board.rows.filter((r) => scorecardRowNeedsHonestyWarn(r)).length}{" "}
+          row(s) have dual/pf lamps but notes lack{" "}
+          <code className="font-mono">honesty_mode=</code> (fantasy dual risk — e.g. T2
+          R10). Do not read as honesty residual. Soft KEEP ≠ Promote.
+        </div>
+      )}
 
       {/* Two visually distinct shelves */}
       <div className="mt-4 grid gap-3 md:grid-cols-2">

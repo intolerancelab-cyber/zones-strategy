@@ -538,6 +538,26 @@ export function mergeImportedScorecardRows(
   };
 }
 
+
+/** Pull honesty_mode=… from notes (measure mapper stamps this). */
+export function honestyModeFromNotes(notes: string | undefined | null): string {
+  const n = notes ?? "";
+  const m = /honesty_mode=([^;]+)/i.exec(n);
+  return (m?.[1] ?? "").trim();
+}
+
+/** True when dual/pf lamps present but notes lack honesty_mode (e.g. fantasy T2 R10). */
+export function scorecardRowNeedsHonestyWarn(row: ScorecardRow): boolean {
+  const notes = row.values.notes ?? "";
+  if (honestyModeFromNotes(notes)) return false;
+  const pf = (row.values.pf_honest ?? "").trim();
+  const dual = (row.values.dual_vs_noTP ?? "").trim().toUpperCase();
+  // ctl NA dual or empty lamps → no fantasy dual risk banner
+  if (!pf) return false;
+  if (!dual || dual === "NA") return false;
+  return true;
+}
+
 export const WORK_IDS = [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20] as const;
 
 /** CHECK stage ids + Stage 20 Final Assault (WORK with assault gate) */
