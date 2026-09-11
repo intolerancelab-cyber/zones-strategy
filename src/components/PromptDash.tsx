@@ -5,6 +5,8 @@ import { STAGES, CHUNK_LABELS, type StageDef } from "../lib/stages";
 import {
   ASSAULT_AGENTS,
   FLEET,
+  PROMOTE_GATE_TEXT,
+  SCORECARD_COLUMNS,
   TALK_BOX_LABELS,
   TALK_BOX_STAGE_IDS,
   WF_STAGE_IDS,
@@ -13,6 +15,8 @@ import {
   assaultHasFail,
   defaultState,
   emptyAssault,
+  emptyScorecardRow,
+  emptyStage2Scorecard,
   emptyTalkNote,
   emptyWalkForward,
   emptyWork,
@@ -30,6 +34,10 @@ import {
   type DashState,
   type EntryMode,
   type OverseerStatus,
+  type ScorecardColumn,
+  type ScorecardRow,
+  type ScorecardShelf,
+  type Stage2Scorecard,
   type TalkNote,
   type WalkForwardStamp,
   type WorkProgress,
@@ -397,6 +405,14 @@ export default function PromptDash() {
     });
   };
 
+  const updateStage2Scorecard = (fn: (board: Stage2Scorecard) => Stage2Scorecard) => {
+    setState((s) => ({
+      ...s,
+      stage2Scorecard: fn(s.stage2Scorecard || emptyStage2Scorecard()),
+    }));
+  };
+
+
   const togglePrompt = (stageId: number) => {
     setOpenPromptId((cur) => (cur === stageId ? null : stageId));
   };
@@ -576,6 +592,12 @@ export default function PromptDash() {
                 promptOpen={openPromptId === stage.id}
                 onTogglePrompt={() => togglePrompt(stage.id)}
               />
+              {stage.id === 2 && (
+                <Stage2ScorecardPanel
+                  board={state.stage2Scorecard || emptyStage2Scorecard()}
+                  onChange={updateStage2Scorecard}
+                />
+              )}
               {WF_STAGE_IDS.includes(stage.id as (typeof WF_STAGE_IDS)[number]) && (
                 <WalkForwardLamp
                   stageId={stage.id}
@@ -1431,6 +1453,278 @@ function WalkForwardLamp({
         value={wf.note}
         onChange={(e) => onNote(e.target.value)}
       />
+    </section>
+  );
+}
+
+
+/** Stage-2 §4 Phase1 scorecard — Soft KEEP shelf ≠ promote/paper green. */
+function Stage2ScorecardPanel({
+  board,
+  onChange,
+}: {
+  board: Stage2Scorecard;
+  onChange: (fn: (b: Stage2Scorecard) => Stage2Scorecard) => void;
+}) {
+  const valueCols = SCORECARD_COLUMNS.filter((c) => c !== "soft_keep_or_promote");
+
+  const softRows = board.rows.filter((r) => r.shelf === "soft_keep");
+  const promoteRows = board.rows.filter((r) => r.shelf === "promote");
+  const unsetRows = board.rows.filter((r) => r.shelf === "unset");
+
+  const setHoldout = (holdoutCut: string) =>
+    onChange((b) => ({ ...b, holdoutCut }));
+
+  const addRow = () =>
+    onChange((b) => ({ ...b, rows: [...b.rows, emptyScorecardRow("ES 15m")] }));
+
+  const removeRow = (id: string) =>
+    onChange((b) => ({ ...b, rows: b.rows.filter((r) => r.id !== id) }));
+
+  const patchRow = (id: string, patch: Partial<ScorecardRow>) =>
+    onChange((b) => ({
+      ...b,
+      rows: b.rows.map((r) => (r.id === id ? { ...r, ...patch } : r)),
+    }));
+
+  const setCellValue = (id: string, col: ScorecardColumn, val: string) =>
+    onChange((b) => ({
+      ...b,
+      rows: b.rows.map((r) =>
+        r.id === id
+          ? {
+              ...r,
+              values: { ...r.values, [col]: val },
+            }
+          : r,
+      ),
+    }));
+
+  const setShelf = (id: string, shelf: ScorecardShelf) =>
+    onChange((b) => ({
+      ...b,
+      rows: b.rows.map((r) =>
+        r.id === id
+          ? {
+              ...r,
+              shelf,
+              values: {
+                ...r.values,
+                soft_keep_or_promote:
+                  shelf === "soft_keep"
+                    ? "SOFT_KEEP"
+                    : shelf === "promote"
+                      ? "PROMOTE"
+                      : "",
+              },
+            }
+          : r,
+      ),
+    }));
+
+  const renderRow = (row: ScorecardRow) => (
+    <tr key={row.id} className="border-t border-slate-200 align-top">
+      <td className="p-1.5">
+        <select
+          className="w-full rounded border border-slate-300 bg-white px-1 py-1 text-xs"
+          value={row.cell}
+          onChange={(e) => patchRow(row.id, { cell: e.target.value })}
+        >
+          {FLEET.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
+      </td>
+      <td className="p-1.5">
+        <input
+          className="w-28 rounded border border-slate-300 bg-white px-1 py-1 text-xs"
+          placeholder="arm id"
+          value={row.armId}
+          onChange={(e) => patchRow(row.id, { armId: e.target.value })}
+        />
+      </td>
+      {valueCols.map((col) => (
+        <td key={col} className="p-1.5">
+          <input
+            className="min-w-[4.5rem] w-full rounded border border-slate-300 bg-white px-1 py-1 font-mono text-[10px]"
+            placeholder="—"
+            value={row.values[col] ?? ""}
+            onChange={(e) => setCellValue(row.id, col, e.target.value)}
+            title={col}
+          />
+        </td>
+      ))}
+      <td className="p-1.5">
+        <div className="flex flex-col gap-1">
+          <button
+            type="button"
+            onClick={() => setShelf(row.id, "soft_keep")}
+            className={`rounded px-2 py-1 text-[10px] font-extrabold uppercase tracking-wide ${
+              row.shelf === "soft_keep"
+                ? "bg-amber-500 text-slate-950 ring-2 ring-amber-700"
+                : "bg-amber-100 text-amber-900 ring-1 ring-amber-300"
+            }`}
+            title="Research shelf — never promote green"
+          >
+            Soft KEEP
+          </button>
+          <button
+            type="button"
+            onClick={() => setShelf(row.id, "promote")}
+            className={`rounded px-2 py-1 text-[10px] font-extrabold uppercase tracking-wide ${
+              row.shelf === "promote"
+                ? "bg-emerald-600 text-white ring-2 ring-emerald-800"
+                : "bg-emerald-50 text-emerald-900 ring-1 ring-emerald-300"
+            }`}
+            title="Full promote gate only"
+          >
+            Promote
+          </button>
+          <button
+            type="button"
+            onClick={() => setShelf(row.id, "unset")}
+            className={`rounded px-2 py-0.5 text-[10px] font-semibold ${
+              row.shelf === "unset"
+                ? "bg-slate-400 text-white"
+                : "bg-slate-100 text-slate-600"
+            }`}
+          >
+            unset
+          </button>
+        </div>
+      </td>
+      <td className="p-1.5">
+        <button
+          type="button"
+          onClick={() => removeRow(row.id)}
+          className="rounded bg-slate-200 px-2 py-1 text-[10px] font-semibold text-slate-700 hover:bg-rose-100"
+        >
+          Remove
+        </button>
+      </td>
+    </tr>
+  );
+
+  return (
+    <section className="mb-8 -mt-4 rounded-b-2xl border border-t-0 border-violet-200 bg-violet-50 px-5 py-4 shadow-sm">
+      <div className="flex flex-wrap items-center gap-3">
+        <h3 className="text-sm font-bold uppercase tracking-wide text-violet-950">
+          Stage-2 §4 scorecard · Phase1
+        </h3>
+        <span className="rounded bg-violet-800 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-white">
+          Soft KEEP ≠ promote
+        </span>
+      </div>
+      <p className="mt-1 text-sm text-violet-900">
+        Binding columns only — fill lamps from measures; do not invent numbers. Paper champ /
+        live configs untouched.
+      </p>
+
+      <div className="mt-3 rounded-xl border border-violet-200 bg-white px-3 py-2">
+        <div className="text-[10px] font-bold uppercase tracking-wide text-violet-800">
+          Promote gate
+        </div>
+        <code className="mt-1 block whitespace-pre-wrap break-words text-[11px] text-slate-800">
+          {PROMOTE_GATE_TEXT}
+        </code>
+      </div>
+
+      <div className="mt-3 flex flex-wrap items-center gap-3">
+        <label className="text-xs font-semibold text-violet-900">
+          Holdout cut (entry_time ≥)
+          <input
+            type="date"
+            className="ml-2 rounded border border-violet-300 bg-white px-2 py-1 text-sm"
+            value={board.holdoutCut || "2022-02-09"}
+            onChange={(e) => setHoldout(e.target.value)}
+          />
+        </label>
+        <span className="text-[11px] text-violet-700">Default 2022-02-09</span>
+        <button
+          type="button"
+          onClick={addRow}
+          className="rounded-lg bg-violet-700 px-3 py-1.5 text-sm font-semibold text-white hover:bg-violet-600"
+        >
+          Add arm row
+        </button>
+      </div>
+
+      {/* Two visually distinct shelves */}
+      <div className="mt-4 grid gap-3 md:grid-cols-2">
+        <div className="rounded-xl border-2 border-amber-400 bg-amber-50 px-3 py-2">
+          <div className="flex items-center gap-2">
+            <span className="rounded bg-amber-500 px-2 py-0.5 text-[10px] font-extrabold uppercase text-slate-950">
+              Soft KEEP shelf
+            </span>
+            <span className="text-[11px] text-amber-900">
+              Research only — never paper green
+            </span>
+          </div>
+          <p className="mt-1 text-[11px] text-amber-950">
+            {softRows.length === 0
+              ? "No Soft KEEP rows tagged yet."
+              : softRows
+                  .map((r) => `${r.cell}${r.armId ? ` · ${r.armId}` : ""}`)
+                  .join(" · ")}
+          </p>
+        </div>
+        <div className="rounded-xl border-2 border-emerald-600 bg-emerald-50 px-3 py-2">
+          <div className="flex items-center gap-2">
+            <span className="rounded bg-emerald-600 px-2 py-0.5 text-[10px] font-extrabold uppercase text-white">
+              Promote shelf
+            </span>
+            <span className="text-[11px] text-emerald-900">
+              Full gate only — paper talk later
+            </span>
+          </div>
+          <p className="mt-1 text-[11px] text-emerald-950">
+            {promoteRows.length === 0
+              ? "Empty — Soft KEEP must not land here."
+              : promoteRows
+                  .map((r) => `${r.cell}${r.armId ? ` · ${r.armId}` : ""}`)
+                  .join(" · ")}
+          </p>
+        </div>
+      </div>
+      {unsetRows.length > 0 && (
+        <p className="mt-2 text-[11px] text-slate-600">
+          Unset shelf rows: {unsetRows.length} (tag Soft KEEP or Promote after lamps).
+        </p>
+      )}
+
+      <div className="mt-3 overflow-x-auto rounded-xl border border-violet-200 bg-white">
+        <table className="min-w-full border-collapse text-left text-xs">
+          <thead className="bg-violet-100 text-[10px] uppercase tracking-wide text-violet-950">
+            <tr>
+              <th className="p-1.5">cell</th>
+              <th className="p-1.5">arm</th>
+              {valueCols.map((c) => (
+                <th key={c} className="p-1.5 font-mono normal-case">
+                  {c}
+                </th>
+              ))}
+              <th className="p-1.5">shelf</th>
+              <th className="p-1.5" />
+            </tr>
+          </thead>
+          <tbody>
+            {board.rows.length === 0 ? (
+              <tr>
+                <td
+                  colSpan={valueCols.length + 4}
+                  className="p-4 text-center text-slate-500"
+                >
+                  No rows yet — Add arm row, then fill §4 lamps (no invented measures).
+                </td>
+              </tr>
+            ) : (
+              board.rows.map(renderRow)
+            )}
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 }

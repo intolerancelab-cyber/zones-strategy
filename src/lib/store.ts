@@ -93,6 +93,71 @@ export const TALK_BOX_LABELS: Record<number, string> = {
  */
 export const WF_STAGE_IDS = [11, 12, 13] as const;
 
+/* ─── Stage-2 §4 scorecard (Phase1 first-sweep) ─── */
+
+/** Binding scorecard columns — do not invent measures; operators fill lamps. */
+export const SCORECARD_COLUMNS = [
+  "pf_honest",
+  "sumR_honest",
+  "n",
+  "dual_vs_noTP",
+  "dual_vs_FT_or_CW_entry",
+  "holdout_dual",
+  "year_2020_dR",
+  "year_2016_dual",
+  "soft_hole_2020",
+  "early_cut_n_dR",
+  "adverse_slip_green",
+  "commission_status",
+  "soft_keep_or_promote",
+  "notes",
+] as const;
+
+export type ScorecardColumn = (typeof SCORECARD_COLUMNS)[number];
+
+/** Soft KEEP ≠ promote — never paint Soft KEEP as paper/promote green. */
+export type ScorecardShelf = "unset" | "soft_keep" | "promote";
+
+export const DEFAULT_HOLDOUT_CUT = "2022-02-09";
+
+/** Short promote-gate text (Stage-2 §4 / Phase1 plan §5.3). */
+export const PROMOTE_GATE_TEXT =
+  "dual_vs_noTP ∧ holdout_dual ∧ ¬soft_hole_only_juice ∧ year_meat_ok ∧ commission≠NA ∧ ¬ES_ONLY_if_policy_requires_NQ ∧ honesty PASS";
+
+export type ScorecardRow = {
+  id: string;
+  cell: string;
+  armId: string;
+  /** Column values as operator-entered strings — no invented numbers. */
+  values: Partial<Record<ScorecardColumn, string>>;
+  shelf: ScorecardShelf;
+};
+
+export type Stage2Scorecard = {
+  holdoutCut: string;
+  rows: ScorecardRow[];
+};
+
+export function emptyScorecardRow(
+  cell = "ES 15m",
+  id?: string,
+): ScorecardRow {
+  return {
+    id: id ?? `row_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+    cell,
+    armId: "",
+    values: {},
+    shelf: "unset",
+  };
+}
+
+export function emptyStage2Scorecard(): Stage2Scorecard {
+  return {
+    holdoutCut: DEFAULT_HOLDOUT_CUT,
+    rows: [],
+  };
+}
+
 export type DashState = {
   entered: boolean;
   strategyText: string;
@@ -102,6 +167,8 @@ export type DashState = {
   bankedChampions: BankedChampion[];
   talkNotes: Record<number, TalkNote>;
   walkForward: Record<number, WalkForwardStamp>;
+  /** Stage-2 §4 Phase1 scorecard board (Soft KEEP ≠ promote). */
+  stage2Scorecard: Stage2Scorecard;
   overseer: OverseerStatus;
   activeWorkId: number;
   toast: string | null;
@@ -175,6 +242,7 @@ export function defaultState(): DashState {
     bankedChampions: [],
     talkNotes,
     walkForward,
+    stage2Scorecard: emptyStage2Scorecard(),
     overseer: "moving",
     activeWorkId: 1,
     toast: null,
@@ -199,6 +267,13 @@ export function loadState(): DashState {
       bankedChampions: parsed.bankedChampions || [],
       talkNotes: { ...base.talkNotes, ...(parsed.talkNotes || {}) },
       walkForward: { ...base.walkForward, ...(parsed.walkForward || {}) },
+      stage2Scorecard: {
+        ...base.stage2Scorecard,
+        ...(parsed.stage2Scorecard || {}),
+        holdoutCut:
+          parsed.stage2Scorecard?.holdoutCut || base.stage2Scorecard.holdoutCut,
+        rows: parsed.stage2Scorecard?.rows ?? base.stage2Scorecard.rows,
+      },
     };
   } catch {
     return defaultState();

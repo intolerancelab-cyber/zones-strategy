@@ -16,7 +16,7 @@ export interface StageDef {
 
 export const STAGES: StageDef[] = [
   { id: 1, title: "Freeze / admit", kind: "WORK", promptFile: "01_FREEZE_ADMIT_WORK.md", note: "Cost/session locks; no ORB in intake" },
-  { id: 2, title: "Baseline alone", kind: "WORK", promptFile: "02_BASELINE_WORK.md" },
+  { id: 2, title: "Baseline alone", kind: "WORK", promptFile: "02_BASELINE_WORK.md", note: "Phase1 §4 scorecard · Soft KEEP ≠ promote · holdout ≥2022-02-09" },
   { id: 3, title: "Baseline check", kind: "CHECK", promptFile: "03_BASELINE_CHECK.md", note: "Champion talk + checkpoint/bank if multi types" },
   { id: 4, title: "POI map", kind: "WORK", promptFile: "04_POI_MAP_WORK.md", note: "Value areas = POIs: D/W/M" },
   { id: 5, title: "POI map check", kind: "CHECK", promptFile: "05_POI_MAP_CHECK.md" },
