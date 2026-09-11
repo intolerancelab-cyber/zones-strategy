@@ -19,6 +19,8 @@ import {
   emptyRelampImportGate,
   emptyScorecardRow,
   emptyStage2Scorecard,
+  mergeImportedScorecardRows,
+  parseScorecardRowsJson,
   emptyTalkNote,
   emptyWalkForward,
   emptyWork,
@@ -1496,6 +1498,35 @@ function Stage2ScorecardPanel({
   const addRow = () =>
     onChange((b) => ({ ...b, rows: [...b.rows, emptyScorecardRow("ES 15m")] }));
 
+
+  const fileRef = useRef<HTMLInputElement | null>(null);
+
+  const onImportFile = async (file: File | null) => {
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const raw = JSON.parse(text) as unknown;
+      const parsed = parseScorecardRowsJson(raw);
+      if (parsed.rows.length === 0) {
+        onToast("Import: no rows found in JSON");
+        return;
+      }
+      onChange((b) => {
+        const m = mergeImportedScorecardRows(b, parsed.rows, parsed.holdoutCut);
+        onToast(
+          `Imported ${parsed.rows.length} row(s) — +${m.added} new, ${m.replaced} replaced · shelf unset (Soft KEEP/Promote still H3)`,
+        );
+        return m.board;
+      });
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      onToast(`Import failed — board unchanged (${msg})`);
+    } finally {
+      if (fileRef.current) fileRef.current.value = "";
+    }
+  };
+
+
   const removeRow = (id: string) =>
     onChange((b) => ({ ...b, rows: b.rows.filter((r) => r.id !== id) }));
 
@@ -1808,6 +1839,24 @@ function Stage2ScorecardPanel({
         >
           Add arm row
         </button>
+        <input
+          ref={fileRef}
+          type="file"
+          accept=".json,application/json"
+          className="hidden"
+          onChange={(e) => onImportFile(e.target.files?.[0] ?? null)}
+        />
+        <button
+          type="button"
+          onClick={() => fileRef.current?.click()}
+          className="rounded-lg border border-violet-400 bg-white px-3 py-1.5 text-sm font-semibold text-violet-900 hover:bg-violet-100"
+          title="Load measure lamps from scorecard_rows.json — shelf stays unset"
+        >
+          Import JSON
+        </button>
+        <span className="text-[11px] text-violet-700">
+          Import lamps only — Soft KEEP / Promote still H3
+        </span>
       </div>
 
       {/* Two visually distinct shelves */}

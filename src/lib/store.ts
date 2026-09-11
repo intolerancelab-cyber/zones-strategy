@@ -432,6 +432,112 @@ export const STORAGE_KEY = "prompt-dash-web-v3";
 
 export const FLEET = ["NQ 5m", "ES 5m", "NQ 15m", "ES 15m"] as const;
 
+/** Map research cell labels (es15 / ES15) → FLEET board labels. */
+export function normalizeScorecardCell(raw: string): string {
+  const t = (raw || "").trim();
+  if (!t) return "ES 15m";
+  const compact = t.toLowerCase().replace(/\s+/g, "").replace(/_/g, "");
+  const map: Record<string, (typeof FLEET)[number]> = {
+    es15: "ES 15m",
+    es15m: "ES 15m",
+    es5: "ES 5m",
+    es5m: "ES 5m",
+    nq15: "NQ 15m",
+    nq15m: "NQ 15m",
+    nq5: "NQ 5m",
+    nq5m: "NQ 5m",
+  };
+  if (map[compact]) return map[compact];
+  const hit = FLEET.find((c) => c.toLowerCase() === t.toLowerCase());
+  return hit ?? t;
+}
+
+export type ScorecardImportResult = {
+  rows: ScorecardRow[];
+  holdoutCut?: string;
+};
+
+/**
+ * Parse scorecard_rows.json (bare array or {rows:[...]} pack).
+ * Forces shelf=unset; strips soft_keep_or_promote; never invents lamps.
+ */
+export function parseScorecardRowsJson(raw: unknown): ScorecardImportResult {
+  let holdoutCut: string | undefined;
+  let list: unknown[] = [];
+  if (Array.isArray(raw)) {
+    list = raw;
+  } else if (raw && typeof raw === "object") {
+    const o = raw as Record<string, unknown>;
+    if (Array.isArray(o.rows)) list = o.rows;
+    else throw new Error("JSON must be a row array or { rows: [...] } pack");
+    if (typeof o.holdoutCut === "string" && o.holdoutCut.trim()) {
+      holdoutCut = o.holdoutCut.trim();
+    }
+  } else {
+    throw new Error("JSON must be a row array or { rows: [...] } pack");
+  }
+  const rows: ScorecardRow[] = [];
+  for (const item of list) {
+    if (!item || typeof item !== "object") continue;
+    const r = item as Record<string, unknown>;
+    const armId = String(r.armId ?? r.arm_id ?? "");
+    const cell = normalizeScorecardCell(String(r.cell ?? "ES 15m"));
+    const id =
+      typeof r.id === "string" && r.id.trim()
+        ? r.id.trim()
+        : `row_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+    const srcVals =
+      r.values && typeof r.values === "object"
+        ? (r.values as Record<string, unknown>)
+        : {};
+    const values: Partial<Record<ScorecardColumn, string>> = {};
+    for (const col of SCORECARD_COLUMNS) {
+      if (col === "soft_keep_or_promote") {
+        values[col] = ""; // H3 UI only — never import shelf paint
+        continue;
+      }
+      const v = srcVals[col];
+      if (v === undefined || v === null) continue;
+      const s = String(v);
+      if (s === "") continue; // leave blank — do not invent
+      values[col] = s;
+    }
+    rows.push({
+      id,
+      cell,
+      armId,
+      values,
+      shelf: "unset",
+    });
+  }
+  return { rows, holdoutCut };
+}
+
+/** Merge imported rows into board by id (replace same id, else append). */
+export function mergeImportedScorecardRows(
+  board: Stage2Scorecard,
+  imported: ScorecardRow[],
+  holdoutCut?: string,
+): { board: Stage2Scorecard; added: number; replaced: number } {
+  const byId = new Map(board.rows.map((r) => [r.id, r]));
+  let added = 0;
+  let replaced = 0;
+  for (const row of imported) {
+    if (byId.has(row.id)) replaced += 1;
+    else added += 1;
+    byId.set(row.id, row);
+  }
+  return {
+    board: {
+      ...board,
+      holdoutCut: holdoutCut?.trim() ? holdoutCut.trim() : board.holdoutCut,
+      rows: Array.from(byId.values()),
+    },
+    added,
+    replaced,
+  };
+}
+
 export const WORK_IDS = [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20] as const;
 
 /** CHECK stage ids + Stage 20 Final Assault (WORK with assault gate) */
